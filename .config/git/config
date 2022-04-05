@@ -1,0 +1,10 @@
+[user]
+	name = Pranjal Soni
+	email = soni.pranjals17@gmail.com
+[core]
+	autocrlf = input
+	editor = nvim
+[alias]
+	lg = log --graph --all --decorate --color --oneline --date=relative
+[commit]
+	verbose = true
