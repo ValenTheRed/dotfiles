@@ -1,0 +1,14 @@
+alias neovide="start neovide.exe"
+
+alias gccw="gcc --std=c99 -Wall"
+alias gcce="gcc --std=c99 -Wall -Wextra"
+alias gccp="gcc --std=c99 -Wall -Wextra -pedantic"
+
+alias gs="git status"
+alias glo="git log --oneline"
+alias ggr="git log --graph --all --decorate --color --oneline"
+
+alias ls="ls -F"
+alias ll="ls -Alh"
+alias la="ls -Ah"
+alias l="ls -Ch"
