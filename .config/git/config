@@ -5,7 +5,11 @@
 	autocrlf = input
 	editor = nvim
 [alias]
-	gr = log --graph --all --decorate --color --oneline --date=relative
+	s = status
 	lo = log --oneline
+	gr = log --graph --all --decorate --color --oneline
+	# Ref: https://stackoverflow.com/questions/14243380/
+	gf = log --graph --all --pretty=format:'%C(auto)%h%d%Creset %s %C(cyan)(%cr)%Creset %C(green)%cn <%ce>%Creset'
 [commit]
+	# show equivalent to `diff --cached` in the commit message
 	verbose = true
