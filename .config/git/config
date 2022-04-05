@@ -5,6 +5,7 @@
 	autocrlf = input
 	editor = nvim
 [alias]
-	lg = log --graph --all --decorate --color --oneline --date=relative
+	gr = log --graph --all --decorate --color --oneline --date=relative
+	lo = log --oneline
 [commit]
 	verbose = true
