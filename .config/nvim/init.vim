@@ -22,7 +22,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'vimwiki/vimwiki'
 Plug 'danro/rename.vim'         " Rename file currently working on
-" Plug 'ctrlpvim/ctrlp.vim'       " Fuzzy finder
 Plug 'godlygeek/tabular'        " aligning
 Plug 'ValenTheRed/ltspice.vim'
 Plug 'joshdick/onedark.vim'     " ColorScheme
@@ -42,7 +41,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'L3MON4D3/LuaSnip'
 Plug 'nvim-lualine/lualine.nvim'
 " Plug 'ray-x/lsp_signature.nvim'
-" Plug 'hrsh7th/nvim-compe'                  " Completion engine
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-buffer'
@@ -115,18 +113,14 @@ lua require('ps.autopairs')
 lua require('ps.colorizer')
 lua require('ps.gitsigns')
 lua require('ps.treesitter')
-" lua require'compe-config'
 lua require('ps.cmp')
 lua require('ps.lsp')
 lua require('ps.telescope')
 lua require('ps.lualine')
 
-let g:ctrlp_map = '<c-\>'
-let g:ctrlp_working_path_mode = 'ra'
 "}}}
 
 "{{{ PLUGIN KEYMAP
-" nnoremap <Leader>fm :CtrlPMRUFiles<CR>
 nmap <leader><space><space> <Plug>VimwikiToggleListItem
 "}}}
 
