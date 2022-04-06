@@ -17,7 +17,6 @@ call plug#begin((has('nvim') ? stdpath('data') : '~/.vim') . '/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-commentary'     " Comment stuff out
 Plug 'tpope/vim-fugitive'       " git integration
-" Plug 'itchyny/lightline.vim'    " Better status bar
 Plug 'joshdick/onedark.vim'     " ColorScheme
 Plug 'ValenTheRed/oceanic-next'
 Plug 'ValenTheRed/material.vim'
@@ -109,31 +108,7 @@ endif
 
 "{{{ PLUGIN CONFIG
 
-" Lightline config
-let g:lightline = {
-   \ 'colorscheme': 'material_vim',
-   \ 'active': {
-   \   'left': [[ 'mode', 'paste' ],
-   \            ['gitbranch', 'readonly', 'relativepath', 'modified']],
-   \  },
-   \  'component_function': {
-   \   'gitbranch': 'FugitiveHead',
-   \  },
-   \ }
-let s:extra_lightline = { 'component': { } }
-
 if has('nvim')
-
-    let g:lightline['active']['left'][1] = ['gitsigns_status'] + g:lightline['active']['left'][1]
-    call extend(g:lightline, {
-       \ 'inactive': {
-       \   'left': [[ 'gitsigns_status', 'relativepath', 'modified']]
-       \  },
-       \ })
-    call extend(s:extra_lightline['component'], {
-     \    'gitsigns_status': "%{get(b:, 'gitsigns_status', '')}"
-     \ })
-
     let g:indent_blankline_char = '¦'
     let g:indent_blankline_filetype_exclude = ['help', 'markdown', 'vimwiki']
     let g:indent_blankline_buftype_exclude = ['terminal']
@@ -148,7 +123,6 @@ if has('nvim')
     lua require('ps.telescope')
     lua require('ps.lualine')
 endif
-call extend(g:lightline, s:extra_lightline)
 
 let g:ctrlp_map = '<c-\>'
 let g:ctrlp_working_path_mode = 'ra'
