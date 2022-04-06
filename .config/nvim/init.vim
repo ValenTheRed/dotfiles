@@ -2,7 +2,7 @@ set termguicolors "use true colours; for nvim-colorizer.lua
 
 "{{{ PLUGINS
 
-let s:data_dir = has('nvim') ? stdpath('data').'/site' : '~/.vim'
+let s:data_dir = stdpath('data').'/site'
 if empty(glob(s:data_dir . '/autoload/plug.vim'))
     " NOTE: set $XDG_DATA_HOME beforehand
     if has('win32') || has('win64')
@@ -13,44 +13,43 @@ if empty(glob(s:data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin((has('nvim') ? stdpath('data') : '~/.vim') . '/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-commentary'     " Comment stuff out
 Plug 'tpope/vim-fugitive'       " git integration
-Plug 'joshdick/onedark.vim'     " ColorScheme
-Plug 'ValenTheRed/oceanic-next'
-Plug 'ValenTheRed/material.vim'
-Plug 'ValenTheRed/ltspice.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
+Plug 'vimwiki/vimwiki'
 Plug 'danro/rename.vim'         " Rename file currently working on
 " Plug 'ctrlpvim/ctrlp.vim'       " Fuzzy finder
 Plug 'godlygeek/tabular'        " aligning
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-dispatch'
-if has('nvim')
-    Plug 'windwp/nvim-autopairs'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'}
-    Plug 'lukas-reineke/indent-blankline.nvim' " Indentation guide
-    Plug 'norcalli/nvim-colorizer.lua'         " RGB code colouring
-    Plug 'lewis6991/gitsigns.nvim'             " Git Gutter
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'nvim-lualine/lualine.nvim'
-    " Plug 'ray-x/lsp_signature.nvim'
-    " Plug 'hrsh7th/nvim-compe'                  " Completion engine
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    " Plug 'uga-rosa/cmp-dictionary'
-endif
+Plug 'ValenTheRed/ltspice.vim'
+Plug 'joshdick/onedark.vim'     " ColorScheme
+Plug 'ValenTheRed/oceanic-next'
+Plug 'ValenTheRed/material.vim'
+
+Plug 'windwp/nvim-autopairs'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'}
+Plug 'lukas-reineke/indent-blankline.nvim' " Indentation guide
+Plug 'norcalli/nvim-colorizer.lua'         " RGB code colouring
+Plug 'lewis6991/gitsigns.nvim'             " Git Gutter
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'L3MON4D3/LuaSnip'
+Plug 'nvim-lualine/lualine.nvim'
+" Plug 'ray-x/lsp_signature.nvim'
+" Plug 'hrsh7th/nvim-compe'                  " Completion engine
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'uga-rosa/cmp-dictionary'
 call plug#end()
 
 let g:material_terminal_italics = 1
@@ -108,21 +107,19 @@ endif
 
 "{{{ PLUGIN CONFIG
 
-if has('nvim')
-    let g:indent_blankline_char = '¦'
-    let g:indent_blankline_filetype_exclude = ['help', 'markdown', 'vimwiki']
-    let g:indent_blankline_buftype_exclude = ['terminal']
+let g:indent_blankline_char = '¦'
+let g:indent_blankline_filetype_exclude = ['help', 'markdown', 'vimwiki']
+let g:indent_blankline_buftype_exclude = ['terminal']
 
-    lua require('ps.autopairs')
-    lua require('ps.colorizer')
-    lua require('ps.gitsigns')
-    lua require('ps.treesitter')
-    " lua require'compe-config'
-    lua require('ps.cmp')
-    lua require('ps.lsp')
-    lua require('ps.telescope')
-    lua require('ps.lualine')
-endif
+lua require('ps.autopairs')
+lua require('ps.colorizer')
+lua require('ps.gitsigns')
+lua require('ps.treesitter')
+" lua require'compe-config'
+lua require('ps.cmp')
+lua require('ps.lsp')
+lua require('ps.telescope')
+lua require('ps.lualine')
 
 let g:ctrlp_map = '<c-\>'
 let g:ctrlp_working_path_mode = 'ra'
