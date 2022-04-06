@@ -138,15 +138,15 @@ if has('nvim')
     let g:indent_blankline_filetype_exclude = ['help', 'markdown', 'vimwiki']
     let g:indent_blankline_buftype_exclude = ['terminal']
 
-    lua require('nvim-autopairs-config')
-    lua require('colorizer').setup()
-    lua require('gitsigns-config')
-    lua require('treesitter-config')
+    lua require('ps.autopairs')
+    lua require('ps.colorizer')
+    lua require('ps.gitsigns')
+    lua require('ps.treesitter')
     " lua require'compe-config'
-    lua require('cmp-config')
-    lua require('nvim-lsp-config')
-    lua require('telescope-config')
-    lua require('lualine-config')
+    lua require('ps.cmp')
+    lua require('ps.lsp')
+    lua require('ps.telescope')
+    lua require('ps.lualine')
 endif
 call extend(g:lightline, s:extra_lightline)
 
