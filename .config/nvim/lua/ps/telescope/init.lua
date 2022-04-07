@@ -52,7 +52,9 @@ function M.lsp_references()
 end
 
 function M.lsp_document_symbols()
-    builtin.lsp_document_symbols()
+    builtin.lsp_document_symbols({
+        previewer = false,
+    })
 end
 
 function M.lsp_workspace_symbols()
@@ -64,7 +66,9 @@ function M.lsp_type_definitions()
 end
 
 function M.lsp_code_actions()
-    builtin.lsp_code_actions()
+    builtin.lsp_code_actions({
+        previewer = false,
+    })
 end
 
 return M
