@@ -141,7 +141,8 @@ lua require('ps.gitsigns')
 lua require('ps.treesitter')
 lua require('ps.cmp')
 lua require('ps.lsp')
-lua require('ps.telescope')
+lua require('ps.telescope.setup')
+lua require('ps.telescope.mappings')
 lua require('ps.lualine')
 
 "}}}

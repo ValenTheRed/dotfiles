@@ -1,55 +1,70 @@
-local actions = require('telescope.actions')
-local action_layout = require('telescope.actions.layout')
+-- Ref:
+--- https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/tj/telescope/init.lua
+if not pcall(require, "telescope") then
+    return
+end
 
-local minimalist_square_box = require('telescope.themes').get_dropdown({
-    borderchars = {
-        { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-        prompt = {"─", "│", " ", "│", '┌', '┐', "│", "│"},
-        results = {"─", "│", "─", "│", "├", "┤", "┘", "└"},
-        preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└'},
-    },
-    width = 0.8,
-    previewer = false,
-})
+local M = {}
+local builtin = require('telescope.builtin')
 
-require('telescope').setup({
-    defaults = {
-        vimgrep_arguments = {
-            "rg", "--vimgrep", "--trim"
-        },
-        mappings = {
-            i = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-            },
-        },
-        preview = false,
-    },
-    pickers = {
-        buffers = {
-            mappings = {
-                i = {
-                    ["<DEL>"] = actions.delete_buffer,
-                },
-                n = {
-                    ["dd"] = actions.delete_buffer,
-                }
-            },
-        },
-    },
-})
+function M.buffers()
+    builtin.buffers({
+        previewer = false,
+        shorten_path = false,
+    })
+end
 
-require('telescope').load_extension('fzf')
+function M.find_files()
+    builtin.find_files({
+        previewer = false,
+    })
+end
 
-local opts = { noremap=true, silent=true }
-vim.api.nvim_set_keymap('n', '<leader>ff', "<cmd> Telescope buffers<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>fd', "<cmd> Telescope find_files<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>fr', "<cmd> Telescope live_grep<CR>", opts)
-vim.api.nvim_set_keymap('n', '<leader>fm', "<cmd> Telescope oldfiles<CR>", opts)
--- Implement the following keymaps in lspconfig
--- vim.api.nvim_set_keymap('n', 'gd', "<cmd> Telescope lsp_definitions<CR>", opts)
--- vim.api.nvim_set_keymap('n', 'gi', "<cmd> Telescope lsp_implementations<CR>", opts)
--- vim.api.nvim_set_keymap('n', 'gr', "<cmd> Telescope lsp_references<CR>", opts)
--- vim.api.nvim_set_keymap('n', 'gdr', "<cmd> Telescope lsp_document_symbols<CR>", opts)
--- vim.api.nvim_set_keymap('n', 'gwr', "<cmd> Telescope lsp_workspace_symbols<CR>", opts)
--- vim.api.nvim_set_keymap('n', '<space>ca', "<cmd> Telescope lsp_code_actions<CR>", opts)
+function M.live_grep()
+    builtin.live_grep()
+end
+
+function M.oldfiles()
+    builtin.oldfiles({
+        previewer = false,
+    })
+end
+
+function M.colorscheme()
+    builtin.colorscheme({
+        enable_preview = true,
+    })
+end
+
+-- TODO: telescope doesn't search amongst the register's value
+-- M.registers = builtin.registers
+
+function M.lsp_definitions()
+    builtin.lsp_definitions()
+end
+
+function M.lsp_implementations()
+    builtin.lsp_implementations()
+end
+
+function M.lsp_references()
+    builtin.lsp_references()
+end
+
+function M.lsp_document_symbols()
+    builtin.lsp_document_symbols()
+end
+
+function M.lsp_workspace_symbols()
+    builtin.lsp_workspace_symbols()
+end
+
+function M.lsp_type_definitions()
+    builtin.lsp_type_definitions()
+end
+
+function M.lsp_code_actions()
+    builtin.lsp_code_actions()
+end
+
+return M
