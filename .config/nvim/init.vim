@@ -131,10 +131,7 @@ hi ColorColumn guibg=#1F2233
 
 "{{{ Plugin config
 
-let g:indent_blankline_char = '¦'
-let g:indent_blankline_filetype_exclude = ['help', 'markdown', 'vimwiki']
-let g:indent_blankline_buftype_exclude = ['terminal']
-
+lua require("ps.indentline")
 lua require('ps.autopairs')
 lua require('ps.colorizer')
 lua require('ps.gitsigns')
