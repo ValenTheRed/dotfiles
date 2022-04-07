@@ -38,6 +38,8 @@ local on_attach = function(client, bufnr)
     nmap('<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
     nmap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
     nmap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+
+    -- Also, undefine sign column's diagnostic signs
 end
 
 -- Enable the following language servers
@@ -59,3 +61,8 @@ require'lspconfig'.omnisharp.setup{
     capabilities = capabilities,
 }
 
+-- Switch off diagnostics signs in the sign column.
+-- :help diagnostic-handlers-example
+vim.diagnostic.handlers.signs = {
+    show = false,
+}
