@@ -102,7 +102,7 @@ Plug 'ValenTheRed/material.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
 Plug 'lukas-reineke/indent-blankline.nvim' " Indentation guide
 Plug 'norcalli/nvim-colorizer.lua'         " RGB code colouring
 Plug 'lewis6991/gitsigns.nvim'             " Git Gutter
