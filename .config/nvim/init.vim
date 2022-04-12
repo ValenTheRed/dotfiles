@@ -62,6 +62,11 @@ set nrformats+=alpha
 " save window sizes with :mks
 set sessionoptions+=resize,winpos
 
+" Patience is better than the default in some cases.
+" Explanation of indent-heuristic:
+" https://vimways.org/2018/the-power-of-diff/#the-indent-heuristics
+set diffopt+=algorithm:patience,indent-heuristic
+
 if executable('rg')
     set grepprg=rg\ --vimgrep
     set grepformat^=%f:%l:%c:%m
