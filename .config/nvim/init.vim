@@ -102,6 +102,7 @@ Plug 'godlygeek/tabular'        " aligning
 Plug 'ValenTheRed/ltspice.vim'
 Plug 'ValenTheRed/material.vim'
 
+Plug 'ValenTheRed/psmdc.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -125,15 +126,11 @@ Plug 'saadparwaiz1/cmp_luasnip'
 " Plug 'uga-rosa/cmp-dictionary'
 call plug#end()
 
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'ocean'
-
-colorscheme material
-hi ColorColumn guibg=#1F2233
-
 " }}}
 
 "{{{ Plugin config
+
+colorscheme psmdc_dark
 
 lua require("ps.indentline")
 lua require('ps.autopairs')
@@ -183,6 +180,22 @@ augroup END
 " {{{ Plugin keymaps
 
 nmap <leader><space><space> <Plug>VimwikiToggleListItem
+
+" }}}
+
+" {{{ Functions
+
+lua << EOF
+close_all_floating_windows = function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        local config = vim.api.nvim_win_get_config(win);
+        if config.relative ~= "" then
+            vim.api.nvim_win_close(win, false);
+            -- print('Closing window', win)
+        end
+    end
+end
+EOF
 
 " }}}
 
