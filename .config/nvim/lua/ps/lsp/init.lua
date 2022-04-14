@@ -10,6 +10,36 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 local telescope_mapper = require('ps.telescope.mappings')
 
+-- global function
+function toggle_document_highlight()
+  -- NOTE: Ref: https://vi.stackexchange.com/questions/4120
+  -- The `#CursorHold` is important. Performing a
+  -- `augroup! lsp_document_highlight` gives warning `:h W19`, so we
+  -- need to reset the augroup by deleting all the autocmds inside it
+  -- and checking for the existence of those groups to determine if we
+  -- need to populate the augroup.
+  -- NOTE: all numbers are truth-y in lua, even 0; hence a negation.
+  if vim.fn.exists("#lsp_document_highlight#CursorHold") ~= 0 then
+    -- highlights do not disappear if toggling is performed while
+    -- the symbols are highlighted.
+    vim.lsp.buf.clear_references()
+    -- reset it
+    vim.cmd([[
+      augroup lsp_document_highlight
+        autocmd!
+      augroup END
+    ]])
+  else -- create it
+    vim.cmd([[
+      augroup lsp_document_highlight
+        autocmd!
+        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+      augroup END
+    ]])
+  end
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -34,12 +64,19 @@ local on_attach = function(client, bufnr)
   nmap('<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   telescope_mapper("<space>ca", "lsp_code_actions", nil, true)
   nmap('<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-  nmap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
   nmap('<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
   nmap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
   nmap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
 
-  -- Also, undefine sign column's diagnostic signs
+  if client.resolved_capabilities.document_formatting or
+    client.resolved_capabilities.document_range_formatting then
+    nmap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+  end
+
+  if client.resolved_capabilities.document_highlight then
+    nmap("<space>dh", '<cmd>lua toggle_document_highlight()<CR>')
+  end
+
 end
 
 -- Enable the following language servers
@@ -61,9 +98,10 @@ require'lspconfig'.omnisharp.setup{
   capabilities = capabilities,
 }
 
--- Switch off diagnostics signs in the sign column.
--- github issue: https://github.com/neovim/neovim/issues/15770
--- :help diagnostic-handlers-example
-vim.diagnostic.handlers.signs = {
-  show = false,
-}
+-- Signs for the sign column
+local icons = { error = " ", warn = " ", info = " ", hint = " " }
+for type, icon in pairs(icons) do
+  local title_case = string.upper(string.sub(type, 1, 1)) .. string.sub(type, 2)
+  local hl = "DiagnosticSign" .. title_case
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
+end

@@ -132,6 +132,8 @@ call plug#end()
 
 colorscheme psmdc_dark
 
+" diagnostic is an neovim module
+lua require("ps.vim_diagnostic")
 lua require("ps.indentline")
 lua require('ps.autopairs')
 lua require('ps.colorizer')
