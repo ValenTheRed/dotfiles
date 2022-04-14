@@ -1,20 +1,60 @@
 local cmp = require('cmp')
 
+local snippet = {
+  expand = function(args)
+    require('luasnip').lsp_expand(args.body)
+  end
+}
+
+local mapping = {
+  ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  ['<C-e>'] = cmp.mapping({
+    i = cmp.mapping.abort(),
+    c = cmp.mapping.close(),
+  }),
+  ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
+  ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
+}
+
+local format_icons = function(_, vim_item)
+  -- For now, no displaying of item source
+  local icons = {
+    Text = "",
+    Method = "",
+    Function = "",
+    Constructor = "",
+    Field = "ﰠ",
+    Variable = "",
+    Class = "",
+    Interface = "",
+    Module = " ",
+    Property = "",
+    Unit = "",
+    Value = " ",
+    Enum = "",
+    Keyword = "",
+    Snippet = "﬌",
+    Color = "",
+    File = " ",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "",
+    Event = "⌘",
+    Operator = "",
+    TypeParameter = "",
+  }
+  vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
+  return vim_item
+end
+
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end
-  },
-  mapping = {
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
+  snippet = snippet,
+  mapping = mapping,
+  formatting = {
+    format = format_icons,
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -53,7 +93,7 @@ cmp.setup.cmdline('/', {
 _G.vimrc = _G.vimrc or {}
 _G.vimrc.cmp = _G.vimrc.cmp or {}
 _G.vimrc.cmp.on_ctrl_n = cmp.complete
-vim.api.nvim_set_keymap('c', '<C-n>', "<cmd>call v:lua.vimrc.cmp.on_ctrl_n()<CR>", {
-  silent = true,
-  noremap = true,
-})
+vim.api.nvim_set_keymap(
+  'c', '<C-n>', "<cmd>call v:lua.vimrc.cmp.on_ctrl_n()<CR>",
+  { silent = true, noremap = true, }
+)
