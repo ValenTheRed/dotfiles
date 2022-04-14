@@ -4,6 +4,7 @@ local defaults = {
   -- defaults doesn't support the key, defining it inside of a theme
   -- works.
   --results_title = false
+  selection_caret = "▌",
   sorting_strategy = "ascending",
   layout_strategy = "horizontal",
   layout_config = {

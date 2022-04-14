@@ -7,7 +7,8 @@ nnoremap <C-->        :Smaller<CR>
 nnoremap <C-+>        :Bigger<CR>
 
 if exists('g:neovide') "{{{1
-    set guifont=Jetbrains\ mono\ nl:h10
+    set guifont=JetBrainsMonoNL\ NF:h10
+    " set guifont=Jetbrains\ mono\ nl:h10
     let g:neovide_cursor_animation_length=0.04
 
     function NeovideToggleFullScreen()
