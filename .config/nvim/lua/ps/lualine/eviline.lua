@@ -23,12 +23,6 @@ eviline.inactive_sections = {
   },
 }
 
-local conditions = {
-  hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
-  end,
-}
-
 -- Inserts a component in lualine_c at left section
 local function ins_left(component)
   table.insert(eviline.sections.lualine_c, component)
@@ -101,6 +95,7 @@ ins_left {
 
 ins_left {
   'filetype',
+  -- hide when width less than 70
   cond = function() return vim.fn.winwidth(0) > 70 end,
 }
 
@@ -162,15 +157,19 @@ ins_right {
 ins_right {
   'encoding',
   color = { bg=c.selection2 },
-  -- hide when width less than specified
-  cond = function() return vim.fn.winwidth(0) > 80 end,
+  cond = function()
+    -- Bring more attention by only displaying when not utf-8
+    return vim.opt.encoding:get() ~= "utf-8" and vim.fn.winwidth(0) > 80
+  end,
 }
 
 ins_right {
   'fileformat',
   color = { bg=c.selection2 },
-  -- hide when width less than specified
-  cond = function() return vim.fn.winwidth(0) > 75 end,
+  cond = function()
+    -- Bring more attention by only displaying when not unix
+    return vim.opt.fileformat:get() ~= "unix" and vim.fn.winwidth(0) > 75
+  end,
 }
 
 ins_right {
