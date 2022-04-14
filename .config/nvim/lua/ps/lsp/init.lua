@@ -19,20 +19,22 @@ function toggle_document_highlight()
   -- and checking for the existence of those groups to determine if we
   -- need to populate the augroup.
   -- NOTE: all numbers are truth-y in lua, even 0; hence a negation.
-  if vim.fn.exists("#lsp_document_highlight#CursorHold") ~= 0 then
+  if vim.fn.exists("#lsp_document_highlight#CursorHold#<buffer>") ~= 0 then
     -- highlights do not disappear if toggling is performed while
     -- the symbols are highlighted.
     vim.lsp.buf.clear_references()
     -- reset it
+    -- `autocmd! * <buffer>` is crucial since we don't want highlight of
+    -- other buffers disappearing.
     vim.cmd([[
       augroup lsp_document_highlight
-        autocmd!
+        autocmd! * <buffer>
       augroup END
     ]])
   else -- create it
     vim.cmd([[
       augroup lsp_document_highlight
-        autocmd!
+        autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
       augroup END
