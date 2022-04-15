@@ -96,7 +96,7 @@ ins_left {
 ins_left {
   'filetype',
   -- hide when width less than 70
-  cond = function() return vim.fn.winwidth(0) > 70 end,
+  cond = function() return vim.fn.winwidth(0) > 80 end,
 }
 
 -- default component has too much space around it
@@ -113,7 +113,7 @@ ins_left {
   sources = { 'nvim_diagnostic', },
   -- Redundant defining of symbols; already in lsp.lua.
   -- TODO(ps): structure lua folder to get symbols from lsp.lua
-  symbols = { error = " ", warn = " ", info = " ", hint = " " },
+  symbols = { error = " ", warn = " ", info = " ", hint = " " },
 }
 
 -- Gitdiff components
@@ -159,7 +159,7 @@ ins_right {
   color = { bg=c.selection2 },
   cond = function()
     -- Bring more attention by only displaying when not utf-8
-    return vim.opt.encoding:get() ~= "utf-8" and vim.fn.winwidth(0) > 80
+    return vim.opt.encoding:get() ~= "utf-8" and vim.fn.winwidth(0) > 75
   end,
 }
 
@@ -168,7 +168,7 @@ ins_right {
   color = { bg=c.selection2 },
   cond = function()
     -- Bring more attention by only displaying when not unix
-    return vim.opt.fileformat:get() ~= "unix" and vim.fn.winwidth(0) > 75
+    return vim.opt.fileformat:get() ~= "unix" and vim.fn.winwidth(0) > 70
   end,
 }
 

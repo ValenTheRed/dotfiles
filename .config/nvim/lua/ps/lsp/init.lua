@@ -1,14 +1,8 @@
--- For nvim-cmp
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
-}
 local telescope_mapper = require('ps.telescope.mappings')
+
+-- For nvim-cmp
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- global function
 function toggle_document_highlight()
@@ -101,7 +95,7 @@ require'lspconfig'.omnisharp.setup{
 }
 
 -- Signs for the sign column
-local icons = { error = " ", warn = " ", info = " ", hint = " " }
+local icons = { error = " ", warn = " ", info = " ", hint = " " }
 for type, icon in pairs(icons) do
   local title_case = string.upper(string.sub(type, 1, 1)) .. string.sub(type, 2)
   local hl = "DiagnosticSign" .. title_case

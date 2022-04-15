@@ -65,7 +65,7 @@ set sessionoptions+=resize,winpos
 " Patience is better than the default in some cases.
 " Explanation of indent-heuristic:
 " https://vimways.org/2018/the-power-of-diff/#the-indent-heuristics
-set diffopt+=algorithm:patience,indent-heuristic
+set diffopt+=algorithm:patience,indent-heuristic,foldcolumn:1
 
 if executable('rg')
     set grepprg=rg\ --vimgrep
@@ -209,9 +209,8 @@ nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 vnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 vnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" Switch command line search history and Ex mode
+" remap Ex mode. We can still enter it using `gQ`
 nnoremap Q q:
-nnoremap q: Q
 
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
@@ -225,9 +224,13 @@ nnoremap <F3> :set hlsearch! hlsearch?<CR>
 " Search and Replace word and WORD under the cursor throughout the buffer
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 nnoremap <Leader>R :%s/\<<C-r><C-A>\>//g<Left><Left>
+" Search using a word boundary
+vnoremap <Leader>r "*y:%s/\V\<<C-r><S-*>\>//g<Left><Left>
+" search using no word boundry
+vnoremap <Leader>R "*y:%s/\V<C-r><S-*>//g<Left><Left>
 
 " Break lines at cursor
-nnoremap <silent> <Leader>j i<CR><ESC>
+nnoremap <silent> <enter> i<CR><ESC>
 
 " Run a terminal emulator at current working directory
 if has('win32') || has('win64')
@@ -242,7 +245,7 @@ nnoremap <C-S-Tab> gT
 " Copy/pasting from system clipboard
 nnoremap <M-p> "+]p
 vnoremap <M-y> "+y
-inoremap <M-p> <C-\><C-o>:set paste<CR><C-r><C-+><C-\><C-o>:set nopaste<CR>
+inoremap <M-p> <ESC>"+]pa
 
 " Buffer
 nnoremap ]b :bn<CR>
