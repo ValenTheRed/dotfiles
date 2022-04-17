@@ -4,8 +4,7 @@ local telescope_mapper = require('ps.telescope.mappings')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- global function
-function toggle_document_highlight()
+local function toggle_document_highlight()
   -- NOTE: Ref: https://vi.stackexchange.com/questions/4120
   -- The `#CursorHold` is important. Performing a
   -- `augroup! lsp_document_highlight` gives warning `:h W19`, so we
@@ -20,12 +19,14 @@ function toggle_document_highlight()
     -- reset it
     -- `autocmd! * <buffer>` is crucial since we don't want highlight of
     -- other buffers disappearing.
+    print("nohldocument")
     vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
       augroup END
     ]])
   else -- create it
+    print("hldocument")
     vim.cmd([[
       augroup lsp_document_highlight
         autocmd! * <buffer>
@@ -39,8 +40,9 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local opts = { noremap=true, silent=true }
-  local function nmap(key, cmd)
+  local function nmap(key, cmd, opts)
+    local def_opts = { noremap=true, silent=true }
+    local opts = opts and vim.tbl_extend("force", def_opts, opts) or def_opts
     vim.api.nvim_buf_set_keymap(bufnr, 'n', key, cmd, opts)
   end
   -- Mappings.
@@ -70,7 +72,7 @@ local on_attach = function(client, bufnr)
   end
 
   if client.resolved_capabilities.document_highlight then
-    nmap("<space>dh", '<cmd>lua toggle_document_highlight()<CR>')
+    nmap("<space>dh", '', { callback=toggle_document_highlight })
   end
 
 end

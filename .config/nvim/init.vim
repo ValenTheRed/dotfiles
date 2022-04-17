@@ -101,6 +101,7 @@ Plug 'danro/rename.vim'         " Rename file currently working on
 Plug 'godlygeek/tabular'        " aligning
 Plug 'ValenTheRed/ltspice.vim'
 Plug 'ValenTheRed/material.vim'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 Plug 'ValenTheRed/psmdc.nvim'
 Plug 'windwp/nvim-autopairs'
@@ -151,17 +152,26 @@ lua require('ps.lualine')
 " {{{ Autocmds
 
 " Re-source $MYVIMRC if changed
-augroup re_source
+augroup resource_vimrc
     au!
     autocmd BufWritePost $MYVIMRC nested :source $MYVIMRC
 augroup END
 
-" Doesn't work if moved into ftplugin\<ft>.vim
-let s:config = has('nvim') ? stdpath('config') : '~/.vim'
-augroup skele
-    au!
-    autocmd BufNewFile *.* silent! execute '0r '.s:config.'/templates/skeleton.'.expand("%:e")
-augroup END
+lua << EOF
+vim.api.nvim_create_autocmd("BufNewFile", {
+    group = vim.api.nvim_create_augroup("load_from_skeleton_file", {}),
+    pattern = { "*.*" },
+    callback = function()
+        -- To restore alternate file register after `:r` clobers it
+        local alt_reg = vim.fn.getreg("#")
+        local file = vim.fn.stdpath("config") .. [[/templates/skeleton.]] .. vim.fn.expand("%:e")
+        if vim.fn.filereadable(file) ~= 0 then
+            vim.cmd([[0r ]] .. file)
+        end
+        vim.fn.setreg("#", alt_reg)
+    end,
+})
+EOF
 
 " from :help incsearch
 " TODO: preserve `hlsearch`: on -> '/' on -> on; off -> '/' on -> off
@@ -171,8 +181,7 @@ augroup vimrc_incsearch_highlight
     " autocmd CmdlineLeave /,\? :set nohlsearch
 augroup END
 
-" Remove trailing whitespaces when file is saved.
-augroup fmt
+augroup remove_trailing_whitespaces
     au!
     autocmd BufWritePre * :%s/\s\+$//e
 augroup END
@@ -241,6 +250,8 @@ endif
 " Browser like tab movement
 nnoremap <C-Tab> gt
 nnoremap <C-S-Tab> gT
+
+nnoremap <C-q> :qa<CR>
 
 " Copy/pasting from system clipboard
 nnoremap <M-p> "+]p
