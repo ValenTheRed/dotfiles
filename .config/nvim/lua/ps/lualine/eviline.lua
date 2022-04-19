@@ -116,36 +116,19 @@ ins_left {
   symbols = { error = " ", warn = " ", info = " ", hint = " " },
 }
 
--- Gitdiff components
--- Default component is not used since the last time I used it, it was
--- slower to update than gitsigns_status.
--- TODO(ps): to collapse the next three components into a single component.
--- Separation was done since I don't know how to colour differently within
--- the same component.
-local function get_gitsigns_status(of, sign)
-  local num = vim.b.gitsigns_status_dict[of]
-  if num > 0 then
-    return sign .. num
-  end
-  return ""
-end
-
+-- from lualine's wiki
 ins_right {
-  function() return get_gitsigns_status("added", "+") end,
-  color = { fg=c.green, bg=c.selection },
-  padding = { left=1 }
-}
-
-ins_right {
-  function() return get_gitsigns_status("changed", "~") end,
-  color = { fg=c.yellow, bg=c.selection },
-  padding = { left=1, right=1 }
-}
-
-ins_right {
-  function() return get_gitsigns_status("removed", "-") end,
-  color = { fg=c.red, bg=c.selection },
-  padding = { right=1 }
+  'diff',
+  source = function()
+    local gitsigns = vim.b.gitsigns_status_dict
+    if gitsigns then
+      return {
+        added = gitsigns.added,
+        modified = gitsigns.changed,
+        removed = gitsigns.removed
+      }
+    end
+  end,
 }
 
 ins_right {
