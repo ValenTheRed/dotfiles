@@ -1,8 +1,8 @@
 declare -A ZINIT
-ZINIT[BIN_DIR]=$XDG_CONFIG_HOME/zsh/zinit.git/zinit.zsh
-ZINIT[HOME_DIR]=$XDG_CONFIG_HOME/zsh/zinit
+ZINIT[HOME_DIR]="${HOME}/.local/share/zinit"
+ZINIT[BIN_DIR]="${ZINIT[HOME_DIR]}/zinit.git"
 
-source $XDG_CONFIG_HOME/zsh/zinit.git/zinit.zsh
+source "${ZINIT[BIN_DIR]}/zinit.zsh"
 zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
 # zinit light intelfx/pure
 zinit light sindresorhus/pure
@@ -19,7 +19,7 @@ export EDITOR='nvim'
 bindkey -v '^K' history-beginning-search-backward
 bindkey -v '^J' history-beginning-search-forward
 
-HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
+HISTFILE="${HOME}/.local/share/zsh/zsh_history"
 # Huge history. Doesn't appear to slow things down, so why not?
 HISTSIZE=500000
 SAVEHIST=100000
