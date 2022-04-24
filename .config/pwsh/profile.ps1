@@ -7,6 +7,13 @@ foreach ($mod in $importModules) {
         Write-Host "cannot find $mod"
     }
 }
+
+# if have posh-git
+if (Get-Module -ListAvailable -Name "posh-git") {
+    $GitPromptSettings.BranchColor.ForegroundColor = 'Salmon'
+    $GitPromptSettings.BeforeStatus.ForegroundColor = 'Gray'
+    $GitPromptSettings.AfterStatus.ForegroundColor =  'Gray'
+}
 # }}}
 
 # {{{ Completion
@@ -106,14 +113,20 @@ function Prompt {
 
     $prompt = ""
 
-    $prompt += Write-Prompt "$displayPath" -ForegroundColor 0xadefd1 # MINT
+    $prompt += Write-Prompt "$displayPath" -ForegroundColor LightSkyBlue #CornflowerBlue #0xadefd1 # MINT
     $prompt += Write-VcsStatus
-    $prompt += Write-Prompt "$(if ($PsDebugContext) {' [DBG]: '} else {''})" -ForegroundColor Magenta
-    $prompt += Write-Prompt "$('❱' * ($nestedPromptLevel + 1)) " -ForegroundColor 0xffa500
+    if ($PsDebugContext) {
+        $prompt += $GitPromptSettings.DefaultPromptDebug
+    }
+    if ($origLastExitCode) {
+        $prompt += Write-Prompt "!$($origLastExitCode)" -ForegroundColor Azure
+    }
+    $prompt += Write-Prompt "$('❱' * ($nestedPromptLevel + 1)) " -ForegroundColor Chartreuse
 
     $LASTEXITCODE = $origLastExitCode
     if ($prompt) { "$prompt" } else { "❱ " }
 }
+
 # }}}
 
 # vim: set fdm=marker:
