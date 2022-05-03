@@ -282,6 +282,10 @@ nnoremap <C-k> <C-w><C-k>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-l> <C-w><C-l>
 
+" :sp and :vs are easier to type than :vne and :new so, remap their shortcuts
+nnoremap <silent> <C-w><C-v> :vne<Cr>
+nnoremap <silent> <C-w><C-s> :new<Cr>
+
 " Easy resize of split panes
 nnoremap <M-j> <C-w><C-->
 nnoremap <M-k> <C-w><C-+>
