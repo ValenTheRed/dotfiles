@@ -40,7 +40,7 @@ Set-PSReadLineKeyHandler -Chord Ctrl-w -Function BackwardDeleteWord
 Set-alias -Name gh -Value Get-Help
 Set-alias -Name fvim -Value 'C:/Software/FVim/FVim.exe'
 
-function dotgit {
+function dot {
     $dotfilesDir = "D:/Github/dotfiles/"
     git --git-dir="$dotfilesDir" --work-tree="$env:HOME" @args
 }
@@ -111,10 +111,14 @@ function Prompt {
       '…{0}{1}' -f $dirSep, ($pathComponents[-2,-1] -join $dirSep)
     }
 
-    $prompt = ""
+    $prompt = Write-Prompt (Get-Date -format '羽hh:mm') -ForegroundColor Black -BackgroundColor Thistle
+    $prompt += " "
 
     $prompt += Write-Prompt "$displayPath" -ForegroundColor LightSkyBlue #CornflowerBlue #0xadefd1 # MINT
-    $prompt += Write-VcsStatus
+    if (Write-VcsStatus -ne "") {
+        $prompt += Write-VcsStatus
+        $prompt += "`n"
+    }
     if ($PsDebugContext) {
         $prompt += $GitPromptSettings.DefaultPromptDebug
     }
