@@ -90,12 +90,10 @@ function vshell {
 }
 
 function opex {
-    param($Path)
-
-    if ($Path) {
-        explorer "$Path"
-    } else {
+    if ($args.Length -eq 0) {
         explorer .
+    } else {
+        explorer @args
     }
 }
 # }}}
@@ -123,12 +121,12 @@ function Prompt {
         $prompt += $GitPromptSettings.DefaultPromptDebug
     }
     if ($origLastExitCode) {
-        $prompt += Write-Prompt "!$($origLastExitCode)" -ForegroundColor Azure
+        $prompt += Write-Prompt "!$origLastExitCode" -ForegroundColor Azure
     }
     $prompt += Write-Prompt "$('❱' * ($nestedPromptLevel + 1)) " -ForegroundColor Chartreuse
 
     $LASTEXITCODE = $origLastExitCode
-    if ($prompt) { "$prompt" } else { "❱ " }
+    if ($prompt) { $prompt } else { "❱ " }
 }
 
 # }}}
