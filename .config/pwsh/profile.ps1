@@ -109,7 +109,13 @@ function Prompt {
       '…{0}{1}' -f $dirSep, ($pathComponents[-2,-1] -join $dirSep)
     }
 
-    $prompt = Write-Prompt (Get-Date -format '羽hh:mm') -ForegroundColor Black -BackgroundColor Thistle
+    $d = (Get-Date).Hour
+    if (($d -ge 0 -and $d -le 6) -or ($d -ge 19 -and $d -le 24)) {
+        $date = Get-Date -format 'hh:mm ⏾'
+    } else {
+        $date = Get-Date -format '羽hh:mm'
+    }
+    $prompt = Write-Prompt $date -ForegroundColor Black -BackgroundColor Thistle
     $prompt += " "
 
     $prompt += Write-Prompt "$displayPath" -ForegroundColor LightSkyBlue #CornflowerBlue #0xadefd1 # MINT
