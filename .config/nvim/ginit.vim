@@ -3,8 +3,8 @@ let $MYGVIMRC = has('nvim') ? stdpath('config').'/ginit.vim' : '~/.vim/.gvimrc'
 " From tpope's .vimrc
 command! -bar -nargs=0 Bigger  :let &guifont = substitute(&guifont,'\d\+$','\=submatch(0)+1','')
 command! -bar -nargs=0 Smaller :let &guifont = substitute(&guifont,'\d\+$','\=submatch(0)-1','')
-nnoremap <C-->        :Smaller<CR>
-nnoremap <C-+>        :Bigger<CR>
+nnoremap <silent> _ :Smaller<CR>
+nnoremap <silent> + :Bigger<CR>
 
 if exists('g:neovide') "{{{1
     set guifont=JetBrainsMonoNL\ NF:h10
@@ -26,7 +26,7 @@ elseif exists('g:fvim_loaded') "{{{1
     FVimFontLigature v:false
 
     " external popup menu
-    FVimUIPopupMenu v:true
+    " FVimUIPopupMenu v:true
 
 elseif has('gui_running') "{{{1
     set guifont=Fira_Code:h12
