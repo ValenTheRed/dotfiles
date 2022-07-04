@@ -239,7 +239,7 @@ vnoremap <Leader>r "*y:%s/\V\<<C-r><S-*>\>//g<Left><Left>
 vnoremap <Leader>R "*y:%s/\V<C-r><S-*>//g<Left><Left>
 
 " Break lines at cursor
-nnoremap <silent> <enter> i<CR><ESC>
+nnoremap <silent> <leader>q i<CR><ESC>
 
 " Run a terminal emulator at current working directory
 if has('win32') || has('win64')
