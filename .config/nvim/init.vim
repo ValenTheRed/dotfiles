@@ -96,13 +96,14 @@ Plug 'tpope/vim-fugitive'       " git integration
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
-Plug 'vimwiki/vimwiki'
+" Plug 'vimwiki/vimwiki'
 Plug 'danro/rename.vim'         " Rename file currently working on
 Plug 'godlygeek/tabular'        " aligning
 Plug 'ValenTheRed/ltspice.vim'
 Plug 'ValenTheRed/material.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 
+Plug 'jakewvincent/mkdnflow.nvim'
 Plug 'ValenTheRed/psmdc.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-lua/plenary.nvim'
@@ -146,6 +147,7 @@ lua require('ps.lsp')
 lua require('ps.telescope.setup')
 lua require('ps.telescope.mappings')
 lua require('ps.lualine')
+lua require('ps.mkdnflow')
 
 "}}}
 
