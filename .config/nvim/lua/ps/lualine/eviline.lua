@@ -89,6 +89,8 @@ ins_left {
 
 ins_left {
   'filename',
+  icons_enabled = true,
+  icon = "",
   path = 1,
   color = { bg=c.selection2 }
 }
