@@ -104,8 +104,10 @@ ins_left {
 -- default component has too much space around it
 ins_left {
   function ()
-    return " %l:%c"
-  end
+    return "%l:%c"
+  end,
+  icons_enabled = true,
+  icon = "",
 }
 
 ins_left {
