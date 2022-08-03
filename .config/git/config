@@ -1,3 +1,5 @@
+[init]
+	defaultbranch = main
 [user]
 	name = Pranjal Soni
 	email = soni.pranjals17@gmail.com
