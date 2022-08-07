@@ -17,7 +17,7 @@ if (Get-Module -ListAvailable -Name "posh-git") {
 # }}}
 
 # {{{ Completion
-$completionScripts = @("~/_fd.ps1", "~/_rg.ps1", "~/_dotnet.ps1")
+$completionScripts = @("~/_fd.ps1", "~/_rg.ps1")#, "~/_dotnet.ps1")
 foreach ($script in $completionScripts) {
     if (Test-Path $script) {
         & $script
@@ -41,7 +41,7 @@ Set-alias -Name gh -Value Get-Help
 Set-alias -Name fvim -Value 'C:/Software/FVim/FVim.exe'
 
 function dot {
-    $dotfilesDir = "D:/Github/dotfiles/"
+    $dotfilesDir = "F:/Github/dotfiles/"
     git --git-dir="$dotfilesDir" --work-tree="$env:HOME" @args
 }
 
@@ -101,12 +101,25 @@ function opex {
 # {{{ Prompt
 function Prompt {
     $origLastExitCode = $LASTEXITCODE
+
+    # If number of characters in $PWD (excluding separator) exceeds some $MAX,
+    # $PWD is shortened
     $dirSep = [IO.Path]::DirectorySeparatorChar
     $pathComponents = $PWD.Path.Split($dirSep)
-    $displayPath = if ($pathComponents.Count -lt 3) {
-      $PWD.Path
+    $i = -1
+    for ($len = $pathComponents[$i].Length; $i -gt -$pathComponents.Length; ) {
+        $len += $pathComponents[$i - 1].Length
+        # 36 is the my max number of characters
+        if ($len -le 36) {
+            $i--
+        } else {
+            break
+        }
+    }
+    $displayPath = if ($i -eq -$pathComponents.Length) {
+        $PWD.Path
     } else {
-      '…{0}{1}' -f $dirSep, ($pathComponents[-2,-1] -join $dirSep)
+        '…{0}{1}' -f $dirSep, ($pathComponents[$i..-1] -join $dirSep)
     }
 
     $d = (Get-Date).Hour
@@ -118,7 +131,7 @@ function Prompt {
     $prompt = Write-Prompt $date -ForegroundColor Black -BackgroundColor Thistle
     $prompt += " "
 
-    $prompt += Write-Prompt "$displayPath" -ForegroundColor LightSkyBlue #CornflowerBlue #0xadefd1 # MINT
+    $prompt += Write-Prompt $displayPath -ForegroundColor LightSkyBlue #CornflowerBlue #0xadefd1 # MINT
     if (Write-VcsStatus -ne "") {
         $prompt += Write-VcsStatus
         $prompt += "`n"
