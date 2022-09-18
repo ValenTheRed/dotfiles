@@ -9,6 +9,8 @@
 [alias]
 	s = status
 	c = commit
+	b = branch
+	cam = commit --amend
 	lo = log --oneline
 	gr = log --graph --all --decorate --color --oneline
 	# Ref: https://stackoverflow.com/questions/14243380/
