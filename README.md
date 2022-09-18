@@ -1,2 +1,3 @@
 # dotfiles
-Title is explanation enough :)
+
+All of my config files.
