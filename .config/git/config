@@ -20,5 +20,7 @@
 [commit]
 	# show equivalent to `diff --cached` in the commit message
 	verbose = true
+[advice]
+	detachedHead = false
 
 # vim: set noet:
