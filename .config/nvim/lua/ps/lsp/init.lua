@@ -1,4 +1,4 @@
-local telescope_mapper = require('ps.telescope.mappings')
+local telescope_builtin = require('telescope.builtin')
 
 -- For nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -40,39 +40,49 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function nmap(key, cmd, opts)
-    local def_opts = { noremap=true, silent=true }
-    local opts = opts and vim.tbl_extend("force", def_opts, opts) or def_opts
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', key, cmd, opts)
+  local nmap = function(lhs, rhs, desc)
+    vim.keymap.set("n", lhs, rhs, {
+      noremap = true, silent = true, desc = desc,
+    })
   end
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  nmap('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-  telescope_mapper("gd", "lsp_definitions", nil, true)
-  nmap('K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  telescope_mapper("gi", "lsp_implementations", nil, true)
-  nmap('gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-  telescope_mapper("gr", "lsp_references", nil, true)
-  telescope_mapper("gdr", "lsp_document_symbols", nil, true)
-  telescope_mapper("gwr", "lsp_workspace_symbols", nil, true)
-  nmap('<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>')
-  nmap('<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
-  nmap('<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
-  telescope_mapper("<space>D", "lsp_type_definitions", nil, true)
-  nmap('<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  telescope_mapper("<space>ca", "lsp_code_actions", nil, true)
-  nmap('<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>')
-  nmap('<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
-  nmap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-  nmap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
+  nmap('gD', vim.lsp.buf.declaration, "lsp.declaration")
+  nmap("gd", telescope_builtin.lsp_definitions, "Telescope list definitions")
+  nmap('K', vim.lsp.buf.hover, "hover lsp symbol info")
+  nmap("gi", telescope_builtin.lsp_implementations, "Telescope list implementations")
+  nmap('gs', vim.lsp.buf.signature_help, "hover lsp function signature help")
+  nmap("gr", telescope_builtin.lsp_references, "Telescope lists references")
+  nmap("gdr", function()
+    telescope_builtin.lsp_document_symbols({
+      previewer = false,
+    })
+  end, "Telescope list doc symbols")
+  nmap("gwr", telescope_builtin.lsp_workspace_symbols, "Telescope list lsp workspace symbols")
+  nmap('<space>wa', vim.lsp.buf.add_workspace_folder)
+  nmap('<space>wr', vim.lsp.buf.remove_workspace_folder)
+  nmap('<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, "print workspace folders in :messages section")
+  nmap("<space>D", telescope_builtin.lsp_type_definitions, "Telescope list type definitions")
+  nmap('<space>rn', vim.lsp.buf.rename, "lsp rename identifier under cursor")
+  nmap("<space>ca", function()
+    telescope_builtin.lsp_code_actions({
+      previewer = false,
+    })
+  end, "Telescope list code actions")
+  nmap('<space>e', vim.lsp.diagnostic.show_line_diagnostics, "hover all line diagnostics")
+  nmap('<space>q', vim.lsp.diagnostic.set_loclist, "vim.lsp.diagnostic.set_loclist")
+  nmap('[d', vim.lsp.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
+  nmap(']d', vim.lsp.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
   if client.resolved_capabilities.document_formatting or
     client.resolved_capabilities.document_range_formatting then
-    nmap("<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
+    nmap("<space>f", vim.lsp.buf.formatting, "vim.lsp.buf.formatting")
   end
 
   if client.resolved_capabilities.document_highlight then
-    nmap("<space>dh", '', { callback=toggle_document_highlight })
+    nmap("<space>dh", toggle_document_highlight, "toggle ide-like symbol under cursor highlight")
   end
 
 end
