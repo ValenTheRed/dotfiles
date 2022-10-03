@@ -21,13 +21,4 @@ local map_tele = function(key, fn, options, buffer)
   end
 end
 
--- ff: convenient position
-map_tele("<leader>ff", "buffers")
-map_tele("<leader>fd", "find_files")
--- fg: file grep
-map_tele("<leader>fg", "live_grep")
--- fm: file most recently used
-map_tele("<leader>fm", "oldfiles")
-map_tele("<leader>fc", "colorscheme")
-
 return map_tele

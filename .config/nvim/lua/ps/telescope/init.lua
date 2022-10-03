@@ -49,3 +49,44 @@ require('telescope').setup({
 })
 
 require('telescope').load_extension('fzf')
+
+
+-- KEYMAPS
+local builtin = require("telescope.builtin")
+local def_keymap_opts = { noremap = true, silent = true }
+local nmap = function(lhs, rhs, desc)
+  vim.keymap.set("n", lhs, rhs, {
+    noremap=true, silent=true , desc=desc,
+  })
+end
+
+-- ff mnemonic for: nothing, ff is in a convenient position
+nmap("<leader>ff", function()
+  builtin.buffers({
+    previewer = false,
+    shorten_path = false,
+  })
+end, "Telescope lists open buffers in current neovim instance")
+
+nmap("<leader>fd", function()
+  builtin.find_files({
+    previewer = false,
+  })
+end, "Telescope lists files in your current working directory, respects .gitignore")
+
+-- fg mnemonic for: file grep
+nmap("<leader>fg", builtin.live_grep,
+  "Telescope search for string in CWD with live results; respects .gitignore")
+
+-- fm mnemonic for: file most recently used
+nmap("<leader>fm", function()
+  builtin.oldfiles({
+    previewer = false,
+  })
+end, "Telescope lists previously open files")
+
+nmap("<leader>fc", function()
+  builtin.colorscheme({
+    enable_preview = true,
+  })
+end, "Telescope lists and previews available colorschemes; applies them on <cr>")
