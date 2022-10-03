@@ -40,6 +40,7 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  local client_namespace = vim.lsp.diagnostic.get_namespace(client.id)
   local nmap = function(lhs, rhs, desc)
     vim.keymap.set("n", lhs, rhs, {
       noremap = true, silent = true, desc = desc,
@@ -47,34 +48,39 @@ local on_attach = function(client, bufnr)
   end
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  nmap('gD', vim.lsp.buf.declaration, "lsp.declaration")
-  nmap("gd", telescope_builtin.lsp_definitions, "Telescope list definitions")
-  nmap('K', vim.lsp.buf.hover, "hover lsp symbol info")
-  nmap("gi", telescope_builtin.lsp_implementations, "Telescope list implementations")
-  nmap('gs', vim.lsp.buf.signature_help, "hover lsp function signature help")
+  nmap("gD", vim.lsp.buf.declaration, "lsp.declaration")
+  nmap("gd", telescope_builtin.lsp_definitions, "Telescope list/goto definitions")
+  nmap("K", vim.lsp.buf.hover, "floating lsp symbol info")
+  -- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
+  nmap("gR", telescope_builtin.lsp_implementations, "Telescope list/goto implementations")
+  nmap("gs", vim.lsp.buf.signature_help, "floating lsp function signature help")
   nmap("gr", telescope_builtin.lsp_references, "Telescope lists references")
-  nmap("gdr", function()
+  nmap("<space>dr", function()
     telescope_builtin.lsp_document_symbols({
       previewer = false,
     })
   end, "Telescope list doc symbols")
-  nmap("gwr", telescope_builtin.lsp_workspace_symbols, "Telescope list lsp workspace symbols")
-  nmap('<space>wa', vim.lsp.buf.add_workspace_folder)
-  nmap('<space>wr', vim.lsp.buf.remove_workspace_folder)
-  nmap('<space>wl', function()
+  nmap("<space>wr", telescope_builtin.lsp_workspace_symbols, "Telescope list lsp workspace symbols")
+  nmap("<space>wa", vim.lsp.buf.add_workspace_folder)
+  nmap("<space>wr", vim.lsp.buf.remove_workspace_folder)
+  nmap("<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, "print workspace folders in :messages section")
-  nmap("<space>D", telescope_builtin.lsp_type_definitions, "Telescope list type definitions")
-  nmap('<space>rn', vim.lsp.buf.rename, "lsp rename identifier under cursor")
+  nmap("<space>D", telescope_builtin.lsp_type_definitions, "Telescope list/goto type definitions")
+  nmap("<space>rn", vim.lsp.buf.rename, "lsp rename identifier under cursor")
   nmap("<space>ca", function()
     telescope_builtin.lsp_code_actions({
       previewer = false,
     })
   end, "Telescope list code actions")
-  nmap('<space>e', vim.lsp.diagnostic.show_line_diagnostics, "hover all line diagnostics")
-  nmap('<space>q', vim.lsp.diagnostic.set_loclist, "vim.lsp.diagnostic.set_loclist")
-  nmap('[d', vim.lsp.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
-  nmap(']d', vim.lsp.diagnostic.goto_next, "jump to next diagnostic in buffer")
+  nmap("<space>e", function()
+    vim.diagnostic.open_float({
+      namespace = client_namespace, scope = "line", source = true,
+    })
+  end, "floating current line diagnostics")
+  nmap("<space>q", vim.diagnostic.setloclist, "vim.lsp.diagnostic.set_loclist")
+  nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
+  nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
   if client.resolved_capabilities.document_formatting or
     client.resolved_capabilities.document_range_formatting then
@@ -84,7 +90,6 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_highlight then
     nmap("<space>dh", toggle_document_highlight, "toggle ide-like symbol under cursor highlight")
   end
-
 end
 
 -- Enable the following language servers
