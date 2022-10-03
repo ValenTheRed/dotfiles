@@ -1,74 +1,51 @@
--- Ref:
---- https://github.com/tjdevries/config_manager/blob/master/xdg_config/nvim/lua/tj/telescope/init.lua
-if not pcall(require, "telescope") then
-  return
-end
+local actions = require('telescope.actions')
 
-local M = {}
-local builtin = require('telescope.builtin')
+local defaults = {
+  -- defaults doesn't support the key, defining it inside of a theme
+  -- works.
+  --results_title = false
+  selection_caret = "▌",
+  sorting_strategy = "ascending",
+  layout_strategy = "horizontal",
+  layout_config = {
+    width = 0.95,
+    height = 0.85,
+    prompt_position = "top",
+    preview_width = function(_, cols, _)
+      if cols > 200 then
+        return math.floor(cols * 0.4)
+      else
+        return math.floor(cols * 0.6)
+      end
+    end,
+  },
+  border = true,
 
-function M.buffers()
-  builtin.buffers({
-    previewer = false,
-    shorten_path = false,
-  })
-end
+  vimgrep_arguments = {
+    "rg", "--vimgrep", "--trim"
+  },
+  mappings = {
+    i = {
+      ["<C-j>"] = actions.move_selection_next,
+      ["<C-k>"] = actions.move_selection_previous,
+    },
+  },
+}
 
-function M.find_files()
-  builtin.find_files({
-    previewer = false,
-  })
-end
+require('telescope').setup({
+  defaults = defaults,
+  pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ["<DEL>"] = actions.delete_buffer,
+        },
+        n = {
+          ["dd"] = actions.delete_buffer,
+        }
+      },
+    },
+  },
+})
 
-function M.live_grep()
-  builtin.live_grep()
-end
-
-function M.oldfiles()
-  builtin.oldfiles({
-    previewer = false,
-  })
-end
-
-function M.colorscheme()
-  builtin.colorscheme({
-    enable_preview = true,
-  })
-end
-
--- TODO: telescope doesn't search amongst the register's value
--- M.registers = builtin.registers
-
-function M.lsp_definitions()
-  builtin.lsp_definitions()
-end
-
-function M.lsp_implementations()
-  builtin.lsp_implementations()
-end
-
-function M.lsp_references()
-  builtin.lsp_references()
-end
-
-function M.lsp_document_symbols()
-  builtin.lsp_document_symbols({
-    previewer = false,
-  })
-end
-
-function M.lsp_workspace_symbols()
-  builtin.lsp_workspace_symbols()
-end
-
-function M.lsp_type_definitions()
-  builtin.lsp_type_definitions()
-end
-
-function M.lsp_code_actions()
-  builtin.lsp_code_actions({
-    previewer = false,
-  })
-end
-
-return M
+require('telescope').load_extension('fzf')

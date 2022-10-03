@@ -11,7 +11,7 @@ local map_tele = function(key, fn, options, buffer)
   TelescopeMapArgs[map_key] = options or {}
 
   local mode = "n"
-  local rhs = string.format("<cmd>lua require('ps.telescope')['%s'](TelescopeMapArgs['%s'])<CR>", fn, map_key)
+  local rhs = string.format("<cmd>lua require('ps.telescope.pickers')['%s'](TelescopeMapArgs['%s'])<CR>", fn, map_key)
   local map_opts = { noremap = true, silent = true }
 
   if not buffer then
