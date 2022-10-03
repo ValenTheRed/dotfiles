@@ -192,8 +192,6 @@ augroup END
 
 " {{{ Plugin keymaps
 
-nmap <leader><space><space> <Plug>VimwikiToggleListItem
-
 " }}}
 
 " {{{ Functions
