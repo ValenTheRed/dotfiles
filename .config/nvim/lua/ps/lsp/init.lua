@@ -110,11 +110,3 @@ require'lspconfig'.omnisharp.setup{
   on_attach = on_attach,
   capabilities = capabilities,
 }
-
--- Signs for the sign column
-local icons = { error = " ", warn = " ", info = " ", hint = " " }
-for type, icon in pairs(icons) do
-  local title_case = string.upper(string.sub(type, 1, 1)) .. string.sub(type, 2)
-  local hl = "DiagnosticSign" .. title_case
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
-end

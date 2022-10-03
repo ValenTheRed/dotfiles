@@ -115,9 +115,7 @@ ins_left {
   -- Having both nvim_diagnostic and nvim_lsp leads to the component
   -- reporting twice the number of errors.
   sources = { 'nvim_diagnostic', },
-  -- Redundant defining of symbols; already in lsp.lua.
-  -- TODO(ps): structure lua folder to get symbols from lsp.lua
-  symbols = { error = " ", warn = " ", info = " ", hint = " " },
+  symbols = require("ps.vim_diagnostic").icons,
 }
 
 -- from lualine's wiki
