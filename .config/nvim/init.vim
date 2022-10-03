@@ -145,7 +145,6 @@ lua require('ps.tree_playground')
 lua require('ps.cmp')
 lua require('ps.lsp')
 lua require('ps.telescope')
-lua require('ps.telescope.mappings')
 lua require('ps.lualine')
 lua require('ps.mkdnflow')
 
