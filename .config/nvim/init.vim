@@ -274,8 +274,8 @@ nnoremap <silent> <leader>lc :lcd %:p:h<CR>:pwd<CR>
 vnoremap <leader>do :diffget<CR>
 vnoremap <leader>dp :diffput<CR>
 
-" A poor man's 'zoom' -- open buffer in a new tab
-nnoremap <leader>oo :tab split<CR>
+" We can emulate 'zoom' feature by opening the buffer in a new tab.
+" builtin keymap is <C-W><C-T>
 
 " Easy move between split panes
 nnoremap <C-j> <C-w><C-j>
