@@ -103,6 +103,7 @@ Plug 'ValenTheRed/ltspice.vim'
 Plug 'ValenTheRed/material.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 
+Plug 'hkupty/iron.nvim'
 Plug 'jakewvincent/mkdnflow.nvim'
 Plug 'ValenTheRed/psmdc.nvim'
 Plug 'windwp/nvim-autopairs'
@@ -147,6 +148,7 @@ lua require('ps.lsp')
 lua require('ps.telescope')
 lua require('ps.lualine')
 lua require('ps.mkdnflow')
+lua require('ps.iron')
 
 "}}}
 
