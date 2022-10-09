@@ -102,6 +102,7 @@ Plug 'godlygeek/tabular'        " aligning
 Plug 'ValenTheRed/ltspice.vim'
 Plug 'ValenTheRed/material.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'wlangstroth/vim-racket'
 
 Plug 'hkupty/iron.nvim'
 Plug 'jakewvincent/mkdnflow.nvim'
