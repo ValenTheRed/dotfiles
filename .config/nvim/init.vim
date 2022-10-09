@@ -281,6 +281,8 @@ nnoremap <C-k> <C-w><C-k>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-l> <C-w><C-l>
 
+tnoremap <ESC> <C-\><C-n>
+
 " :sp and :vs are easier to type than :vne and :new so, remap their shortcuts
 nnoremap <silent> <C-w><C-v> :vne<Cr>
 nnoremap <silent> <C-w><C-s> :new<Cr>
