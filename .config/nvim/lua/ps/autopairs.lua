@@ -10,7 +10,8 @@ npairs.setup({
 npairs.add_rules({
   Rule('<', '>', {'html', 'xml', 'xhtml', 'htm'}),
   --Ref: https://github.com/sriramkandukuri/devenv/blob/master/vim/lua/devenv/autopairs.lua
-  Rule('\\[', '\\]', {'latex'}),
+  Rule('\\[', '\\]', {'tex'}),
+  Rule("$", "$", {'tex'}),
   Rule(' ', ' ')
   :with_pair(function(opts)
     local pair = opts.line:sub(opts.col - 1, opts.col)
