@@ -1,11 +1,12 @@
 local npairs = require('nvim-autopairs')
 local Rule = require('nvim-autopairs.rule')
-local cmp_npairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
 
-npairs.setup({
-  cmp.event:on('confirm_done', cmp_npairs.on_confirm_done({ map_char = { tex = '' }})),
-})
+npairs.setup {}
+
+require('cmp').event:on(
+  'confirm_done',
+  require('nvim-autopairs.completion.cmp').on_confirm_done()
+)
 
 npairs.add_rules({
   Rule('<', '>', {'html', 'xml', 'xhtml', 'htm'}),
