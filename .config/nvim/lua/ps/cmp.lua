@@ -7,7 +7,8 @@ local snippet = {
 }
 
 local mapping = {
-  ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
+  -- NOTE: Figure out what this mapping is supposed to do.
+  -- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
   ['<CR>'] = cmp.mapping.confirm({ select = true }),
   ['<C-e>'] = cmp.mapping({
     i = cmp.mapping.abort(),
@@ -15,6 +16,20 @@ local mapping = {
   }),
   ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), {'i', 'c'}),
   ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
+  ['<C-n>'] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_next_item()
+    else
+      fallback()
+    end
+  end, {'i', 'c'}),
+  ['<C-p>'] = cmp.mapping(function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    else
+      fallback()
+    end
+  end, {'i', 'c'}),
 }
 
 local format_icons = function(_, vim_item)
@@ -59,16 +74,7 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    {
-      name = 'buffer',
-      option = {
-        -- get_bufnrs can be tweaked to not work on large files.
-        get_bufnrs = function()
-          return vim.api.nvim_list_bufs()
-        end
-      }
-    },
-    { name = 'cmdline' },
+    { name = 'buffer' },
     { name = 'path' },
   }),
 })
@@ -90,10 +96,4 @@ cmp.setup.cmdline('/', {
 --   })
 -- })
 
-_G.vimrc = _G.vimrc or {}
-_G.vimrc.cmp = _G.vimrc.cmp or {}
-_G.vimrc.cmp.on_ctrl_n = cmp.complete
-vim.api.nvim_set_keymap(
-  'c', '<C-n>', "<cmd>call v:lua.vimrc.cmp.on_ctrl_n()<CR>",
-  { silent = true, noremap = true, }
-)
+vim.keymap.set("i", "<C-n>", require("cmp").complete, {silent = true, noremap = true})
