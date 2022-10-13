@@ -32,44 +32,45 @@ local mapping = {
   end, {'i', 'c'}),
 }
 
-local format_icons = function(_, vim_item)
-  -- For now, no displaying of item source
-  local icons = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "𝓧",
-    Class = "",
-    Interface = "",
-    Module = " ",
-    Property = "ﰠ",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "﬌",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-  }
-  vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
-  return vim_item
-end
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "",
+  Constructor = "",
+  Field = "",
+  Variable = "𝓧",
+  Class = "",
+  Interface = "",
+  Module = " ",
+  Property = "ﰠ",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "﬌",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "",
+  Event = "",
+  Operator = "",
+  TypeParameter = ""
+}
 
 cmp.setup({
   snippet = snippet,
   mapping = mapping,
   formatting = {
-    format = format_icons,
+    fields = { "kind", "abbr", "menu" },
+    format = function(_, vim_item)
+      -- For now, no displaying of item source
+      vim_item.menu = vim_item.kind
+      vim_item.kind = kind_icons[vim_item.kind]
+      return vim_item
+    end,
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
