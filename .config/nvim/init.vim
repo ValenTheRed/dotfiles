@@ -100,7 +100,6 @@ Plug 'tpope/vim-dispatch'
 Plug 'danro/rename.vim'         " Rename file currently working on
 Plug 'godlygeek/tabular'        " aligning
 Plug 'ValenTheRed/ltspice.vim'
-Plug 'ValenTheRed/material.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'wlangstroth/vim-racket'
 
@@ -134,7 +133,7 @@ call plug#end()
 
 "{{{ Plugin config
 
-colorscheme psmdc_dark
+colorscheme psmdc_darker
 
 " diagnostic is an neovim module
 lua require("ps.vim_diagnostic")
