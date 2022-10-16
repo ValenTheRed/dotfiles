@@ -15,10 +15,11 @@ statusline.sections = {
 statusline.inactive_sections = {
   lualine_a = {},
   lualine_b = {},
-  lualine_c = {},
-  lualine_x = {},
-  lualine_y = {},
-  lualine_z = {
+  lualine_c = {
+    {
+      -- Dummy component that centers the subsequent section.
+      function() return "%=" end,
+    },
     {
       'filename',
       icons_enabled = true,
@@ -26,6 +27,9 @@ statusline.inactive_sections = {
       path = 1,
     },
   },
+  lualine_x = {},
+  lualine_y = {},
+  lualine_z = {},
 }
 
 -- Inserts component at lualine section {a, b, c, x, y, z}
