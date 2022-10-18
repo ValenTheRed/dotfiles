@@ -63,6 +63,11 @@ local kind_icons = {
 cmp.setup({
   snippet = snippet,
   mapping = mapping,
+  window = {
+    completion = {
+      col_offset = -2,
+    },
+  },
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(_, vim_item)
