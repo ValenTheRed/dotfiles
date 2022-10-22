@@ -82,12 +82,12 @@ local on_attach = function(client, bufnr)
   nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
   nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
-  if client.resolved_capabilities.document_formatting or
-    client.resolved_capabilities.document_range_formatting then
-    nmap("<space>f", vim.lsp.buf.formatting, "vim.lsp.buf.formatting")
+  if client.server_capabilities.documentFormattingProvider or
+    client.server_capabilities.document_range_formatting then
+    nmap("<space>f", vim.lsp.buf.format, "vim.lsp.buf.format")
   end
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     nmap("<space>dh", toggle_document_highlight, "toggle ide-like symbol under cursor highlight")
   end
 end
