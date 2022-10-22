@@ -7,7 +7,7 @@ if vim.fn.has("win62") ~= 0 or vim.fn.has("win32") ~= 0 then
   ossep = "\\"
 end
 
-local root = vim.fn.stdpath("data") .. ossep .. "sessions"
+local root = vim.fn.stdpath("state") .. ossep .. "sessions"
 if vim.fn.isdirectory(root) == 0 then
   vim.cmd([[:!mkdir ]] .. root)
 end
