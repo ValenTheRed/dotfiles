@@ -9,7 +9,7 @@ local snippet = {
 local mapping = {
   -- NOTE: Figure out what this mapping is supposed to do.
   -- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  ['<CR>'] = cmp.mapping.confirm({ select = false }),
   ['<C-e>'] = cmp.mapping({
     i = cmp.mapping.abort(),
     c = cmp.mapping.close(),
