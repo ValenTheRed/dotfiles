@@ -150,6 +150,8 @@ lua require('ps.lualine')
 lua require('ps.mkdnflow')
 lua require('ps.iron')
 
+let g:tex_flavor = "latex"
+
 "}}}
 
 " {{{ Autocmds
