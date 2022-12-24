@@ -14,9 +14,9 @@
 	cm = commit --amend
 	cam = commit -a --amend
 	lo = log --oneline
-	gr = log --graph --all --decorate --color --oneline
+	gr = log --graph --all --decorate --oneline
 	# Ref: https://stackoverflow.com/questions/14243380/
-	gf = log --graph --all --pretty=format:'%C(auto)%h%d%Creset %s %C(cyan)(%cr)%Creset %C(green)%cn <%ce>%Creset'
+	gf = log --graph --all --pretty=format:'%C(auto)%h%d%Creset %s %C(auto,cyan)(%cr)%Creset %C(auto,italic green)<%cn, %ce>%Creset'
 	ch = checkout
 	chb = checkout -b
 [commit]
