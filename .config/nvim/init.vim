@@ -129,6 +129,9 @@ Plug 'saadparwaiz1/cmp_luasnip'
 " Plug 'uga-rosa/cmp-dictionary'
 call plug#end()
 
+lua require("ps.sessions")
+lua require("ps.wiki")
+
 " }}}
 
 "{{{ Plugin config
