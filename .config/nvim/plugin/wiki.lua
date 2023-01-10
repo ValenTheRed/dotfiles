@@ -1,9 +1,4 @@
-local sep = "/"
-if vim.fn.has("win62") ~= 0 or vim.fn.has("win32") ~= 0 then
-  sep = "\\"
-end
-
-local wiki_index = table.concat({"~", "wiki", "index.md"}, sep)
+local wiki_index = "~/wiki/index.md"
 
 vim.keymap.set(
   "n", "<leader>ww", ":e " .. wiki_index .. "<CR>", {

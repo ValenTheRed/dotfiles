@@ -2,12 +2,7 @@
 -- Make managing sessions easier by chucking all the session files in a
 -- root directory.
 --]]
-local ossep = "/"
-if vim.fn.has("win62") ~= 0 or vim.fn.has("win32") ~= 0 then
-  ossep = "\\"
-end
-
-local root = vim.fn.stdpath("state") .. ossep .. "sessions"
+local root = vim.fn.stdpath("state") .. "/sessions"
 if vim.fn.isdirectory(root) == 0 then
   vim.cmd([[:!mkdir ]] .. root)
 end
@@ -15,7 +10,7 @@ end
 -- session_file returns absolute path to the session file.
 local session_file = function()
   local str = string.gsub(vim.fn.getcwd(), "[:\\/]", "")
-  return root .. ossep .. str
+  return root .. "/" .. str
 end
 
 vim.api.nvim_create_user_command("Mksession", function(opts)
@@ -45,7 +40,7 @@ vim.api.nvim_create_user_command("Ldsession", function(opts)
 vim.api.nvim_create_user_command("Rmsession", function(opts)
     local file = session_file()
     local cmd = "rm"
-    if ossep ~= "/" then
+    if vim.fn.has("win32") ~= 0 then
       cmd = "del"
     end
     if vim.fn.filereadable(file) ~= 0 then
