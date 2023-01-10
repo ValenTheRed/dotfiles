@@ -30,7 +30,7 @@ vim.api.nvim_create_user_command("Ldsession", function(opts)
     if vim.fn.filereadable(file) ~= 0 then
       vim.cmd([[:source ]] .. file)
     else
-      print("No session file exists!")
+      vim.notify("No session file exists!", vim.log.levels.INFO)
     end
   end, {
     desc = "load session file in directory: " .. root,
@@ -56,7 +56,7 @@ vim.api.nvim_create_autocmd("UIEnter", {
   pattern = { "*" },
   callback = function()
     if vim.fn.filereadable(session_file()) ~= 0 then
-      print("A session file exists!")
+      vim.notify("A session file exists!", vim.log.levels.INFO)
     end
   end,
 })
