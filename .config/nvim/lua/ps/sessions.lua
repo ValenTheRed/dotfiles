@@ -52,8 +52,8 @@ vim.api.nvim_create_user_command("Rmsession", function(opts)
 )
 
 vim.api.nvim_create_autocmd("UIEnter", {
-  group = vim.api.nvim_create_augroup("notify_if_session_file_exists", {}),
-  pattern = { "*" },
+  group = vim.api.nvim_create_augroup("notify_if_session_file_exists", { clear=true }),
+  pattern = "*",
   callback = function()
     if vim.fn.filereadable(session_file()) ~= 0 then
       vim.notify("A session file exists!", vim.log.levels.INFO)

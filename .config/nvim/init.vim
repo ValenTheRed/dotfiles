@@ -167,8 +167,8 @@ augroup END
 
 lua << EOF
 vim.api.nvim_create_autocmd("BufNewFile", {
-    group = vim.api.nvim_create_augroup("load_from_skeleton_file", {}),
-    pattern = { "*.*" },
+    group = vim.api.nvim_create_augroup("load_from_skeleton_file", { clear=true }),
+    pattern = "*.*",
     callback = function()
         -- To restore alternate file register after `:r` clobers it
         local alt_reg = vim.fn.getreg("#")
