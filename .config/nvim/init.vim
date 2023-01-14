@@ -104,7 +104,6 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'wlangstroth/vim-racket'
 
 Plug 'hkupty/iron.nvim'
-Plug 'jakewvincent/mkdnflow.nvim'
 Plug 'ValenTheRed/psmdc.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-lua/plenary.nvim'
@@ -150,7 +149,6 @@ lua require('ps.cmp')
 lua require('ps.lsp')
 lua require('ps.telescope')
 lua require('ps.lualine')
-lua require('ps.mkdnflow')
 lua require('ps.iron')
 
 let g:tex_flavor = "latex"
