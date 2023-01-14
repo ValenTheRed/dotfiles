@@ -4,38 +4,31 @@ local telescope_builtin = require('telescope.builtin')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local function toggle_document_highlight()
-  -- NOTE: Ref: https://vi.stackexchange.com/questions/4120
-  -- The `#CursorHold` is important. Performing a
-  -- `augroup! lsp_document_highlight` gives warning `:h W19`, so we
-  -- need to reset the augroup by deleting all the autocmds inside it
-  -- and checking for the existence of those groups to determine if we
-  -- need to populate the augroup.
-  -- NOTE: all numbers are truth-y in lua, even 0; hence a negation.
-  if vim.fn.exists("#lsp_document_highlight#CursorHold#<buffer>") ~= 0 then
-    -- highlights do not disappear if toggling is performed while
-    -- the symbols are highlighted.
-    vim.lsp.buf.clear_references()
-    -- reset it
-    -- `autocmd! * <buffer>` is crucial since we don't want highlight of
-    -- other buffers disappearing.
-    print("nohldocument")
-    vim.cmd([[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-      augroup END
-    ]])
-  else -- create it
-    print("hldocument")
-    vim.cmd([[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]])
+local toggle_document_highlight = (function()
+  local id = vim.api.nvim_create_augroup("lsp_document_highlight", {
+    clear = true
+  })
+  return function()
+    -- [Reference](https://vi.stackexchange.com/questions/4120) for
+    -- toggling autocmds.
+    if vim.fn.exists("#lsp_document_highlight#CursorHold#<buffer>") ~= 0 then
+      vim.notify("nohldocument")
+      -- Clearing autocmds doesn't automatically clear the highlights.
+      vim.lsp.buf.clear_references()
+      -- Only clear the autocmds defined for the current buffer,
+      -- otherwise highlights in other buffers will disappear.
+      vim.api.nvim_clear_autocmds({ buffer = 0, group = id })
+    else
+      vim.notify("hldocument")
+      vim.api.nvim_create_autocmd("CursorHold", {
+        group = id, buffer = 0, callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+        group = id, buffer = 0, callback = vim.lsp.buf.clear_references,
+      })
+    end
   end
-end
+end)()
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
