@@ -103,6 +103,7 @@ Plug 'ValenTheRed/ltspice.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'wlangstroth/vim-racket'
 
+Plug 'windwp/nvim-ts-autotag'
 Plug 'hkupty/iron.nvim'
 Plug 'ValenTheRed/psmdc.nvim'
 Plug 'windwp/nvim-autopairs'

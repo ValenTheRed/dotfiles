@@ -37,16 +37,16 @@ npairs.add_rules({
   -- and  `:use_regex(true, '>')`
   -- are equivalent. Order of invocation matters. This shouldn't be the case.
 
-  Rule('<%s*([%a%d]+)', 'd', {'html', 'xml', 'xhtml', 'htm'})
-  -- Trigger key `>` will also be inserted into the buffer.
-    :use_regex(true, '>')
-    :replace_endpair(function(opts)
-      -- replace end pair `d` with...
-      if opts.line:sub(opts.col - 1, opts.col) == "/" then
-        return ""
-      end
-      return "</" .. opts.text:match(opts.rule.start_pair) .. ">"
-    end),
+  -- Rule('<%s*([%a%d]+)', 'd', {'html', 'xml', 'xhtml', 'htm'})
+  -- -- Trigger key `>` will also be inserted into the buffer.
+  --   :use_regex(true, '>')
+  --   :replace_endpair(function(opts)
+  --     -- replace end pair `d` with...
+  --     if opts.line:sub(opts.col - 1, opts.col) == "/" then
+  --       return ""
+  --     end
+  --     return "</" .. opts.text:match(opts.rule.start_pair) .. ">"
+  --   end),
 
   Rule('function%s*%(.-%)', 'end', {'lua'})
     :use_regex(true)
