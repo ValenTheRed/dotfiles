@@ -136,7 +136,7 @@ lua require("ps.wiki")
 
 "{{{ Plugin config
 
-colorscheme psmdc_darker
+colorscheme psmdc_dark
 
 " diagnostic is an neovim module
 lua require("ps.vim_diagnostic")

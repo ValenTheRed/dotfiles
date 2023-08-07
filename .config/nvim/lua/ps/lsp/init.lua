@@ -2,7 +2,7 @@ local telescope_builtin = require('telescope.builtin')
 
 -- For nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local toggle_document_highlight = (function()
   local id = vim.api.nvim_create_augroup("lsp_document_highlight", {
