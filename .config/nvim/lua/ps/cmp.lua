@@ -34,30 +34,30 @@ local mapping = {
 
 local kind_icons = {
   Text = "",
-  Method = "",
-  Function = "",
-  Constructor = "",
-  Field = "",
+  Method = "󰅲",
+  Function = "󰡱",
+  Constructor = "",
+  Field = "󰇽",
   Variable = "𝓧",
   Class = "",
   Interface = "",
   Module = " ",
-  Property = "ﰠ",
+  Property = "󰜢",
   Unit = "",
-  Value = "",
+  Value = "󰎠",
   Enum = "",
-  Keyword = "",
-  Snippet = "﬌",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
+  Keyword = "󰌋",
+  Snippet = "󱞩",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "󰌹",
+  Folder = "󰉋",
   EnumMember = "",
   Constant = "",
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = ""
+  TypeParameter = "󰊄"
 }
 
 cmp.setup({

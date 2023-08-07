@@ -17,7 +17,7 @@ vim.diagnostic.config {
 }
 
 -- Diagnostic signs
-M.icons = { error = " ", warn = " ", info = " ", hint = " " }
+M.icons = { error = " ", warn = " ", info = " ", hint = "󰌵 " }
 
 -- set icon and text highlight for diagnostic signs
 for type, icon in pairs(M.icons) do
