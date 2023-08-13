@@ -19,6 +19,7 @@ local defaults = {
       end
     end,
   },
+
   border = true,
 
   vimgrep_arguments = {

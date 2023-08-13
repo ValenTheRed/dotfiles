@@ -27,7 +27,7 @@ npairs.add_rules({
   -- BUG(4fc96c8): if the default closing pair is the empty string '' then,
   -- <BS> after/while completing the rule results in it deleting X (unknown
   -- as of writing) number of characters instead of just the previous
-  -- character.
+  -- character. Even `with_del` doesn't help.
 
   -- BUG(4fc96c8):
   --      `:use_key('>'):use_regex(true)`
@@ -37,7 +37,7 @@ npairs.add_rules({
   -- and  `:use_regex(true, '>')`
   -- are equivalent. Order of invocation matters. This shouldn't be the case.
 
-  Rule('<([%a%d]+)', 'd', {
+  Rule('<([%a%d]+)', '<', {
     "html", "xml", "xhtml", "javascriptreact", "typescriptreact",
     "typescript", "javascript"
   }):use_regex(true, '>') -- Trigger `>` will also be inserted into the buffer

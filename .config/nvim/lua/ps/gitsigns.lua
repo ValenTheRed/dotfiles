@@ -34,14 +34,3 @@ require('gitsigns').setup{
     map('x', 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
-
--- local opts = { noremap=true, silent=true }
--- vim.api.nvim_set_keymap('n', '<leader>hv', "<cmd> Gitsigns select_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('n', '<leader>hp', "<cmd> Gitsigns preview_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('n', '<leader>hs', "<cmd> Gitsigns stage_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('n', '<leader>hu', "<cmd> Gitsigns undo_stage_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('n', '<leader>hr', "<cmd> Gitsigns reset_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('v', '<leader>hs', "<cmd> Gitsigns stage_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('v', '<leader>hr', "<cmd> Gitsigns reset_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('n', '[c', "<cmd> Gitsigns prev_hunk<CR>", opts)
--- vim.api.nvim_set_keymap('n', ']c', "<cmd> Gitsigns next_hunk<CR>", opts)
