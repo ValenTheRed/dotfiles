@@ -76,6 +76,21 @@ endif
 
 " {{{ Plugins
 
+lua << EOF
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+EOF
+
 let s:data_dir = stdpath('data').'/site'
 if empty(glob(s:data_dir . '/autoload/plug.vim'))
     if has('win32') || has('win64')
@@ -126,6 +141,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'saadparwaiz1/cmp_luasnip'
 " Plug 'uga-rosa/cmp-dictionary'
+Plug 'nvim-neorg/neorg'
 call plug#end()
 
 lua require("ps.sessions")
@@ -149,6 +165,7 @@ lua require('ps.cmp')
 lua require('ps.lsp')
 lua require('ps.telescope')
 lua require('ps.lualine')
+lua require('ps.neorg')
 
 let g:tex_flavor = "latex"
 
