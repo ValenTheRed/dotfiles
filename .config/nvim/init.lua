@@ -41,8 +41,9 @@ set.cursorline = true
 -- delay changing from insert to normal mode in lightline reduced
 set.ttimeout = true
 
--- fold manually along indent
-set.foldmethod = "manual"
+-- fold along indent
+set.foldmethod = "indent"
+set.foldlevelstart = 99 -- don't start fold when file is opened
 
 -- change signcolumn to accomodate signs
 set.signcolumn = "auto"
@@ -279,4 +280,4 @@ nmap("<leader>grc", ":e $MYGVIMRC<CR>")
 
 -- }}}
 
--- vim: set fdm=marker:kp=\:help
+-- vim: set fdm=marker:
