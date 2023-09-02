@@ -1,6 +1,20 @@
-# source ${ZDOTDIR}/.zsh_aliases
+alias es="exa --icons --group-directories-first"
+alias ea="exa --icons -a --group-directories-first"
+alias el="exa --icons -la --group-directories-first"
+
+alias la="ls -A"
+alias ll="ls -lFh"
+alias lsa="ls -AlFh"
+
+alias vi="nvim"
 
 # a nice sensible .zshrc file: https://gist.github.com/scottstanfield/fa1085c225069160225d18b1dc16ee1c
+
+# pressing `<S-v>` in normal mode (called command mode in zsh (`man zshzle(1)`))
+# will open $EDITOR for editing there (like the feature bash).
+# Chose `<S-v>` since `v` is bound to visual mode.
+autoload edit-command-line && zle -N edit-command-line
+bindkey -M vicmd V edit-command-line
 
 autoload -Uz compinit && compinit
 # smart case matching. `cd d<TAB>` will match `Doc` and `doc`.
