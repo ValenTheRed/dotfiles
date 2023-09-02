@@ -160,7 +160,7 @@ vim.api.nvim_create_autocmd("CmdlineEnter", {
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = vim.api.nvim_create_augroup("remove_trailing_whitespaces", {clear=true}),
   pattern = "*",
-  command = [[s/\s\+$//e]],
+  command = [[%s/\s\+$//e]],
 })
 
 -- }}}
