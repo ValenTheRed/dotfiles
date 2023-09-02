@@ -606,6 +606,21 @@ return {
     })
 
     insert("x", {
+      function()
+        local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+        if #clients == 1 then
+          return string.sub(clients[1].name, 1, 1)
+        end
+        local names = vim.tbl_map(function(client)
+          return client.name
+        end, clients)
+        return table.concat(names, ", ")
+      end,
+      icon = "",
+      cond = function() return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 end,
+    })
+
+    insert("x", {
       'diff',
       colored = true,
       source = function()
