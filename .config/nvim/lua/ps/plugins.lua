@@ -571,17 +571,12 @@ return {
     end
 
     insert("a", {
-      function() return " " end,
-      padding = {},
-    })
-
-    insert("b", {
       'filename',
       icon = "",
       path = 1,
     })
 
-    insert("c", {
+    insert("b", {
       'filetype',
       icons_enabled = false,
       -- hide when width less than 70
