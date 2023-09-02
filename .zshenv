@@ -11,6 +11,6 @@ if [[ -d ${SHELL_SESSION_DIR} ]]; then
     mkdir -m 700 -p ${SHELL_SESSION_DIR}
 fi
 
-export EDITOR=nvim
+export EDITOR="nvim"
 
 source ${ZDOTDIR}/.zshenv
