@@ -570,6 +570,8 @@ return {
       table.insert(statusline.sections[string.format("lualine_%s", section)], component)
     end
 
+    local winwidth = vim.fn.winwidth
+
     insert("a", {
       'filename',
       icon = "",
@@ -579,8 +581,7 @@ return {
     insert("b", {
       'filetype',
       icons_enabled = false,
-      -- hide when width less than 70
-      cond = function() return vim.fn.winwidth(0) > 80 end,
+      cond = function() return winwidth(0) > 73 end,
     })
 
     -- default component has too much space around it
@@ -589,6 +590,7 @@ return {
         return "%l:%c"
       end,
       icon = "",
+      cond = function() return winwidth(0) > 80 end,
     })
 
     insert("c", {
@@ -612,7 +614,9 @@ return {
         return table.concat(names, ", ")
       end,
       icon = "",
-      cond = function() return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 end,
+      cond = function() 
+        return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and winwidth(0) > 63
+      end,
     })
 
     insert("x", {
@@ -640,7 +644,7 @@ return {
       icons_enabled = false,
       cond = function()
         -- Bring more attention by only displaying when not utf-8
-        return vim.opt.encoding:get() ~= "utf-8" and vim.fn.winwidth(0) > 75
+        return vim.opt.encoding:get() ~= "utf-8" and vim.fn.winwidth(0) > 53
       end,
     })
 
@@ -649,7 +653,7 @@ return {
       icons_enabled = false,
       cond = function()
         -- Bring more attention by only displaying when not unix
-        return vim.opt.fileformat:get() ~= "unix" and vim.fn.winwidth(0) > 70
+        return vim.opt.fileformat:get() ~= "unix" and vim.fn.winwidth(0) > 46
       end,
     })
 
