@@ -54,7 +54,7 @@ return {
 
   --{{{ telescope.nvim
   {
-    'nvim-telescope/telescope.nvim', 
+    'nvim-telescope/telescope.nvim',
     dependencies = {'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig'},
     config = function()
 
@@ -82,9 +82,7 @@ return {
 
         border = true,
 
-        vimgrep_arguments = {
-          "rg", "--vimgrep", "--trim"
-        },
+        vimgrep_arguments = vim.split(vim.opt.grepprg:get(), " "),
         mappings = {
           i = {
             ["<C-j>"] = actions.move_selection_next,
@@ -132,6 +130,7 @@ return {
       nmap("<leader>fd", function()
         builtin.find_files({
           previewer = false,
+          find_command = vim.split([[fd --hidden --exclude .git]], " ")
         })
       end, "Telescope lists files in your current working directory, respects .gitignore")
 
@@ -295,7 +294,7 @@ return {
 
   --{{{ cmp-nvim-lsp
   {
-    'hrsh7th/cmp-nvim-lsp', 
+    'hrsh7th/cmp-nvim-lsp',
     dependencies = { 'neovim/nvim-lspconfig', 'hrsh7th/nvim-cmp' },
   },
   --}}}
@@ -322,7 +321,7 @@ return {
 
   --{{{ playground
   {
-    'nvim-treesitter/playground', 
+    'nvim-treesitter/playground',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require("nvim-treesitter.configs").setup {
@@ -351,7 +350,7 @@ return {
 
   --{{{ nvim-ts-autotag
   {
-    'windwp/nvim-ts-autotag', 
+    'windwp/nvim-ts-autotag',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require("nvim-ts-autotag").setup {
@@ -614,7 +613,7 @@ return {
         return table.concat(names, ", ")
       end,
       icon = "",
-      cond = function() 
+      cond = function()
         return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and winwidth(0) > 63
       end,
     })

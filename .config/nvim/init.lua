@@ -77,7 +77,9 @@ set.sessionoptions:append({"resize", "winpos"})
 set.diffopt:append({"algorithm:patience", "indent-heuristic", "foldcolumn:1"})
 
 if vim.fn.executable('rg') then
-  set.grepprg = [[rg --vimgrep]]
+  -- Surrounding `!.git` with quotes makes :grep not work :( for unknown
+  -- reasons.
+  set.grepprg = [[rg --hidden --glob !.git --trim --vimgrep]]
   set.grepformat:prepend("%f:%l:%c:%m")
 end
 
