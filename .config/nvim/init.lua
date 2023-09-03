@@ -109,6 +109,7 @@ require('ps.sessions')
 require('ps.wiki')
 -- diagnostic is an neovim module
 require("ps.vim_diagnostic")
+require("ps.ui_input")
 
 letg.tex_flavor = "latex"
 
