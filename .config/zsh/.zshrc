@@ -13,47 +13,14 @@ alias vi="nvim"
 # pressing `<S-v>` in normal mode (called command mode in zsh (`man zshzle(1)`))
 # will open $EDITOR for editing there (like the feature bash).
 # Chose `<S-v>` since `v` is bound to visual mode.
-autoload edit-command-line && zle -N edit-command-line
+autoload -Uz edit-command-line && zle -N edit-command-line
 bindkey -M vicmd V edit-command-line
 
 autoload -Uz compinit && compinit
 # smart case matching. `cd d<TAB>` will match `Doc` and `doc`.
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-setopt PROMPT_SUBST
-
-precmd() {
-    # This is necessary if you want __last_exit_code() to execute after other
-    # prompt functions like __username_and_host(). Otherwise the function
-    # doesn't work.
-    __exit_code_before_prompt_update=$?
-}
-
-function __username_and_host() {
-    local user_host=""
-    if [[ "${USER}" != 'insert-your-user-name' ]]; then
-        user_host='%n'
-    fi
-    if [[ "${HOST}" != 'insert-your-host-name' ]]; then
-        user_host="${user_host}@%m"
-    fi
-    if [[ -n "${SSH_CLIENT}" ]]; then
-        user_host='%n@%m'
-    fi
-    if [[ -n "${user_host}" ]]; then
-        echo "%F{cyan} ${user_host} "
-    fi
-}
-
-function __last_exit_code() {
-    if (( $__exit_code_before_prompt_update != 0 )); then
-        echo '%F{red}%B%?%b'
-    fi
-}
-
-#       
-# single quotes are important here!
-PROMPT='$(__username_and_host)%F{green} %~$(__last_exit_code) %F{yellow}%f '
+source "${ZDOTDIR}/prompt.zsh"
 
 # ZSH automatically sets editing mode as `vi` if it detects substring `vi`
 # in $EDITOR. So, no need for `set -o vi` or whatever the ZSH equivalent is.
