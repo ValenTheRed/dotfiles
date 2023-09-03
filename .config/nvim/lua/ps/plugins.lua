@@ -464,7 +464,7 @@ return {
         local client_namespace = vim.lsp.diagnostic.get_namespace(client.id)
         local nmap = function(lhs, rhs, desc)
           vim.keymap.set("n", lhs, rhs, {
-            noremap = true, silent = true, desc = desc,
+            noremap = true, silent = true, desc = desc, buffer = 0,
           })
         end
         -- Mappings.
