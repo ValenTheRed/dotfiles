@@ -4,9 +4,9 @@ if ! [[ -d "${ZDOTDIR}/git-prompt.zsh" ]]; then
    git clone --depth=1 'https://github.com/woefe/git-prompt.zsh' "${ZDOTDIR}/git-prompt.zsh"
 fi
 
-ZSH_THEME_GIT_PROMPT_PREFIX="〈"
-ZSH_THEME_GIT_PROMPT_SUFFIX="〉\n"
-ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{#ff3ba5}%f "
+ZSH_THEME_GIT_PROMPT_SUFFIX="\n%f"
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" ▶"
 ZSH_THEME_GIT_PROMPT_DETACHED="%B%F{cyan}:"
 ZSH_THEME_GIT_PROMPT_BRANCH="%B%F{magenta}"
 ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL="%B%F{yellow}󱞹 "
@@ -19,8 +19,8 @@ ZSH_THEME_GIT_PROMPT_UNMERGED=" %F{red}-"
 ZSH_THEME_GIT_PROMPT_STAGED=" %F{green}+"
 ZSH_THEME_GIT_PROMPT_UNSTAGED=" %F{red}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED=" …"
-ZSH_THEME_GIT_PROMPT_STASHED="%F{blue}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%B%F{#ff8c00}✓"
+ZSH_THEME_GIT_PROMPT_STASHED=" %F{blue}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" %B%F{#ff8c00}✓"
 
 source "${ZDOTDIR}/git-prompt.zsh/git-prompt.zsh"
 
