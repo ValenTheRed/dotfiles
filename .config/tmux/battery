@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+batt_status=""
+if pmset -g batt | rg -o '\bcharging\b'; then
+    batt_status=" "
+fi
+
+battery=$(pmset -g batt | rg -o --pcre2 '\d{1,2}(?=%;)')
+if [[ "${battery}" -le 15 ]]; then
+    batt_status="${batt_status}  "
+elif [[ "${battery}" -le 30 ]]; then
+    batt_status="${batt_status}  "
+elif [[ "${battery}" -le 55 ]]; then
+    batt_status="${batt_status}  "
+elif [[ "${battery}" -le 80 ]]; then
+    batt_status="${batt_status}  "
+else
+    batt_status="${batt_status}  "
+fi
+
+echo "${batt_status}${battery}%"
