@@ -45,9 +45,7 @@ function dot {
     git --git-dir="$dotfilesDir" --work-tree="$env:HOME" @args
 }
 
-function gs { git status }
-function glo { git log --oneline }
-function ggr { git log --graph --all --decorate --color --oneline }
+function vi { nvim @args }
 # }}}
 
 # {{{ Functions
