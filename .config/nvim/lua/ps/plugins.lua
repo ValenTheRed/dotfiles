@@ -130,7 +130,7 @@ return {
       nmap("<leader>fd", function()
         builtin.find_files({
           previewer = false,
-          find_command = vim.split([[fd --hidden --exclude .git]], " ")
+          find_command = vim.split([[fd --type file --hidden --exclude .git]], " ")
         })
       end, "Telescope lists files in your current working directory, respects .gitignore")
 
@@ -178,7 +178,13 @@ return {
       local mapping = {
         -- NOTE: Figure out what this mapping is supposed to do.
         -- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
-        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<CR>'] = cmp.mapping(function(fallback)
+          if cmp.visible() and cmp.get_active_entry() then
+            cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
+          else
+            fallback()
+          end
+        end, {"i"}),
         ['<C-e>'] = cmp.mapping({
           i = cmp.mapping.abort(),
           c = cmp.mapping.close(),
@@ -187,14 +193,14 @@ return {
         ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), {'i', 'c'}),
         ['<C-n>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_next_item()
+            cmp.select_next_item({ behavior = cmp.ConfirmBehavior.Insert, select = false })
           else
             fallback()
           end
         end, {'i', 'c'}),
         ['<C-p>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            cmp.select_prev_item()
+            cmp.select_prev_item({ behavior = cmp.ConfirmBehavior.Insert, select = false })
           else
             fallback()
           end
