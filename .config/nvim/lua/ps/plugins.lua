@@ -271,19 +271,18 @@ return {
         }
       })
 
-      -- cmp.setup.cmdline(':', {
-        --   completion = {
-          --     autocomplete = false
-          --   },
-          --   sources = cmp.config.sources({
-            --     { name = 'cmdline' },
-            --     { name = 'buffer' },
-            --     { names = 'path' },
-            --   })
-            -- })
+      vim.keymap.set("i", "<C-n>", require("cmp").complete, {silent = true, noremap = true}) end},
 
-            vim.keymap.set("i", "<C-n>", require("cmp").complete, {silent = true, noremap = true})
-          end},
+      -- cmp.setup.cmdline(':', {
+      --   completion = {
+      --     autocomplete = false
+      --   },
+      --   sources = cmp.config.sources({
+      --     { name = 'cmdline' },
+      --     { name = 'buffer' },
+      --     { names = 'path' },
+      --   })
+      -- })
   --}}}
 
   --{{{ cmp-path
