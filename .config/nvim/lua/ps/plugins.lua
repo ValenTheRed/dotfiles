@@ -584,7 +584,8 @@ return {
 
     insert("b", {
       'filetype',
-      icons_enabled = false,
+      icons_enabled = true,
+      colored = false,
       cond = function() return winwidth(0) > 73 end,
     })
 
@@ -774,8 +775,24 @@ return {
     end},
   --}}}
 
-  --{{{ neorg
-  -- {'nvim-neorg/neorg'},
+  --{{{ oil.nvim
+  { 'stevearc/oil.nvim',
+    config = function()
+      require("oil").setup {
+        default_file_explorer = true,
+        buf_options = {
+          buflisted = false,
+          bufhidden = "hide",
+        },
+        columns = {
+          "icon",
+        },
+      }
+    end},
   --}}}
+
+  -- {{{ nvim-web-devicons
+  { 'nvim-tree/nvim-web-devicons' },
+  -- }}}
 }
 -- vim: set fdm=marker:
