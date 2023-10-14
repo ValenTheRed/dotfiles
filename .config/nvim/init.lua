@@ -131,11 +131,15 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
 vim.api.nvim_create_autocmd("BufNewFile", {
   group = vim.api.nvim_create_augroup("load_from_skeleton_file", { clear=true }),
-  pattern = "*.*",
+  pattern = "*",
   callback = function()
+    local extension = vim.fn.expand("%:e")
+    if extension == "" then
+      return
+    end
     -- To restore alternate file register after `:r` clobers it
     local alt_reg = vim.fn.getreg("#")
-    local file = vim.fn.stdpath("config") .. [[/templates/skeleton.]] .. vim.fn.expand("%:e")
+    local file = vim.fn.stdpath("config") .. [[/templates/skeleton.]] .. extension
     if vim.fn.filereadable(file) ~= 0 then
       vim.cmd([[0r ]] .. file)
     end
