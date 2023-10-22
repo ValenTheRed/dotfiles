@@ -46,6 +46,11 @@ function dot {
 }
 
 function vi { nvim @args }
+
+function es { eza --icons --group-directories-first @args }
+function ea { eza --icons -a --group-directories-first @args }
+function el { eza --icons -la --group-directories-first @args }
+
 # }}}
 
 # {{{ Functions
