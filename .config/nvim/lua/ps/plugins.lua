@@ -511,8 +511,13 @@ return {
         nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
         nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
+        if client.name == "tsserver" then
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end
+
         if client.server_capabilities.documentFormattingProvider or
-          client.server_capabilities.document_range_formatting then
+          client.server_capabilities.documentRangeFormattingProvider then
           nmap("<space>f", vim.lsp.buf.format, "vim.lsp.buf.format")
         end
 
@@ -522,15 +527,69 @@ return {
       end
 
       -- Enable the following language servers
-      local servers = {'pyright', 'gopls'}
-      for _, lsp in ipairs(servers) do
-        require('lspconfig')[lsp].setup {
-          -- You will probably want to add a custom on_attach here to locally map
-          -- keybinds to buffers with an active client
-          on_attach = on_attach,
-          capabilities = capabilities,
-        }
-      end
+      local lsp = require('lspconfig')
+      lsp.pyright.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+      lsp.gopls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+
+      local prettierd = {
+        formatCanRange = true,
+        formatCommand = "prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}",
+        formatStdin = true,
+        rootMarkers = {
+          '.prettierrc',
+          '.prettierrc.json',
+          '.prettierrc.js',
+          '.prettierrc.yml',
+          '.prettierrc.yaml',
+          '.prettierrc.json5',
+          '.prettierrc.mjs',
+          '.prettierrc.cjs',
+          '.prettierrc.toml',
+        },
+      }
+      local eslint_d = {
+        lintSource = 'efm/eslint_d',
+        lintCommand = 'eslint_d --no-color --format unix --stdin-filename "${INPUT}" --stdin',
+        lintStdin = true,
+        lintFormats = { '%f:%l:%c: %m' },
+        lintIgnoreExitCode = true,
+        rootMarkers = {
+          '.eslintrc',
+          '.eslintrc.cjs',
+          '.eslintrc.js',
+          '.eslintrc.json',
+          '.eslintrc.yaml',
+          '.eslintrc.yml',
+        },
+      }
+      local efm_languages = {
+        javascriptreact = { prettierd, eslint_d },
+        javascript = { prettierd, eslint_d },
+        typescriptreact = { prettierd, eslint_d },
+        typescript = { prettierd, eslint_d },
+        json = { prettierd }
+      }
+
+      lsp.efm.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        init_options = {
+          documentFormatting = true,
+          documentRangeFormatting = true,
+        },
+        filetypes = vim.tbl_keys(efm_languages),
+        settings = {
+          rootMarkers = { '.git/' },
+          languages = efm_languages
+        },
+      }
+
     end
   },
   --}}}
