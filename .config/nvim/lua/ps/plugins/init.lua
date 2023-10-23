@@ -69,8 +69,13 @@ return {
           disable = { "help" },
         },
         additional_vim_regex_highlighting = false,
+        context_commentstring = {
+          enable = true,
+        }
       }
-    end, build = ':TSUpdate'
+    end,
+    dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
+    build = ':TSUpdate'
   }, --}}}
   'L3MON4D3/LuaSnip',
 }
