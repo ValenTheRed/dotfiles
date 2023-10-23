@@ -1,6 +1,6 @@
-alias es="exa --icons --group-directories-first"
-alias ea="exa --icons -a --group-directories-first"
-alias el="exa --icons -la --group-directories-first"
+alias es="eza --icons --group-directories-first"
+alias ea="eza --icons -a --group-directories-first"
+alias el="eza --icons -la --group-directories-first"
 
 alias la="ls -A"
 alias ll="ls -lFh"
