@@ -137,7 +137,7 @@ local config = function()
   local lsp = require('lspconfig')
   lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
   lsp.gopls.setup { on_attach = on_attach, capabilities = capabilities }
-
+  lsp.tsserver.setup { on_attach = on_attach, capabilities = capabilities }
   lsp.efm.setup {
     on_attach = on_attach,
     capabilities = capabilities,
