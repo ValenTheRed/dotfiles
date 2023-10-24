@@ -153,4 +153,4 @@ function Prompt {
 
 # }}}
 
-# vim: set fdm=marker:
+# vim: set fdm=marker fdl=0:
