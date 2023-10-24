@@ -29,6 +29,20 @@ return {
         columns = {
           "icon",
         },
+        keymaps = {
+          ["<C-s>"] = false,
+          ["<C-h>"] = false,
+          ["<C-t>"] = false,
+          ["<C-p>"] = false,
+          ["<C-c>"] = false,
+          ["<C-l>"] = false,
+          ["<C-p>"] = "actions.select_vsplit",
+          ["<C-s>"] = "actions.select_split",
+          ["<C-t>"] = "actions.select_tab",
+          -- ["<C-p>"] = "actions.preview",
+          ["<C-q>"] = "actions.close",
+          ["<C-r>"] = "actions.refresh",
+        },
       }
     end
   }, -- }}}
