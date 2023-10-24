@@ -292,4 +292,4 @@ nmap("<leader>grc", ":e $MYGVIMRC<CR>")
 
 -- }}}
 
--- vim: set fdm=marker:
+-- vim: set fdm=marker fdl=0:
