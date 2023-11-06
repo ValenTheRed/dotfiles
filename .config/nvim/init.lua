@@ -59,6 +59,8 @@ set.colorcolumn = "79"
 
 set.matchpairs:append("<:>")
 
+set.fillchars:append("diff:╱")
+
 set.splitright = true
 set.splitbelow = true
 
