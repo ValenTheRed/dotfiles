@@ -39,7 +39,7 @@ return {
           ["<C-p>"] = "actions.select_vsplit",
           ["<C-s>"] = "actions.select_split",
           ["<C-t>"] = "actions.select_tab",
-          -- ["<C-p>"] = "actions.preview",
+          ["<C-a>"] = "actions.preview",
           ["<C-q>"] = "actions.close",
           ["<C-r>"] = "actions.refresh",
         },
