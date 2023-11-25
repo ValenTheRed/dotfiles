@@ -81,7 +81,6 @@ local config = function()
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
-    local client_namespace = vim.lsp.diagnostic.get_namespace(client.id)
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     nmap("gD", vim.lsp.buf.declaration, "lsp.declaration")
@@ -110,11 +109,9 @@ local config = function()
       })
     end, "Telescope list code actions")
     nmap("<space>e", function()
-      vim.diagnostic.open_float({
-        namespace = client_namespace, scope = "line", source = true,
-      })
+      vim.diagnostic.open_float({ scope = "line", source = true })
     end, "floating current line diagnostics")
-    nmap("<space>q", vim.diagnostic.setloclist, "vim.lsp.diagnostic.set_loclist")
+    nmap("<space>q", vim.diagnostic.setloclist, "vim.diagnostic.setloclist by LSP")
     nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
     nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
