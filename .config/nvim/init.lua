@@ -272,7 +272,7 @@ nmap("<M-k>", "<C-w><C-+>")
 nmap("<M-l>", "<C-w><C->>")
 nmap("<M-h>", "<C-w><C-<>")
 
-nmap("<leader><leader>rc", ":e $MYVIMRC<CR>")
+nmap("<leader>erc", ":e $MYVIMRC<CR>")
 nmap("<leader>grc", ":e $MYGVIMRC<CR>")
 
 -- }}}
