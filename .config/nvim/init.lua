@@ -203,16 +203,16 @@ local tmap = function(...) vim.keymap.set("t", ...) end
 -- {{{ Keymaps
 
 -- 10j moves down by 10 lines while j moves by gj
-local g_prefix_or_not = function(key)
+local mux_with_g = function(key)
   local gkey = "g"..key
   return function()
     if vim.v.count == 0 then return gkey else return key end
   end
 end
-nmap("j", g_prefix_or_not("j"), {expr = true})
-nmap("k", g_prefix_or_not("k"), {expr = true})
-vmap("j", g_prefix_or_not("j"), {expr = true})
-vmap("k", g_prefix_or_not("k"), {expr = true})
+nmap("j", mux_with_g("j"), {expr = true})
+nmap("k", mux_with_g("k"), {expr = true})
+vmap("j", mux_with_g("j"), {expr = true})
+vmap("k", mux_with_g("k"), {expr = true})
 
 -- remap Ex mode. We can still enter it using `gQ`
 nmap("Q", "q:")
@@ -230,24 +230,12 @@ nmap("<F3>", ":set hlsearch! hlsearch?<CR>")
 nmap("<Leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 nmap("<Leader>R", [[:%s/\<<C-r><C-A>\>//g<Left><Left>]])
 -- Search using a word boundary
-vmap("<Leader>r", [["*y:%s/\V\<<C-r><S-*>\>//g<Left><Left>]])
+vmap("<Leader>r", [["*y:%s/\V<C-r><S-*>//g<Left><Left>]])
 -- search using no word boundry
 vmap("<Leader>R", [["*y:%s/\V<C-r><S-*>//g<Left><Left>]])
 
 -- Break lines at cursor
 nmap("<leader><CR>", "i<CR><ESC>", {silent=true})
-
--- Run a terminal emulator at current working directory
-if vim.fn.has('win32') ~= 0 or vim.fn.has('win64') ~= 0 then
--- run windows terminal
-    nmap("<leader>tw", ":silent !wt -d .<CR>", {silent=true})
-end
-
--- Browser like tab movement
-nmap("<C-Tab>", "gt")
-nmap("<C-S-Tab>", "gT")
-
-nmap("<C-q>", ":qa<CR>")
 
 -- Copy/pasting from system clipboard
 nmap("<M-p>", [["+]p]])
@@ -257,17 +245,11 @@ imap("<M-p>", [[<ESC>"+]pa]])
 -- Buffer
 nmap("]b", ":bn<CR>")
 nmap("[b", ":bp<CR>")
-nmap("<Leader>#", ":b#<CR>")
-nmap("<Leader>d", [[:b#\|bd! #<CR>]])
 
 -- change directory for whole of nvim
 nmap("<leader>cd", ":cd %:p:h<CR>:pwd<CR>", {silent=true})
 nmap("<leader>lc", ":lcd %:p:h<CR>:pwd<CR>", {silent=true})
 -- change directory for the current window
-
--- Visual diff maps
-vmap("<leader>do", ":diffget<CR>")
-vmap("<leader>dp", ":diffput<CR>")
 
 -- We can emulate 'zoom' feature by opening the buffer in a new tab.
 -- builtin keymap is <C-W><C-T>
