@@ -1,3 +1,9 @@
+local nmap = function(lhs, rhs, desc)
+  vim.keymap.set("n", lhs, rhs, {
+    noremap = true, silent = true, desc = desc,
+  })
+end
+
 -- Switch off diagnostics signs in the sign column.
 -- github issue: https://github.com/neovim/neovim/issues/15770
 -- :help diagnostic-handlers-example
@@ -25,5 +31,12 @@ for type, icon in pairs(M.icons) do
   local hl = "DiagnosticSign" .. title_case
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
 end
+
+nmap("<leader>e", function()
+  vim.diagnostic.open_float({ scope = "line", source = true })
+end, "open line diagnostics in a floating window")
+nmap("<leader>q", vim.diagnostic.setloclist, "vim.diagnostic.setloclist")
+nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
+nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
 return M

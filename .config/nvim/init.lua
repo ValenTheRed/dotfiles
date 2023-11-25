@@ -235,7 +235,7 @@ vmap("<Leader>r", [["*y:%s/\V\<<C-r><S-*>\>//g<Left><Left>]])
 vmap("<Leader>R", [["*y:%s/\V<C-r><S-*>//g<Left><Left>]])
 
 -- Break lines at cursor
-nmap("<leader>q", "i<CR><ESC>", {silent=true})
+nmap("<leader><CR>", "i<CR><ESC>", {silent=true})
 
 -- Run a terminal emulator at current working directory
 if vim.fn.has('win32') ~= 0 or vim.fn.has('win64') ~= 0 then
@@ -290,7 +290,7 @@ nmap("<M-k>", "<C-w><C-+>")
 nmap("<M-l>", "<C-w><C->>")
 nmap("<M-h>", "<C-w><C-<>")
 
-nmap("<leader>erc", ":e $MYVIMRC<CR>")
+nmap("<leader><leader>rc", ":e $MYVIMRC<CR>")
 nmap("<leader>grc", ":e $MYGVIMRC<CR>")
 
 -- }}}

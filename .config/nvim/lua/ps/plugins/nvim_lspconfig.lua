@@ -108,12 +108,6 @@ local config = function()
         previewer = false,
       })
     end, "Telescope list code actions")
-    nmap("<space>e", function()
-      vim.diagnostic.open_float({ scope = "line", source = true })
-    end, "floating current line diagnostics")
-    nmap("<space>q", vim.diagnostic.setloclist, "vim.diagnostic.setloclist by LSP")
-    nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
-    nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
     if client.name == "tsserver" then
       client.server_capabilities.documentFormattingProvider = false
