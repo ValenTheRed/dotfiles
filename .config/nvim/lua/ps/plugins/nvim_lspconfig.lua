@@ -81,18 +81,28 @@ local config = function()
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
+    local telescope_lsp_opts = { show_line = false }
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     nmap("gD", vim.lsp.buf.declaration, "lsp.declaration")
-    nmap("gd", telescope_builtin.lsp_definitions, "Telescope list/goto definitions")
     nmap("K", vim.lsp.buf.hover, "floating lsp symbol info")
+    nmap("gd", function()
+      telescope_builtin.lsp_definitions(telescope_lsp_opts)
+    end, "Telescope list/goto definitions")
     -- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
-    nmap("gR", telescope_builtin.lsp_implementations, "Telescope list/goto implementations")
+    nmap("gR", function()
+      telescope_builtin.lsp_implementations(telescope_lsp_opts)
+    end, "Telescope list/goto implementations")
     nmap("gs", vim.lsp.buf.signature_help, "floating lsp function signature help")
-    nmap("gr", telescope_builtin.lsp_references, "Telescope lists references")
+    nmap("gr", function()
+      telescope_builtin.lsp_references(telescope_lsp_opts)
+    end, "Telescope lists references")
+    nmap("<space>D", function()
+      telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
+    end, "Telescope list/goto type definitions")
     nmap("<space>dr", function()
       telescope_builtin.lsp_document_symbols({
-        previewer = false,
+        previewer = true,
       })
     end, "Telescope list doc symbols")
     nmap("<space>wr", telescope_builtin.lsp_workspace_symbols, "Telescope list lsp workspace symbols")
@@ -101,7 +111,6 @@ local config = function()
     nmap("<space>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, "print workspace folders in :messages section")
-    nmap("<space>D", telescope_builtin.lsp_type_definitions, "Telescope list/goto type definitions")
     nmap("<space>rn", vim.lsp.buf.rename, "lsp rename identifier under cursor")
     nmap("<space>ca", function()
       telescope_builtin.lsp_code_actions({
