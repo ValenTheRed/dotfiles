@@ -10,6 +10,7 @@
 	s = status
 	c = commit
 	b = branch
+	r = restore
 	ca = commit -a
 	cm = commit --amend
 	cam = commit -a --amend
