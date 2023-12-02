@@ -55,10 +55,9 @@ return {
   -- {{{ indent-blankline.nvim
   {
     'lukas-reineke/indent-blankline.nvim', config = function()
-      require("indent_blankline").setup({
-        char = "│",
-        filetype_exclude = {"help", "markdown", "vimwiki"},
-        buftype_exclude = {"terminal"},
+      require("ibl").setup({
+        indent = { char = "│" },
+        scope = { enabled = false },
       })
     end
   }, -- }}}
