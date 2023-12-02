@@ -32,12 +32,11 @@ for type, icon in pairs(M.icons) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
 end
 
--- dl is the same as x. So useless and available to map.
-nmap("dl", function()
+-- d- is the same as d1k. So useless and available to map.
+nmap("d-", function()
   vim.diagnostic.open_float({ scope = "line", source = true })
 end, "open line diagnostics in a floating window")
--- Used (and overriden) in fugitive summary view. So safe to use.
-nmap("dq", vim.diagnostic.setloclist, "vim.diagnostic.setloclist")
+nmap("dl", vim.diagnostic.setloclist, "vim.diagnostic.setloclist")
 nmap("[d", vim.diagnostic.goto_prev, "jump to previous diagnostic in buffer")
 nmap("]d", vim.diagnostic.goto_next, "jump to next diagnostic in buffer")
 
