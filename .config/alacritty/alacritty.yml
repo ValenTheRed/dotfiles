@@ -3,7 +3,7 @@ key_bindings:
   - {key: Tab, mods: Control,       chars: "\x1b[27;5;9~"}
   - {key: Tab, mods: Control|Shift, chars: "\x1b[27;6;9~"}
   # zoom
-  - {key: Z, mod: Command, chars: "\x13\x7a"}
+  - {key: Z, mods: Command, chars: "\x13\x7a"}
   # create vertical pane: <C-s>% -> cmd + d
   - { key: P,     mods: Command,       chars: "\x13\x25" }
   # create horizontal pane: <C-s>" -> cmd + shift + d
