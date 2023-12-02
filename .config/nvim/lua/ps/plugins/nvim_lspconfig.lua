@@ -137,7 +137,18 @@ local config = function()
   local lsp = require('lspconfig')
   lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
   lsp.gopls.setup { on_attach = on_attach, capabilities = capabilities }
-  lsp.tsserver.setup { on_attach = on_attach, capabilities = capabilities }
+  lsp.tsserver.setup {
+    root_dir = function(filename)
+      if string.find(filename, "enter_directory_name") ~= nil then
+        return lsp.util.find_git_ancestor(filename)
+      end
+      return lsp.util.root_pattern(
+        "package.json", "tsconfig.json", "jsconfig.json", ".git"
+      )(filename)
+    end,
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
   lsp.efm.setup {
     on_attach = on_attach,
     capabilities = capabilities,
