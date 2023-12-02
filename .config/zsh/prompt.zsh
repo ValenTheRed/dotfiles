@@ -1,7 +1,7 @@
 setopt PROMPT_SUBST
 
 if ! [[ -d "${ZDOTDIR}/git-prompt.zsh" ]]; then
-   git clone --depth=1 'https://github.com/woefe/git-prompt.zsh' "${ZDOTDIR}/git-prompt.zsh"
+    git clone --depth=1 'https://github.com/woefe/git-prompt.zsh' "${ZDOTDIR}/git-prompt.zsh"
 fi
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{#ff3ba5}%f "
@@ -25,32 +25,32 @@ ZSH_THEME_GIT_PROMPT_CLEAN=" %B%F{#ff8c00}✓"
 source "${ZDOTDIR}/git-prompt.zsh/git-prompt.zsh"
 
 precmd() {
-   # This is necessary if you want __last_exit_code() to execute after other
-   # prompt functions like __username_and_host(). Otherwise the function
-   # doesn't work.
-   __exit_code_before_prompt_update=$?
+    # This is necessary if you want __last_exit_code() to execute after other
+    # prompt functions like __username_and_host(). Otherwise the function
+    # doesn't work.
+    __exit_code_before_prompt_update=$?
 }
 
 function __username_and_host() {
-   local user_host=""
-   if [[ "${USER}" != 'insert-user-here' ]]; then
-       user_host='%n'
-   fi
-   if [[ "${HOST}" != 'insert-host-here' ]]; then
-       user_host="${user_host}@%m"
-   fi
-   if [[ -n "${SSH_CLIENT}" ]]; then
-       user_host='%n@%m'
-   fi
-   if [[ -n "${user_host}" ]]; then
-       echo "%F{cyan} ${user_host} "
-   fi
+    local user_host=""
+    if [[ "${USER}" != 'insert-user-here' ]]; then
+        user_host='%n'
+    fi
+    if [[ "${HOST}" != 'insert-host-here' ]]; then
+        user_host="${user_host}@%m"
+    fi
+    if [[ -n "${SSH_CLIENT}" ]]; then
+        user_host='%n@%m'
+    fi
+    if [[ -n "${user_host}" ]]; then
+        echo "%F{cyan} ${user_host} "
+    fi
 }
 
 function __last_exit_code() {
-   if (( $__exit_code_before_prompt_update != 0 )); then
-       echo '%F{red}%B%?%b '
-   fi
+    if (( $__exit_code_before_prompt_update != 0 )); then
+        echo '%F{red}%B%?%b '
+    fi
 }
 
 #       
