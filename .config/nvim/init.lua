@@ -76,7 +76,9 @@ set.sessionoptions:append({"resize", "winpos"})
 -- Patience is better than the default in some cases.
 -- Explanation of indent-heuristic:
 -- https://vimways.org/2018/the-power-of-diff/#the-indent-heuristics
-set.diffopt:append({"algorithm:patience", "indent-heuristic", "foldcolumn:1"})
+set.diffopt:append({
+  "algorithm:patience", "indent-heuristic", "linematch:60", "foldcolumn:1"
+})
 
 if vim.fn.executable('rg') then
   -- Surrounding `!.git` with quotes makes :grep not work :( for unknown
