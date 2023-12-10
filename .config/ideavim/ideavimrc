@@ -1,0 +1,24 @@
+set surround
+set commentary
+
+set incsearch
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set ideajoin
+
+let mapleader = " "
+
+map gr <Action>(ShowUsages)
+
+map <leader>hr <Action>(Vcs.RollbackChangedLines)
+map [c <Action>(VcsShowPrevChangeMarker)
+map ]c <Action>(VcsShowNextChangeMarker)
+
+map <leader>rn <Action>(RenameElement)
+
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-l> <C-w><C-l>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
