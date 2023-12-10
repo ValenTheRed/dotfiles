@@ -56,6 +56,8 @@ unsetopt correct_all            # disable ZSH autocorrect
 
 setopt MENU_COMPLETE            # this one causes selection on the menu to be highlighted
 
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+
 # WINDOWS (MSYS2) ONLY
 # The default completion system for /usr/bin/start script doesn't
 # complete files. Defining new completion style using `zstyle` didn't
