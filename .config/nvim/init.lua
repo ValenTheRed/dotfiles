@@ -87,6 +87,8 @@ if vim.fn.executable('rg') then
   set.grepformat:prepend("%f:%l:%c:%m")
 end
 
+set.linebreak = true
+
 --}}}
 
 -- {{{ Plugins
