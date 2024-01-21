@@ -36,6 +36,9 @@ local setup = {
   signs = {
     add = {
       text = '+'
+    },
+    delete = {
+      text = '—'
     }
   },
   current_line_blame_opts = {
