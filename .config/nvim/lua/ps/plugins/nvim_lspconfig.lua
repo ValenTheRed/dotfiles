@@ -142,6 +142,8 @@ local config = function()
       if string.find(filename, "enter_directory_name") ~= nil then
         return lsp.util.find_git_ancestor(filename)
       end
+      -- This is the default config set by lspconfig.
+      -- Check `:h lspconfig-server-configurations` & `/# tsserver`
       return lsp.util.root_pattern(
         "package.json", "tsconfig.json", "jsconfig.json", ".git"
       )(filename)
