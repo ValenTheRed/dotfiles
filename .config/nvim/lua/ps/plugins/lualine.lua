@@ -1,3 +1,5 @@
+local lsp_progress = require("lsp-progress")
+
 -- Definig the statusline.
 local statusline = {}
 
@@ -71,20 +73,21 @@ insert("c", {
 })
 
 insert("x", {
-  function()
-    local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-    if #clients == 1 then
-      return string.sub(clients[1].name, 1, 1)
-    end
-    local names = vim.tbl_map(function(client)
-      return client.name
-    end, clients)
-    return table.concat(names, ", ")
-  end,
-  icon = "",
-  cond = function()
-    return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and winwidth(0) > 63
-  end,
+  lsp_progress.progress,
+  -- function()
+  --   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  --   if #clients == 1 then
+  --     return string.sub(clients[1].name, 1, 1)
+  --   end
+  --   local names = vim.tbl_map(function(client)
+  --     return client.name
+  --   end, clients)
+  --   return table.concat(names, ", ")
+  -- end,
+  -- icon = "",
+  -- cond = function()
+  --   return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and winwidth(0) > 63
+  -- end,
 })
 
 insert("x", {
