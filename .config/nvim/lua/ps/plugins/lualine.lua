@@ -1,57 +1,83 @@
-local lsp_progress = require("lsp-progress")
+local set = vim.opt
+local lsp_progress = require('lsp-progress')
 
--- Definig the statusline.
-local statusline = {}
+local use_winbar = true
 
--- set empty table to remove dafaults
-statusline.sections = {
-  lualine_a = {},
-  lualine_b = {},
-  lualine_c = {},
-  lualine_x = {},
-  lualine_y = {},
-  lualine_z = {},
-}
+local statusline = { active = {}, inactive = {} }
+local winbar = {}
 
--- set empty table to remove dafaults
-statusline.inactive_sections = {
-  lualine_a = {},
-  lualine_b = {},
-  lualine_c = {
-    {
-      -- Dummy component that centers the subsequent section.
-      function() return "%=" end,
+-- remove dafault components
+for _, v in ipairs({"a", "b", "c", "x", "y", "z"}) do
+  local section = string.format("lualine_%s", v)
+  statusline.active[section] = {}
+  statusline.inactive[section] = {}
+end
+
+local winwidth = vim.fn.winwidth
+
+-- Insert component at section {a, b, c, x, y, z}
+local function insert(section, component)
+  local section = string.format("lualine_%s", section)
+  table.insert(statusline.active[section], component)
+end
+
+if use_winbar then
+  winbar.active = {
+    lualine_a = {
+      {
+        'filename',
+        icon = "",
+        path = 1,
+        -- file_status = false,
+      },
     },
+    lualine_c = {
+      { function() return "" end, draw_empty = true, }
+    },
+  }
+  winbar.inactive = {
+    lualine_c = {
+      -- the centering trick doesn't work here
+      {
+        'filename',
+        icons_enabled = true,
+        icon = "",
+        path = 1,
+      },
+    },
+  }
+  insert("a", {
+    function() return " " end,
+    padding = {},
+  })
+else
+  insert("a", {
+    'filename',
+    icon = "",
+    path = 1,
+  })
+  statusline.inactive.lualine_c = {
+    -- Dummy component that centers the subsequent section.
+    { function() return "%=" end, },
     {
       'filename',
       icons_enabled = true,
       icon = "",
       path = 1,
     },
-  },
-  lualine_x = {},
-  lualine_y = {},
-  lualine_z = {},
-}
-
--- Inserts component at lualine section {a, b, c, x, y, z}
-local function insert(section, component)
-  table.insert(statusline.sections[string.format("lualine_%s", section)], component)
+  }
 end
-
-local winwidth = vim.fn.winwidth
-
-insert("a", {
-  'filename',
-  icon = "",
-  path = 1,
-})
 
 insert("b", {
   'filetype',
   icons_enabled = true,
   colored = false,
   cond = function() return winwidth(0) > 73 end,
+})
+
+insert("c", {
+  function() return use_winbar and "%m%r%w" or "" end,
+  padding = {},
 })
 
 -- default component has too much space around it
@@ -106,7 +132,7 @@ insert("x", {
 })
 
 insert("x", {
-  'branch',
+  'b:gitsigns_head',
   icon = "",
 })
 
@@ -141,15 +167,18 @@ return {{
         theme = "auto",
         component_separators = "",
         section_separators = "",
+        globalstatus = use_winbar,
       },
-      sections = statusline.sections,
-      inactive_sections = statusline.inactive_sections,
+      sections = statusline.active,
+      inactive_sections = statusline.inactive,
       tabline_section = {
         lualine_a = {
           'filename',
           path = 2,
         }
-      }
+      },
+      winbar = winbar.active,
+      inactive_winbar = winbar.inactive,
     }
   end
 }}
