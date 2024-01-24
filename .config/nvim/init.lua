@@ -9,13 +9,13 @@ letg.mapleader = ","
 set.termguicolors = true
 
 -- allow mouse
-set.mouse = { n=true, v=true, i=true }
+set.mouse = { n = true, v = true, i = true }
 
 -- Set the order of file encodings when reading and creating files.
-set.fileencodings = {"utf-8"}
+set.fileencodings = { "utf-8" }
 
 --Set the order of line endings when reading and creating files.
-set.fileformats = {"unix", "dos", "mac"}
+set.fileformats = { "unix", "dos", "mac" }
 
 -- number column
 set.number = true
@@ -31,9 +31,15 @@ set.softtabstop = 4
 set.ignorecase = true
 set.smartcase = true
 
-set.wildignore:append({
-  "*/tmp/*", "*/virenvs/*", "*/venvs/*", "*/.venv/*", "*.so", "*.swp", "*.zip",
-})
+set.wildignore:append {
+	"*/tmp/*",
+	"*/virenvs/*",
+	"*/venvs/*",
+	"*/.venv/*",
+	"*.so",
+	"*.swp",
+	"*.zip",
+}
 
 -- hightlight current line
 set.cursorline = true
@@ -71,20 +77,24 @@ set.undofile = true
 set.nrformats:append("alpha")
 
 -- save window sizes with :mks
-set.sessionoptions:append({"resize", "winpos"})
+set.sessionoptions:append { "resize", "winpos" }
 
 -- Patience is better than the default in some cases.
 -- Explanation of indent-heuristic:
 -- https://vimways.org/2018/the-power-of-diff/#the-indent-heuristics
-set.diffopt:append({
-  "algorithm:patience", "indent-heuristic", "linematch:60", "foldcolumn:1"
-})
+set.diffopt:append {
+	"algorithm:patience",
+	"indent-heuristic",
+	"linematch:60",
+	"foldcolumn:1",
+}
 
-if vim.fn.executable('rg') then
-  -- Surrounding `!.git` with quotes makes :grep not work :( for unknown
-  -- reasons.
-  set.grepprg = [[rg --no-config --smart-case --hidden --glob !.git --trim --vimgrep]]
-  set.grepformat:prepend("%f:%l:%c:%m")
+if vim.fn.executable("rg") then
+	-- Surrounding `!.git` with quotes makes :grep not work :( for unknown
+	-- reasons.
+	set.grepprg =
+		[[rg --no-config --smart-case --hidden --glob !.git --trim --vimgrep]]
+	set.grepformat:prepend("%f:%l:%c:%m")
 end
 
 set.linebreak = true
@@ -95,32 +105,32 @@ set.linebreak = true
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system {
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	}
 end
 set.runtimepath:prepend(lazypath)
 
 -- load ./lua/ps/plugins
 -- colorscheme is set there
 -- all plugins configuration is set there
-require('lazy').setup("ps.plugins")
+require("lazy").setup("ps.plugins")
 
-require('ps.sessions')
-require('ps.wiki')
+require("ps.sessions")
+require("ps.wiki")
 -- diagnostic is an neovim module
 require("ps.vim_diagnostic")
 require("ps.ui_input")
 require("ps.prettierrc")
 vim.cmd.packadd("cfilter")
-require("luasnip.loaders.from_lua").load({
-  paths = "./luasnip"
-})
+require("luasnip.loaders.from_lua").load {
+	paths = "./luasnip",
+}
 
 letg.tex_flavor = "latex"
 
@@ -134,28 +144,33 @@ letg.tex_flavor = "latex"
 --     autocmd BufWritePost $MYVIMRC nested :source $MYVIMRC
 -- augroup END
 vim.api.nvim_create_autocmd("BufWritePost", {
-  group = vim.api.nvim_create_augroup("re_source_vimrc", { clear=true }),
-  pattern = vim.fn.expand("$MYVIMRC"),
-  nested = true,
-  command = ":source $MYVIMRC",
+	group = vim.api.nvim_create_augroup("re_source_vimrc", { clear = true }),
+	pattern = vim.fn.expand("$MYVIMRC"),
+	nested = true,
+	command = ":source $MYVIMRC",
 })
 
 vim.api.nvim_create_autocmd("BufNewFile", {
-  group = vim.api.nvim_create_augroup("load_from_skeleton_file", { clear=true }),
-  pattern = "*",
-  callback = function()
-    local extension = vim.fn.expand("%:e")
-    if extension == "" then
-      return
-    end
-    -- To restore alternate file register after `:r` clobers it
-    local alt_reg = vim.fn.getreg("#")
-    local file = vim.fn.stdpath("config") .. [[/templates/skeleton.]] .. extension
-    if vim.fn.filereadable(file) ~= 0 then
-      vim.cmd([[0r ]] .. file)
-    end
-    vim.fn.setreg("#", alt_reg)
-  end,
+	group = vim.api.nvim_create_augroup(
+		"load_from_skeleton_file",
+		{ clear = true }
+	),
+	pattern = "*",
+	callback = function()
+		local extension = vim.fn.expand("%:e")
+		if extension == "" then
+			return
+		end
+		-- To restore alternate file register after `:r` clobers it
+		local alt_reg = vim.fn.getreg("#")
+		local file = vim.fn.stdpath("config")
+			.. [[/templates/skeleton.]]
+			.. extension
+		if vim.fn.filereadable(file) ~= 0 then
+			vim.cmd([[0r ]] .. file)
+		end
+		vim.fn.setreg("#", alt_reg)
+	end,
 })
 
 -- from :help incsearch
@@ -166,9 +181,12 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 -- -- autocmd CmdlineLeave /,\? :set nohlsearch
 -- augroup END
 vim.api.nvim_create_autocmd("CmdlineEnter", {
-  group = vim.api.nvim_create_augroup("vimrc_incsearch_highlight", {clear=true}),
-  pattern = [[/,\?]],
-  command = ":set hlsearch",
+	group = vim.api.nvim_create_augroup(
+		"vimrc_incsearch_highlight",
+		{ clear = true }
+	),
+	pattern = [[/,\?]],
+	command = ":set hlsearch",
 })
 
 -- augroup remove_trailing_whitespaces
@@ -176,20 +194,26 @@ vim.api.nvim_create_autocmd("CmdlineEnter", {
 --     autocmd BufWritePre * :%s/\s\+$//e
 -- augroup END
 vim.api.nvim_create_autocmd("BufWritePre", {
-  group = vim.api.nvim_create_augroup("remove_trailing_whitespaces", {clear=true}),
-  pattern = "*",
-  callback = function()
-    local view = vim.fn.winsaveview()
-    vim.cmd 'silent! undojoin'
-    vim.cmd [[silent keepjumps keeppatterns %s/\s\+$//e]]
-    vim.fn.winrestview(view)
-  end,
+	group = vim.api.nvim_create_augroup(
+		"remove_trailing_whitespaces",
+		{ clear = true }
+	),
+	pattern = "*",
+	callback = function()
+		local view = vim.fn.winsaveview()
+		vim.cmd("silent! undojoin")
+		vim.cmd([[silent keepjumps keeppatterns %s/\s\+$//e]])
+		vim.fn.winrestview(view)
+	end,
 })
 
 vim.api.nvim_create_autocmd("User", {
-  group = vim.api.nvim_create_augroup("lualine_lsp_progress", { clear = true }),
-  pattern = "LspProgressStatusUpdated",
-  callback = require("lualine").refresh,
+	group = vim.api.nvim_create_augroup(
+		"lualine_lsp_progress",
+		{ clear = true }
+	),
+	pattern = "LspProgressStatusUpdated",
+	callback = require("lualine").refresh,
 })
 
 -- }}}
@@ -197,36 +221,50 @@ vim.api.nvim_create_autocmd("User", {
 -- {{{ Functions
 
 close_all_floating_windows = function()
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local config = vim.api.nvim_win_get_config(win);
-    if config.relative ~= "" then
-      vim.api.nvim_win_close(win, false);
-      -- print('Closing window', win)
-    end
-  end
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local config = vim.api.nvim_win_get_config(win)
+		if config.relative ~= "" then
+			vim.api.nvim_win_close(win, false)
+			-- print('Closing window', win)
+		end
+	end
 end
 
 -- }}}
 
-local nmap = function(...) vim.keymap.set("n", ...) end
-local vmap = function(...) vim.keymap.set("v", ...) end
-local imap = function(...) vim.keymap.set("i", ...) end
-local cmap = function(...) vim.keymap.set("c", ...) end
-local tmap = function(...) vim.keymap.set("t", ...) end
+local nmap = function(...)
+	vim.keymap.set("n", ...)
+end
+local vmap = function(...)
+	vim.keymap.set("v", ...)
+end
+local imap = function(...)
+	vim.keymap.set("i", ...)
+end
+local cmap = function(...)
+	vim.keymap.set("c", ...)
+end
+local tmap = function(...)
+	vim.keymap.set("t", ...)
+end
 
 -- {{{ Keymaps
 
 -- 10j moves down by 10 lines while j moves by gj
 local mux_with_g = function(key)
-  local gkey = "g"..key
-  return function()
-    if vim.v.count == 0 then return gkey else return key end
-  end
+	local gkey = "g" .. key
+	return function()
+		if vim.v.count == 0 then
+			return gkey
+		else
+			return key
+		end
+	end
 end
-nmap("j", mux_with_g("j"), {expr = true})
-nmap("k", mux_with_g("k"), {expr = true})
-vmap("j", mux_with_g("j"), {expr = true})
-vmap("k", mux_with_g("k"), {expr = true})
+nmap("j", mux_with_g("j"), { expr = true })
+nmap("k", mux_with_g("k"), { expr = true })
+vmap("j", mux_with_g("j"), { expr = true })
+vmap("k", mux_with_g("k"), { expr = true })
 
 -- remap Ex mode. We can still enter it using `gQ`
 nmap("Q", "q:")
@@ -249,7 +287,7 @@ vmap("<Leader>r", [["*y:%s/\V<C-r><S-*>//g<Left><Left>]])
 vmap("<Leader>R", [["*y:%s/\V<C-r><S-*>//g<Left><Left>]])
 
 -- Break lines at cursor
-nmap("<leader><CR>", "i<CR><ESC>", {silent=true})
+nmap("<leader><CR>", "i<CR><ESC>", { silent = true })
 
 -- Copy/pasting from system clipboard
 nmap("<M-p>", [["+]p]])
@@ -261,8 +299,8 @@ nmap("]b", ":bn<CR>")
 nmap("[b", ":bp<CR>")
 
 -- change directory for whole of nvim
-nmap("<leader>cd", ":cd %:p:h<CR>:pwd<CR>", {silent=true})
-nmap("<leader>lc", ":lcd %:p:h<CR>:pwd<CR>", {silent=true})
+nmap("<leader>cd", ":cd %:p:h<CR>:pwd<CR>", { silent = true })
+nmap("<leader>lc", ":lcd %:p:h<CR>:pwd<CR>", { silent = true })
 -- change directory for the current window
 
 -- We can emulate 'zoom' feature by opening the buffer in a new tab.
@@ -277,8 +315,8 @@ nmap("<C-l>", "<C-w><C-l>")
 tmap("<ESC>", [[<C-\><C-n>]])
 
 -- :sp and :vs are easier to type than :vne and :new so, remap their shortcuts
-nmap("<C-w><C-v>", ":vne<Cr>", {silent=true})
-nmap("<C-w><C-s>", ":new<Cr>", {silent=true})
+nmap("<C-w><C-v>", ":vne<Cr>", { silent = true })
+nmap("<C-w><C-s>", ":new<Cr>", { silent = true })
 
 -- Easy resize of split panes
 nmap("<M-j>", "<C-w><C-->")
