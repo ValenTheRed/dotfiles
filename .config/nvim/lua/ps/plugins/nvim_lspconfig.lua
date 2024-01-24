@@ -68,7 +68,13 @@ local efm_languages = {
   javascript = { efm_prettierd, efm_eslintd },
   typescriptreact = { efm_prettierd, efm_eslintd },
   typescript = { efm_prettierd, efm_eslintd },
-  json = { efm_prettierd }
+  json = { efm_prettierd },
+  lua = {{
+    formatCanRange = true,
+    formatCommand = "stylua ${--range-start:charStart} ${--range-end:charEnd} -",
+    formatStdin = true,
+    rootMarkers = { 'stylua.toml', '.stylua.toml' },
+  }},
 }
 
 local config = function()
