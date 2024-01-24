@@ -118,6 +118,9 @@ require("ps.vim_diagnostic")
 require("ps.ui_input")
 require("ps.prettierrc")
 vim.cmd.packadd("cfilter")
+require("luasnip.loaders.from_lua").load({
+  paths = "./luasnip"
+})
 
 letg.tex_flavor = "latex"
 
