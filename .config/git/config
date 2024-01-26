@@ -4,6 +4,7 @@
 	name = Pranjal Soni
 	email = soni.pranjals17@gmail.com
 [core]
+	excludesfile = ~/.config/git/ignore
 	autocrlf = input
 	editor = nvim
 [alias]
