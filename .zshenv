@@ -16,5 +16,6 @@ export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgrep/config
 export FZF_DEFAULT_OPTS='--height 40% --reverse'
 export FZF_CTRL_T_OPTS="--select-1 --exit-0"
 export FZF_CTRL_R_OPTS="--select-1 --exit-0"
+export FZF_CTRL_T_COMMAND='fd --type file --hidden --exclude .git'
 
 source ${ZDOTDIR}/.zshenv
