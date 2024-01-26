@@ -174,7 +174,9 @@ local config = function()
 	lsp.gopls.setup { on_attach = on_attach, capabilities = capabilities }
 	lsp.tsserver.setup {
 		root_dir = function(filename)
-			if string.find(filename, "enter_directory_name") ~= nil then
+			if
+				string.find(filename, "substitute_this_with_a_directory") ~= nil
+			then
 				return lsp.util.find_git_ancestor(filename)
 			end
 			-- This is the default config set by lspconfig.

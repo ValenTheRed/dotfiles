@@ -33,10 +33,10 @@ precmd() {
 
 function __username_and_host() {
     local user_host=""
-    if [[ "${USER}" != 'insert-user-here' ]]; then
+    if [[ "${USER}" != 'substitute_this_with_USER' ]]; then
         user_host='%n'
     fi
-    if [[ "${HOST}" != 'insert-host-here' ]]; then
+    if [[ "${HOST}" != 'substitute_this_with_HOST' ]]; then
         user_host="${user_host}@%m"
     fi
     if [[ -n "${SSH_CLIENT}" ]]; then
