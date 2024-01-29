@@ -116,6 +116,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 set.runtimepath:prepend(lazypath)
 
+require("ps.vim_diagnostic")
 -- load ./lua/ps/plugins
 -- colorscheme is set there
 -- all plugins configuration is set there
@@ -123,8 +124,6 @@ require("lazy").setup("ps.plugins")
 
 require("ps.sessions")
 require("ps.wiki")
--- diagnostic is an neovim module
-require("ps.vim_diagnostic")
 require("ps.ui_input")
 require("ps.prettierrc")
 vim.cmd.packadd("cfilter")
