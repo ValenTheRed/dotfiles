@@ -102,7 +102,9 @@ local config = function()
 		-- Mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		nmap("gD", vim.lsp.buf.declaration, "lsp.declaration")
-		nmap("K", vim.lsp.buf.hover, "floating lsp symbol info")
+		if client.server_capabilities.hoverProvider then
+			nmap("K", vim.lsp.buf.hover, "floating lsp symbol info")
+		end
 		nmap("gd", function()
 			telescope_builtin.lsp_definitions(telescope_lsp_opts)
 		end, "Telescope list/goto definitions")
