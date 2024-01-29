@@ -116,6 +116,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 set.runtimepath:prepend(lazypath)
 
+require("ps.vim_diagnostic")
 -- load ./lua/ps/plugins
 -- colorscheme is set there
 -- all plugins configuration is set there
@@ -123,8 +124,6 @@ require("lazy").setup("ps.plugins")
 
 require("ps.sessions")
 require("ps.wiki")
--- diagnostic is an neovim module
-require("ps.vim_diagnostic")
 require("ps.ui_input")
 require("ps.prettierrc")
 vim.cmd.packadd("cfilter")
@@ -205,15 +204,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		vim.cmd([[silent keepjumps keeppatterns %s/\s\+$//e]])
 		vim.fn.winrestview(view)
 	end,
-})
-
-vim.api.nvim_create_autocmd("User", {
-	group = vim.api.nvim_create_augroup(
-		"lualine_lsp_progress",
-		{ clear = true }
-	),
-	pattern = "LspProgressStatusUpdated",
-	callback = require("lualine").refresh,
 })
 
 -- }}}
