@@ -343,7 +343,7 @@ local config = function()
 	local LSPMessages = withPadding(LSPMessages, function()
 		return #vim.lsp.get_active_clients { bufnr = 0 } > 0
 	end)
-	-- local Diagnostics = withPadding(Diagnostics, conds.has_diagnostics)
+	local Diagnostics = withPadding(Diagnostics, conds.has_diagnostics)
 	local GitBranch = withPadding(GitBranch, conds.is_git_repo)
 	local GitChanges = withPadding(GitChanges, conds.is_git_repo)
 	local TabPages = {
