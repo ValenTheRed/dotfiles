@@ -201,6 +201,14 @@ return {
 				winbar = winbar.active,
 				inactive_winbar = winbar.inactive,
 			}
+			vim.api.nvim_create_autocmd("User", {
+				group = vim.api.nvim_create_augroup(
+					"lualine_lsp_progress",
+					{ clear = true }
+				),
+				pattern = "LspProgressStatusUpdated",
+				callback = require("lualine").refresh,
+			})
 		end,
 	},
 }

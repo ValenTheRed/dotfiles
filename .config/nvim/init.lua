@@ -207,15 +207,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-	group = vim.api.nvim_create_augroup(
-		"lualine_lsp_progress",
-		{ clear = true }
-	),
-	pattern = "LspProgressStatusUpdated",
-	callback = require("lualine").refresh,
-})
-
 -- }}}
 
 -- {{{ Functions
