@@ -123,7 +123,15 @@ local FileEncoding = {
 }
 
 local FileFormat = {
-	provider = vim.bo.fileformat,
+	static = {
+		dos = "", -- 
+		unix = "",
+		mac = "",
+	},
+	provider = function(self)
+		local ff = vim.bo.fileformat
+		return self[ff] .. " " .. ff
+	end,
 }
 
 local Ruler = {
