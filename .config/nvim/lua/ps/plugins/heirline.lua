@@ -135,7 +135,7 @@ local FileFormat = {
 }
 
 local Ruler = {
-	provider = "󰆋 %l:%c/%P", --     󰐃 󰆌
+	provider = "󰆋 %l:%c/%p%%", --     󰐃 󰆌
 }
 
 local LSPMessages = {
