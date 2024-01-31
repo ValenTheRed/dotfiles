@@ -184,7 +184,7 @@ local Diagnostics = {
 			self.add_space = self.add_space or self.cond
 		end,
 		provider = function(self)
-			return self.icons.error .. " " .. self.errors
+			return self.icons.error .. self.errors
 		end,
 	},
 	{
@@ -198,7 +198,6 @@ local Diagnostics = {
 		provider = function(self)
 			return self.space(self.add_space)
 				.. self.icons.warn
-				.. " "
 				.. self.warnings
 		end,
 	},
@@ -211,10 +210,7 @@ local Diagnostics = {
 			self.add_space = self.add_space or self.cond
 		end,
 		provider = function(self)
-			return self.space(self.add_space)
-				.. self.icons.info
-				.. " "
-				.. self.info
+			return self.space(self.add_space) .. self.icons.info .. self.info
 		end,
 	},
 	{
@@ -226,10 +222,7 @@ local Diagnostics = {
 			self.add_space = self.add_space or self.cond
 		end,
 		provider = function(self)
-			return self.space(self.add_space)
-				.. self.icons.hint
-				.. " "
-				.. self.hints
+			return self.space(self.add_space) .. self.icons.hint .. self.hints
 		end,
 	},
 }
