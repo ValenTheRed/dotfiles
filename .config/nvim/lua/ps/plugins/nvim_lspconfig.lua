@@ -90,6 +90,7 @@ local efm_languages = {
 
 local config = function()
 	local telescope_builtin = require("telescope.builtin")
+	local telescope_lsp_opts = { show_line = false }
 
 	-- For nvim-cmp
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -98,52 +99,80 @@ local config = function()
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
 	local on_attach = function(client, bufnr)
-		local telescope_lsp_opts = { show_line = false }
-		-- Mappings.
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		nmap("gD", vim.lsp.buf.declaration, "lsp.declaration")
-		if client.server_capabilities.hoverProvider then
-			nmap("K", vim.lsp.buf.hover, "floating lsp symbol info")
+		local cond = function(capability, ...)
+			if client.server_capabilities[capability] then
+				nmap(...)
+			end
 		end
-		nmap("gd", function()
+
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		-- [server capabilities](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities)
+
+		cond(
+			"declarationProvider",
+			"gD",
+			vim.lsp.buf.declaration,
+			"lsp.declaration"
+		)
+
+		cond(
+			"hoverProvider",
+			"K",
+			vim.lsp.buf.hover,
+			"floating lsp symbol info"
+		)
+
+		cond("definitionProvider", "gd", function()
 			telescope_builtin.lsp_definitions(telescope_lsp_opts)
 		end, "Telescope list/goto definitions")
+
 		-- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
-		nmap("gR", function()
+		cond("implementationProvider", "gR", function()
 			telescope_builtin.lsp_implementations(telescope_lsp_opts)
 		end, "Telescope list/goto implementations")
-		nmap(
+
+		cond(
+			"signatureHelpProvider",
 			"gs",
 			vim.lsp.buf.signature_help,
 			"floating lsp function signature help"
 		)
-		nmap("gr", function()
+
+		cond("referencesProvider", "gr", function()
 			telescope_builtin.lsp_references(telescope_lsp_opts)
 		end, "Telescope lists references")
-		nmap("<space>D", function()
+
+		cond("typeDefinitionProvider", "<space>D", function()
 			telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
 		end, "Telescope list/goto type definitions")
-		nmap("<space>dr", function()
+
+		cond("documentSymbolProvider", "<space>dr", function()
 			telescope_builtin.lsp_document_symbols {
 				previewer = true,
 			}
 		end, "Telescope list doc symbols")
+
 		nmap(
+			"workspaceSymbolProvider",
 			"<space>wr",
 			telescope_builtin.lsp_workspace_symbols,
 			"Telescope list lsp workspace symbols"
 		)
-		nmap("<space>wa", vim.lsp.buf.add_workspace_folder)
-		nmap("<space>wr", vim.lsp.buf.remove_workspace_folder)
-		nmap("<space>wl", function()
+
+		cond("workspace", "<space>wa", vim.lsp.buf.add_workspace_folder)
+		cond("workspace", "<space>wr", vim.lsp.buf.remove_workspace_folder)
+		cond("workspace", "<space>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, "print workspace folders in :messages section")
-		nmap(
+
+		cond(
+			"renameProvider",
 			"<space>rn",
 			vim.lsp.buf.rename,
 			"lsp rename identifier under cursor"
 		)
-		nmap("<space>ca", function()
+
+		cond("codeActionProvider", "<space>ca", function()
 			telescope_builtin.lsp_code_actions {
 				previewer = false,
 			}
@@ -154,20 +183,22 @@ local config = function()
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
 
-		if
-			client.server_capabilities.documentFormattingProvider
-			or client.server_capabilities.documentRangeFormattingProvider
-		then
-			nmap("<space>f", vim.lsp.buf.format, "vim.lsp.buf.format")
-		end
-
-		if client.server_capabilities.documentHighlightProvider then
-			nmap(
-				"<space>dh",
-				toggle_document_highlight,
-				"toggle ide-like symbol under cursor highlight"
+		-- vmap this client.server_capabilities.documentRangeFormattingProvider
+		if client.server_capabilities.documentFormattingProvider then
+			cond(
+				"documentFormattingProvider",
+				"<space>f",
+				vim.lsp.buf.format,
+				"vim.lsp.buf.format"
 			)
 		end
+
+		cond(
+			"documentHighlightProvider",
+			"<space>dh",
+			toggle_document_highlight,
+			"toggle ide-like symbol under cursor highlight"
+		)
 	end
 
 	-- Enable the following language servers
