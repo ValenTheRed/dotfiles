@@ -21,15 +21,82 @@ local function insert(section, component)
 	table.insert(statusline.active[section], component)
 end
 
+-- FileInfo consists of [buftype icon][space][file path][space][file status flags]
+local FileInfo = {}
+
+FileInfo.icon = function(type)
+	local buftypes = {
+		file = { full = "", outline = "" },
+		terminal = { full = "", outline = "" },
+		oil = { full = "", outline = "" },
+		netrw = { full = "󰡰", outline = "󰲁" }, -- "󰒍"
+		help = { full = "󰠩", outline = "󰠩" },
+		checkhealth = { full = "󱙣", outline = "󱙤" }, -- "" "♥"
+		nofile = { full = "", outline = "" },
+	}
+	return function()
+		local filetype = vim.bo.filetype
+		local icon = buftypes.file
+		if filetype == "netrw" then
+			icon = buftypes.netrw
+		elseif filetype == "oil" then
+			icon = buftypes.oil
+		elseif filetype == "help" then
+			icon = buftypes.help
+		elseif filetype == "checkhealth" then
+			icon = buftypes.checkhealth
+		elseif vim.bo.buftype == "terminal" then
+			icon = buftypes.terminal
+		elseif vim.bo.buftype == "nofile" then
+			icon = buftypes.nofile
+		end
+		return icon[type]
+	end
+end
+
+FileInfo.path = function()
+	local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+	if filename == "" then
+		return "[No Name]"
+	end
+	return filename
+end
+
+FileInfo.component = function(icon_type)
+	return {
+		{
+			FileInfo.icon(icon_type),
+			padding = 1,
+		},
+		{
+			FileInfo.path,
+			padding = { right = 1 },
+		},
+		{
+			function()
+				return "[+]"
+			end,
+			padding = { right = 1 },
+			cond = function()
+				return vim.bo.modified
+			end,
+		},
+		{
+			function()
+				return ""
+			end,
+			padding = { right = 1 },
+			cond = function()
+				return not vim.bo.modifiable or vim.bo.readonly
+			end,
+		},
+	}
+end
+
 if use_winbar then
 	winbar.active = {
 		lualine_a = {
-			{
-				"filename",
-				icon = "",
-				path = 1,
-				-- file_status = false,
-			},
+			unpack(FileInfo.component("outline")),
 		},
 		lualine_c = {
 			{
@@ -42,13 +109,7 @@ if use_winbar then
 	}
 	winbar.inactive = {
 		lualine_c = {
-			-- the centering trick doesn't work here
-			{
-				"filename",
-				icons_enabled = true,
-				icon = "",
-				path = 1,
-			},
+			unpack(FileInfo.component("full")),
 		},
 	}
 	insert("a", {
