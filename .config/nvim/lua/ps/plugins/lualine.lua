@@ -156,12 +156,12 @@ insert("c", {
 	padding = {},
 })
 
--- default component has too much space around it
 insert("c", {
 	function()
-		return "%l:%c"
+		return "%l:%c/%p%%"
 	end,
-	icon = "",
+	-- for literal table indexing: https://stackoverflow.com/questions/19331262
+	icon = ({ full = "󰆋", outline = "󰆌" }).full,
 	cond = function()
 		return winwidth(0) > 80
 	end,
