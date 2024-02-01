@@ -211,7 +211,7 @@ insert("x", {
 
 insert("x", {
 	"b:gitsigns_head",
-	icon = "",
+	icon = "",
 })
 
 insert("y", {
