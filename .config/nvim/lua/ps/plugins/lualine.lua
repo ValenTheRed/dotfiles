@@ -83,7 +83,7 @@ FileInfo.component = function(icon_type)
 		},
 		{
 			function()
-				return ""
+				return ({ full = "", outline = "" })[icon_type]
 			end,
 			padding = { right = 1 },
 			cond = function()
