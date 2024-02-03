@@ -152,7 +152,7 @@ local config = function()
 			}
 		end, "Telescope list doc symbols")
 
-		nmap(
+		cond(
 			"workspaceSymbolProvider",
 			"<space>wr",
 			telescope_builtin.lsp_workspace_symbols,
@@ -183,15 +183,12 @@ local config = function()
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
 
-		-- vmap this client.server_capabilities.documentRangeFormattingProvider
-		if client.server_capabilities.documentFormattingProvider then
-			cond(
-				"documentFormattingProvider",
-				"<space>f",
-				vim.lsp.buf.format,
-				"vim.lsp.buf.format"
-			)
-		end
+		cond(
+			"documentFormattingProvider",
+			"<space>f",
+			vim.lsp.buf.format,
+			"vim.lsp.buf.format"
+		)
 
 		cond(
 			"documentHighlightProvider",
