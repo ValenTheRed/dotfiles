@@ -16,7 +16,6 @@ local function format(client_messages)
 		return msg and string.format("%s %s", name, msg) or name
 	end
 
-	local sign = ""
 	local lsp_clients = vim.lsp.get_active_clients()
 	if #lsp_clients <= 0 then
 		return ""
@@ -43,7 +42,7 @@ local function format(client_messages)
 	if #builder <= 0 then
 		return ""
 	end
-	return sign .. " " .. table.concat(builder, ", ")
+	return table.concat(builder, ", ")
 end
 
 return {

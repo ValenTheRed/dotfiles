@@ -188,7 +188,7 @@ insert("x", {
 	--   end, clients)
 	--   return table.concat(names, ", ")
 	-- end,
-	-- icon = "",
+	icon = ({full = "", outline = ""}).outline,
 	-- cond = function()
 	--   return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and winwidth(0) > 63
 	-- end,
