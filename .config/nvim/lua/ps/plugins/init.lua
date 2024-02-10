@@ -101,10 +101,18 @@ return {
 	-- GUIDE: https://www.ejmastnak.com/tutorials/vim-latex/luasnip/
 	{
 		"L3MON4D3/LuaSnip",
-		opts = {
-			enable_autosnippets = true,
-		},
-		main = "luasnip",
+		config = function()
+			local ls = require("luasnip")
+			ls.setup {
+				enable_autosnippets = true,
+			}
+			vim.keymap.set({ "i", "s" }, "<C-L>", function()
+				ls.jump(1)
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-h>", function()
+				ls.jump(-1)
+			end, { silent = true })
+		end,
 	}, -- }}}
 }
 -- vim: set fdm=marker fdl=0:
