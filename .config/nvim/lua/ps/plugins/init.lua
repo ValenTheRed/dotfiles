@@ -97,6 +97,14 @@ return {
 		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
 		build = ":TSUpdate",
 	}, --}}}
-	"L3MON4D3/LuaSnip",
+	-- {{{ L3MON4D3/LuaSnip
+	-- GUIDE: https://www.ejmastnak.com/tutorials/vim-latex/luasnip/
+	{
+		"L3MON4D3/LuaSnip",
+		opts = {
+			enable_autosnippets = true,
+		},
+		main = "luasnip",
+	}, -- }}}
 }
 -- vim: set fdm=marker fdl=0:
