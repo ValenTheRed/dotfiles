@@ -94,7 +94,10 @@ local config = function()
 
 	-- For nvim-cmp
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+	local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+	if ok then
+		capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+	end
 
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
