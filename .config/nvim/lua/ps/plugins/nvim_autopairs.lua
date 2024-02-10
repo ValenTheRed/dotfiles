@@ -1,6 +1,7 @@
 return {
 	{
 		"windwp/nvim-autopairs",
+		enabled = false,
 		config = function()
 			local npairs = require("nvim-autopairs")
 			local Rule = require("nvim-autopairs.rule")
