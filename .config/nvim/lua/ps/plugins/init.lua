@@ -114,5 +114,14 @@ return {
 			end, { silent = true })
 		end,
 	}, -- }}}
+	-- {{{ LunarWatcher/auto-pairs
+	{
+		"LunarWatcher/auto-pairs",
+		config = function()
+			vim.g.AutoPairsPrefix = "<M-x>"
+			vim.g.AutoPairsMapBS = true
+			vim.g.AutoPairsMultilineBackspace = true
+		end,
+	}, -- }}}
 }
 -- vim: set fdm=marker fdl=0:
