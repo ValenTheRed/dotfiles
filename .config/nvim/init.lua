@@ -99,6 +99,14 @@ end
 
 set.linebreak = true
 
+set.listchars:append {
+	tab = "——›",
+	trail = "␣",
+	-- TODO: change the number of spaces depending upon the shiftwidth of the
+	-- window.
+	leadmultispace = "│   ",
+}
+
 --}}}
 
 -- {{{ Plugins
