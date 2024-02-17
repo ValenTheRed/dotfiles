@@ -59,7 +59,7 @@ FileInfo.path = function()
 	if filename == "" then
 		return "[No Name]"
 	end
-	return filename
+	return "%<" .. filename
 end
 
 FileInfo.component = function(icon_type)
