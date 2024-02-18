@@ -145,7 +145,7 @@ insert("b", {
 	icons_enabled = true,
 	colored = false,
 	cond = function()
-		return winwidth(0) > 73
+		return use_winbar or winwidth(0) > 73
 	end,
 })
 
@@ -163,7 +163,7 @@ insert("c", {
 	-- for literal table indexing: https://stackoverflow.com/questions/19331262
 	icon = ({ full = "󰆋", outline = "󰆌" }).full,
 	cond = function()
-		return winwidth(0) > 80
+		return use_winbar or winwidth(0) > 80
 	end,
 })
 
@@ -188,9 +188,10 @@ insert("x", {
 	--   end, clients)
 	--   return table.concat(names, ", ")
 	-- end,
-	icon = ({full = "", outline = ""}).outline,
+	icon = ({ full = "", outline = "" }).outline,
 	-- cond = function()
-	--   return #vim.lsp.get_active_clients({ bufnr = 0 }) > 0 and winwidth(0) > 63
+	-- 	return #vim.lsp.get_active_clients { bufnr = 0 } > 0
+	-- 		and (use_winbar or winwidth(0) > 63)
 	-- end,
 })
 
@@ -219,7 +220,8 @@ insert("y", {
 	icons_enabled = false,
 	cond = function()
 		-- Bring more attention by only displaying when not utf-8
-		return vim.opt.encoding:get() ~= "utf-8" and vim.fn.winwidth(0) > 53
+		return vim.opt.encoding:get() ~= "utf-8"
+			and (use_winbar or vim.fn.winwidth(0) > 53)
 	end,
 })
 
@@ -228,7 +230,8 @@ insert("y", {
 	icons_enabled = false,
 	cond = function()
 		-- Bring more attention by only displaying when not unix
-		return vim.opt.fileformat:get() ~= "unix" and vim.fn.winwidth(0) > 46
+		return vim.opt.fileformat:get() ~= "unix"
+			and (use_winbar or vim.fn.winwidth(0) > 46)
 	end,
 })
 
