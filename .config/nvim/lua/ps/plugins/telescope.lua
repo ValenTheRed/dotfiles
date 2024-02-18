@@ -36,6 +36,10 @@ local config = function()
 				["<C-k>"] = actions.move_selection_previous,
 				["<C-e>"] = require("telescope.actions.layout").toggle_preview,
 			},
+			n = {
+				["<C-f>"] = actions.results_scrolling_up,
+				["<C-b>"] = actions.results_scrolling_down,
+			},
 		},
 	}
 
