@@ -139,6 +139,7 @@ vim.cmd.packadd("cfilter")
 require("luasnip.loaders.from_lua").load {
 	paths = "./luasnip",
 }
+require("ps.smart_quotes")
 
 letg.tex_flavor = "latex"
 

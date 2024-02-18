@@ -121,6 +121,18 @@ return {
 			vim.g.AutoPairsPrefix = "<M-x>"
 			vim.g.AutoPairsMapBS = true
 			vim.g.AutoPairsMultilineBackspace = true
+			vim.g.AutoPairs = vim.fn["autopairs#AutoPairsDefine"] {
+				-- NOTE: the closing pair is not inserted when inserting the
+				-- opening pair using digraph. This may be because inserting
+				-- digraph is just a just special case of i_CTRL-V. See `:h
+				-- digraph`, `:h autopairs-troubleshooting-general`, and
+				-- `:h i_CTRL-V`.
+				--
+				-- However, the above limitation is only for insertion, not for
+				-- deletion.
+				{ open = "“", close = "”" },
+				{ open = "‘", close = "’" },
+			}
 		end,
 	}, -- }}}
 }
