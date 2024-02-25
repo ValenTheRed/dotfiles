@@ -46,11 +46,12 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 	end
 
 	local jest_root_dir = vim.fn.fnamemodify(files[1], ":h")
-	local testee = ""
+	local testee, jest_opts = "", ""
 	if #opts.fargs > 0 then
 		testee = vim.fs.normalize(
-			vim.fn.fnamemodify(vim.fn.expand(opts.fargs[1]), ":p")
+			vim.fn.fnamemodify(vim.fn.expand(table.remove(opts.fargs)), ":p")
 		)
+		jest_opts = table.concat(opts.fargs, " ")
 	end
 	local coverage_cmd = ""
 	if opts.bang then
@@ -110,10 +111,11 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 
 	local cmd = vim.cmd.split(
 		string.format(
-			"term://cd '%s' && yarn test %s %s",
+			"term://cd '%s' && yarn test %s %s %s",
 			jest_root_dir,
+			jest_opts,
 			coverage_cmd,
 			testee
 		)
 	)
-end, { bang = true, nargs = "?", complete = "file" })
+end, { bang = true, nargs = "*", complete = "file" })
