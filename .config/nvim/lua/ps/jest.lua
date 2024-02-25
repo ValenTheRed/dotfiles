@@ -64,26 +64,31 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 		if string.find(filename, "test") ~= nil then
 			-- User has provided the test file, we need to find the src file.
 			local fname_no_extention = vim.fn.fnamemodify(filename, ":r:r")
-
 			local src_dir = vim.fn.fnamemodify(testee, ":h:h")
-			src_file = src_dir .. "/" .. fname_no_extention .. "." .. extension
+			src_file = string.format(
+				"%s/%s.%s",
+				src_dir,
+				fname_no_extention,
+				extension
+			)
 		else
 			-- User has provided src file, we need to find the test file.
 			local fname_no_extention = vim.fn.fnamemodify(filename, ":r")
-
 			local src_dir = vim.fn.fnamemodify(testee, ":h")
 			local test_dir = get_test_dir(src_dir)
-			local test_file = test_dir
-				.. "/"
-				.. fname_no_extention
-				.. ".test."
-				.. extension
+			local test_file = string.format(
+				"%s/%s.test.%s",
+				src_dir,
+				fname_no_extention,
+				extension
+			)
 			src_file = testee
 			testee = test_file
 		end
-		coverage_cmd = coverage_cmd
-			.. " --collectCoverageFrom="
-			.. get_relative_path(src_file, jest_root_dir)
+		coverage_cmd = string.format(
+			"--coverage --collectCoverageFrom=%s",
+			get_relative_path(src_file, jest_root_dir)
+		)
 	elseif opts.bang and vim.fn.isdirectory(testee) ~= 0 then
 		local dirname = vim.fn.fnamemodify(testee, ":t")
 
@@ -97,19 +102,18 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 			src_dir = testee
 			testee = test_dir
 		end
-		coverage_cmd = coverage_cmd
-			.. " --collectCoverageFrom='"
-			.. get_relative_path(src_dir, jest_root_dir)
-			.. "/*'"
+		coverage_cmd = string.format(
+			"--coverage --collectCoverageFrom='%s/*'",
+			get_relative_path(src_dir, jest_root_dir)
+		)
 	end
 
-	vim.cmd.split(
-		"term://cd '"
-			.. jest_root_dir
-			.. "' && yarn test"
-			.. " "
-			.. coverage_cmd
-			.. " "
-			.. testee
+	local cmd = vim.cmd.split(
+		string.format(
+			"term://cd '%s' && yarn test %s %s",
+			jest_root_dir,
+			coverage_cmd,
+			testee
+		)
 	)
 end, { bang = true, nargs = "?", complete = "file" })
