@@ -140,6 +140,7 @@ require("luasnip.loaders.from_lua").load {
 	paths = "./luasnip",
 }
 require("ps.smart_quotes")
+require("ps.jest")
 
 letg.tex_flavor = "latex"
 
