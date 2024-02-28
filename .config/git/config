@@ -22,6 +22,7 @@
 	gf = log --graph --all --pretty=format:'%C(auto)%h%d%Creset %s %C(auto,cyan)(%cr)%Creset %C(auto,italic green)<%an, %ae>%Creset'
 	ch = checkout
 	chb = checkout -b
+	curb = rev-parse --abbrev-ref HEAD
 [commit]
 	# show equivalent to `diff --cached` in the commit message
 	verbose = true
