@@ -105,8 +105,10 @@ set.listchars:append {
 	-- TODO: change the number of spaces depending upon the shiftwidth of the
 	-- window.
 	leadmultispace = "│   ",
+	eol = "↲",
 }
 
+set.showbreak = "↪ "
 --}}}
 
 -- {{{ Plugins
