@@ -23,6 +23,18 @@
 	ch = checkout
 	chb = checkout -b
 	curb = rev-parse --abbrev-ref HEAD
+
+	# Create a patch file containing all of the commits in a revision range in
+	# one file. Without the `--stdout` option, `format-patch` creates a patch
+	# file for each commit.
+	#
+	# *Caveat*: can only pass the second argument branch/tag/something that git
+	# recognises. Random strings error with "unknown revision or path not in
+	# the working tree".
+	#
+	# @params
+	# $1: git revision range, $2: patch file name
+	patch = !git format-patch \"$1\" --stdout > \"$2\".patch
 [commit]
 	# show equivalent to `diff --cached` in the commit message
 	verbose = true
