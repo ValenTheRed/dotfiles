@@ -109,7 +109,7 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 		)
 	end
 
-	local cmd = vim.cmd.split(
+	vim.cmd.split(
 		string.format(
 			"term://cd '%s' && yarn test %s %s %s",
 			jest_root_dir,
