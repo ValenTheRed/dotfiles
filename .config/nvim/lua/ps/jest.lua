@@ -1,5 +1,8 @@
 -- get_relative_path returns the relative path of `of` as measured from
 -- `from`. `from` must be a absolute path. (Not enforced as of yet.)
+---@param of string
+---@param from string
+---@return string
 local get_relative_path = function(of, from)
 	local rel_path = string.gsub(of, from, "")
 	-- remove leading '/'
@@ -8,6 +11,8 @@ local get_relative_path = function(of, from)
 end
 
 -- get_test_dir returns the path of the test directory within `root`.
+---@param root string
+---@return string|nil
 local get_test_dir = function(root)
 	for _, dir in ipairs { "/__tests__", "/__test__", "/_test_" } do
 		local test_dir = root .. dir
@@ -57,7 +62,7 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 	if opts.bang then
 		coverage_cmd = "--coverage"
 	end
-	if opts.bang and vim.fn.filereadable(testee) ~= 0 then
+	if vim.fn.filereadable(testee) ~= 0 then
 		local filename = vim.fn.fnamemodify(testee, ":t")
 		local extension = vim.fn.fnamemodify(filename, ":e")
 
@@ -76,6 +81,7 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 			-- User has provided src file, we need to find the test file.
 			local fname_no_extention = vim.fn.fnamemodify(filename, ":r")
 			local src_dir = vim.fn.fnamemodify(testee, ":h")
+			---@type string
 			local test_dir = get_test_dir(src_dir)
 			local test_file = string.format(
 				"%s/%s.test.%s",
@@ -86,11 +92,13 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 			src_file = testee
 			testee = test_file
 		end
-		coverage_cmd = string.format(
-			"--coverage --collectCoverageFrom=%s",
-			get_relative_path(src_file, jest_root_dir)
-		)
-	elseif opts.bang and vim.fn.isdirectory(testee) ~= 0 then
+		if opts.bang then
+			coverage_cmd = string.format(
+				"--coverage --collectCoverageFrom=%s",
+				get_relative_path(src_file, jest_root_dir)
+			)
+		end
+	elseif vim.fn.isdirectory(testee) ~= 0 then
 		local dirname = vim.fn.fnamemodify(testee, ":t")
 
 		local src_dir
@@ -103,10 +111,12 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 			src_dir = testee
 			testee = test_dir
 		end
-		coverage_cmd = string.format(
-			"--coverage --collectCoverageFrom='%s/*'",
-			get_relative_path(src_dir, jest_root_dir)
-		)
+		if opts.bang then
+			coverage_cmd = string.format(
+				"--coverage --collectCoverageFrom='%s/*'",
+				get_relative_path(src_dir, jest_root_dir)
+			)
+		end
 	end
 
 	vim.cmd.split(
