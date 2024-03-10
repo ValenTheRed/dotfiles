@@ -79,7 +79,7 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 			local test_dir = get_test_dir(src_dir)
 			local test_file = string.format(
 				"%s/%s.test.%s",
-				test_src,
+				test_dir,
 				fname_no_extention,
 				extension
 			)
