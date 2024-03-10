@@ -67,7 +67,7 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 		local extension = vim.fn.fnamemodify(filename, ":e")
 
 		local src_file
-		if string.find(filename, "test") ~= nil then
+		if opts.bang and string.find(filename, "test") ~= nil then
 			-- User has provided the test file, we need to find the src file.
 			local fname_no_extention = vim.fn.fnamemodify(filename, ":r:r")
 			local src_dir = vim.fn.fnamemodify(testee, ":h:h")
@@ -102,7 +102,7 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 		local dirname = vim.fn.fnamemodify(testee, ":t")
 
 		local src_dir
-		if string.find(dirname, "test") ~= nil then
+		if opts.bang and string.find(dirname, "test") ~= nil then
 			-- User has provided the test dir, we need to find the src dir.
 			src_dir = vim.fn.fnamemodify(testee, ":h")
 		else
