@@ -112,13 +112,22 @@ if use_winbar then
 				function()
 					return ""
 				end,
+				color = "Normal",
 				draw_empty = true,
 			},
 		},
 	}
 	winbar.inactive = {
-		lualine_c = {
+		lualine_a = {
 			unpack(FileInfo.component("full")),
+		},
+		lualine_b = {
+			{
+				function()
+					return ""
+				end,
+				draw_empty = true,
+			},
 		},
 	}
 	insert("a", {
