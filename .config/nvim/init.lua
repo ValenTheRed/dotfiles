@@ -93,7 +93,7 @@ if vim.fn.executable("rg") then
 	-- Surrounding `!.git` with quotes makes :grep not work :( for unknown
 	-- reasons.
 	set.grepprg =
-		[[rg --no-config --smart-case --hidden --glob !.git --trim --vimgrep]]
+	[[rg --no-config --smart-case --hidden --glob !.git --trim --vimgrep]]
 	set.grepformat:prepend("%f:%l:%c:%m")
 end
 
@@ -329,6 +329,11 @@ nmap("<M-h>", "<C-w><C-<>")
 
 nmap("<leader>erc", ":e $MYVIMRC<CR>")
 nmap("<leader>grc", ":e $MYGVIMRC<CR>")
+
+nmap("]q", ":cnext<CR>")
+nmap("[q", ":cprevious<CR>")
+nmap("]l", ":lnext<CR>")
+nmap("[l", ":lprevious<CR>")
 
 -- }}}
 
