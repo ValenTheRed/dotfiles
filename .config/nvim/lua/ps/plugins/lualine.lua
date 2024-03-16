@@ -83,11 +83,20 @@ FileInfo.component = function(icon_type)
 		},
 		{
 			function()
+				return ({ full = "󱆠", outline = "󱆡" })[icon_type]
+			end,
+			padding = { right = 1 },
+			cond = function()
+				return vim.bo.readonly
+			end,
+		},
+		{
+			function()
 				return ({ full = "", outline = "" })[icon_type]
 			end,
 			padding = { right = 1 },
 			cond = function()
-				return not vim.bo.modifiable or vim.bo.readonly
+				return not vim.bo.modifiable
 			end,
 		},
 	}
