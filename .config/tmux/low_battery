@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+percent_left=$(pmset -g batt | rg -o --pcre2 '\d{1,3}(?=%;)')
+is_charging=$(pmset -g batt | rg -o '\bcharging\b')
+if [[ "${percent_left}" -le 15 ]] && [[ ! $is_charging ]]; then
+    echo "󰻷 low battery"
+    # batt_status="󰚽  󰀦 󰀪 󰀨 󰀩 󱃌 󱇏 󰗖  󰻌 󰲼 󱐭 󰻷 󰂃 "
+fi
