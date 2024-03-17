@@ -106,6 +106,7 @@ return {
 			ls.setup {
 				enable_autosnippets = true,
 			}
+			ls.filetype_extend("typescriptreact", { "typescript" })
 			vim.keymap.set({ "i", "s" }, "<C-L>", function()
 				ls.jump(1)
 			end, { silent = true })

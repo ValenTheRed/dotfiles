@@ -11,6 +11,22 @@ local split = function(line, sep)
 end
 
 return {
+	s(
+		{
+			trig = "fne",
+			snippetType = "autosnippet",
+			dscr = "create function",
+		},
+		fmt(
+			[[
+			(%?): %? => {
+				%?
+			}
+			]],
+			{ i(1), i(2), i(3) },
+			{ delimiters = "%?" }
+		)
+	),
 	s({
 		trig = "usecon",
 		dscr = "print and debug reactive values of react",
