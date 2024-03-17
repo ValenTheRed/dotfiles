@@ -10,13 +10,16 @@ set ideajoin
 
 let mapleader = " "
 
-map gr <Action>(ShowUsages)
+map gr :action ShowUsages<CR>
+map <leader>fg :action FindInPath<CR>
+map <leader>ff :action RecentFiles<CR>
+map <leader>fd :action GotoFile<CR>
 
-map <leader>hr <Action>(Vcs.RollbackChangedLines)
-map [c <Action>(VcsShowPrevChangeMarker)
-map ]c <Action>(VcsShowNextChangeMarker)
+map <leader>hr :action Vcs.RollbackChangedLines<CR>
+map [c :action VcsShowPrevChangeMarker<CR>
+map ]c :action VcsShowNextChangeMarker<CR>
 
-map <leader>rn <Action>(RenameElement)
+map <leader>rn :action RenameElement<CR>
 
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-l> <C-w><C-l>
