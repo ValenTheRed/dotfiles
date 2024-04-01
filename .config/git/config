@@ -9,6 +9,7 @@
 	editor = nvim
 [alias]
 	s = status
+	su = status -u
 	c = commit
 	b = branch
 	r = restore
