@@ -38,7 +38,7 @@ local config = function()
 	local mapping = {
 		-- NOTE: Figure out what this mapping is supposed to do.
 		-- ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
-		["<CR>"] = cmp.mapping(function(fallback)
+		["<C-y>"] = cmp.mapping(function(fallback)
 			if cmp.visible() and cmp.get_active_entry() then
 				cmp.confirm {
 					behavior = cmp.ConfirmBehavior.Insert,
@@ -124,8 +124,8 @@ return {
 		dependencies = { "L3MON4D3/LuaSnip" },
 		config = config,
 	},
-	{ "hrsh7th/cmp-path", dependencies = { "hrsh7th/nvim-cmp" } },
-	{ "hrsh7th/cmp-buffer", dependencies = { "hrsh7th/nvim-cmp" } },
+	{ "hrsh7th/cmp-path",    dependencies = { "hrsh7th/nvim-cmp" } },
+	{ "hrsh7th/cmp-buffer",  dependencies = { "hrsh7th/nvim-cmp" } },
 	{ "hrsh7th/cmp-cmdline", dependencies = { "hrsh7th/nvim-cmp" } },
 	{
 		"hrsh7th/cmp-nvim-lsp",
