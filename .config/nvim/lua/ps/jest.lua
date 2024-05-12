@@ -14,7 +14,7 @@ end
 ---@param root string
 ---@return string|nil
 local get_test_dir = function(root)
-	for _, dir in ipairs { "/__tests__", "/__test__", "/_test_" } do
+	for _, dir in ipairs { "/__tests__", "/__test__", "/_test_", "/_tests_" } do
 		local test_dir = root .. dir
 		if vim.fn.isdirectory(test_dir) ~= 0 then
 			return test_dir
