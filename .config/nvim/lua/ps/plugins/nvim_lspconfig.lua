@@ -41,7 +41,8 @@ end)()
 
 local efm_prettierd = {
 	formatCanRange = true,
-	formatCommand = "prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}",
+	formatCommand =
+	"prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}",
 	formatStdin = true,
 	rootMarkers = {
 		".prettierrc",
@@ -88,117 +89,117 @@ local efm_languages = {
 	},
 }
 
-local config = function()
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
 	local telescope_builtin = require("telescope.builtin")
 	local telescope_lsp_opts = { show_line = false }
 
+	local cond_nmap = function(capability, ...)
+		if client.server_capabilities[capability] then
+			nmap(...)
+		end
+	end
+
+	-- See `:help vim.lsp.*` for documentation on any of the below functions
+	-- [server capabilities](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities)
+
+	cond_nmap(
+		"declarationProvider",
+		"gD",
+		vim.lsp.buf.declaration,
+		"lsp.declaration"
+	)
+
+	cond_nmap(
+		"hoverProvider",
+		"K",
+		vim.lsp.buf.hover,
+		"floating lsp symbol info"
+	)
+
+	cond_nmap("definitionProvider", "gd", function()
+		telescope_builtin.lsp_definitions(telescope_lsp_opts)
+	end, "Telescope list/goto definitions")
+
+	-- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
+	cond_nmap("implementationProvider", "gR", function()
+		telescope_builtin.lsp_implementations(telescope_lsp_opts)
+	end, "Telescope list/goto implementations")
+
+	cond_nmap(
+		"signatureHelpProvider",
+		"gs",
+		vim.lsp.buf.signature_help,
+		"floating lsp function signature help"
+	)
+
+	cond_nmap("referencesProvider", "gr", function()
+		telescope_builtin.lsp_references(telescope_lsp_opts)
+	end, "Telescope lists references")
+
+	cond_nmap("typeDefinitionProvider", "<space>D", function()
+		telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
+	end, "Telescope list/goto type definitions")
+
+	cond_nmap("documentSymbolProvider", "<space>dr", function()
+		telescope_builtin.lsp_document_symbols {
+			previewer = true,
+		}
+	end, "Telescope list doc symbols")
+
+	cond_nmap(
+		"workspaceSymbolProvider",
+		"<space>wr",
+		telescope_builtin.lsp_workspace_symbols,
+		"Telescope list lsp workspace symbols"
+	)
+
+	cond_nmap("workspace", "<space>wa", vim.lsp.buf.add_workspace_folder)
+	cond_nmap("workspace", "<space>wr", vim.lsp.buf.remove_workspace_folder)
+	cond_nmap("workspace", "<space>wl", function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, "print workspace folders in :messages section")
+
+	cond_nmap(
+		"renameProvider",
+		"<space>rn",
+		vim.lsp.buf.rename,
+		"lsp rename identifier under cursor"
+	)
+
+	cond_nmap("codeActionProvider", "<space>ca", function()
+		telescope_builtin.lsp_code_actions {
+			previewer = false,
+		}
+	end, "Telescope list code actions")
+
+	if client.name == "tsserver" then
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+	end
+
+	cond_nmap(
+		"documentFormattingProvider",
+		"<space>f",
+		vim.lsp.buf.format,
+		"vim.lsp.buf.format"
+	)
+
+	cond_nmap(
+		"documentHighlightProvider",
+		"<space>dh",
+		toggle_document_highlight,
+		"toggle ide-like symbol under cursor highlight"
+	)
+end
+
+local config = function()
 	-- For nvim-cmp
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 	if ok then
 		capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-	end
-
-	-- Use an on_attach function to only map the following keys
-	-- after the language server attaches to the current buffer
-	local on_attach = function(client, bufnr)
-		local cond_nmap = function(capability, ...)
-			if client.server_capabilities[capability] then
-				nmap(...)
-			end
-		end
-
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		-- [server capabilities](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities)
-
-		cond_nmap(
-			"declarationProvider",
-			"gD",
-			vim.lsp.buf.declaration,
-			"lsp.declaration"
-		)
-
-		cond_nmap(
-			"hoverProvider",
-			"K",
-			vim.lsp.buf.hover,
-			"floating lsp symbol info"
-		)
-
-		cond_nmap("definitionProvider", "gd", function()
-			telescope_builtin.lsp_definitions(telescope_lsp_opts)
-		end, "Telescope list/goto definitions")
-
-		-- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
-		cond_nmap("implementationProvider", "gR", function()
-			telescope_builtin.lsp_implementations(telescope_lsp_opts)
-		end, "Telescope list/goto implementations")
-
-		cond_nmap(
-			"signatureHelpProvider",
-			"gs",
-			vim.lsp.buf.signature_help,
-			"floating lsp function signature help"
-		)
-
-		cond_nmap("referencesProvider", "gr", function()
-			telescope_builtin.lsp_references(telescope_lsp_opts)
-		end, "Telescope lists references")
-
-		cond_nmap("typeDefinitionProvider", "<space>D", function()
-			telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
-		end, "Telescope list/goto type definitions")
-
-		cond_nmap("documentSymbolProvider", "<space>dr", function()
-			telescope_builtin.lsp_document_symbols {
-				previewer = true,
-			}
-		end, "Telescope list doc symbols")
-
-		cond_nmap(
-			"workspaceSymbolProvider",
-			"<space>wr",
-			telescope_builtin.lsp_workspace_symbols,
-			"Telescope list lsp workspace symbols"
-		)
-
-		cond_nmap("workspace", "<space>wa", vim.lsp.buf.add_workspace_folder)
-		cond_nmap("workspace", "<space>wr", vim.lsp.buf.remove_workspace_folder)
-		cond_nmap("workspace", "<space>wl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, "print workspace folders in :messages section")
-
-		cond_nmap(
-			"renameProvider",
-			"<space>rn",
-			vim.lsp.buf.rename,
-			"lsp rename identifier under cursor"
-		)
-
-		cond_nmap("codeActionProvider", "<space>ca", function()
-			telescope_builtin.lsp_code_actions {
-				previewer = false,
-			}
-		end, "Telescope list code actions")
-
-		if client.name == "tsserver" then
-			client.server_capabilities.documentFormattingProvider = false
-			client.server_capabilities.documentRangeFormattingProvider = false
-		end
-
-		cond_nmap(
-			"documentFormattingProvider",
-			"<space>f",
-			vim.lsp.buf.format,
-			"vim.lsp.buf.format"
-		)
-
-		cond_nmap(
-			"documentHighlightProvider",
-			"<space>dh",
-			toggle_document_highlight,
-			"toggle ide-like symbol under cursor highlight"
-		)
 	end
 
 	-- Enable the following language servers
