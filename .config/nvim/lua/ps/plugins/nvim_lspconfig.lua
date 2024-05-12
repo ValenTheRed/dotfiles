@@ -194,6 +194,14 @@ local on_attach = function(client, bufnr)
 	)
 end
 
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local bufnr = args.buf
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		on_attach(client, bufnr)
+	end,
+})
+
 local config = function()
 	-- For nvim-cmp
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -204,8 +212,8 @@ local config = function()
 
 	-- Enable the following language servers
 	local lsp = require("lspconfig")
-	lsp.pyright.setup { on_attach = on_attach, capabilities = capabilities }
-	lsp.gopls.setup { on_attach = on_attach, capabilities = capabilities }
+	lsp.pyright.setup { capabilities = capabilities }
+	lsp.gopls.setup { capabilities = capabilities }
 	lsp.tsserver.setup {
 		root_dir = function(filename)
 			if
@@ -222,11 +230,9 @@ local config = function()
 				".git"
 			)(filename)
 		end,
-		on_attach = on_attach,
 		capabilities = capabilities,
 	}
 	lsp.efm.setup {
-		on_attach = on_attach,
 		capabilities = capabilities,
 		init_options = {
 			documentFormatting = true,
@@ -239,7 +245,6 @@ local config = function()
 		},
 	}
 	lsp.lua_ls.setup {
-		on_attach = on_attach,
 		capabilities = capabilities,
 		on_init = function(client)
 			local path = client.workspace_folders[1].name
