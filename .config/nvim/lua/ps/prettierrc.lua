@@ -115,19 +115,18 @@ local function config(bufnr)
 	vim.b[bufnr].editorconfig = applied
 end
 
-local group =
-	vim.api.nvim_create_augroup("prettierrc_to_editorconfig", {}),
-	vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufFilePost" }, {
-		group = group,
-		pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.json" },
-		callback = function(args)
-			local enable = vim.F.if_nil(
-				vim.b.editorconfig,
-				vim.F.if_nil(vim.g.editorconfig, true)
-			)
-			if not enable then
-				return
-			end
-			config(args.buf)
-		end,
-	})
+local group = vim.api.nvim_create_augroup("prettierrc_to_editorconfig", {})
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead", "BufFilePost" }, {
+	group = group,
+	pattern = { "*.js", "*.ts", "*.tsx", "*.jsx", "*.json" },
+	callback = function(args)
+		local enable = vim.F.if_nil(
+			vim.b.editorconfig,
+			vim.F.if_nil(vim.g.editorconfig, true)
+		)
+		if not enable then
+			return
+		end
+		config(args.buf)
+	end,
+})
