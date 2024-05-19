@@ -109,6 +109,9 @@ set.listchars:append {
 }
 
 set.showbreak = "↪ "
+
+-- If last line of files doesn't have EOL, don't insert it.
+set.fixendofline = false
 --}}}
 
 -- {{{ Plugins
