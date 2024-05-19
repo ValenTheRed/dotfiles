@@ -127,7 +127,8 @@ vim.api.nvim_create_user_command("Jest", function(opts)
 
 	vim.cmd.split(
 		string.format(
-			"term://cd '%s' && yarn test %s %s %s",
+			-- NOTE: we'll *always* update snapshots
+			"term://cd '%s' && yarn test -u %s %s %s",
 			jest_root_dir,
 			jest_opts,
 			coverage_cmd,
