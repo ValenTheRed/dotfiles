@@ -7,6 +7,16 @@ local nmap = function(bufnr, lhs, rhs, desc)
 	})
 end
 
+--- @param server string
+--- @param opts table
+local function server_setup(server, opts)
+	if vim.fn.executable(server) == 0 then
+		return
+	end
+	local lsp = require("lspconfig")
+	lsp[server].setup(opts)
+end
+
 local toggle_document_highlight = (function()
 	local id = vim.api.nvim_create_augroup("lsp_document_highlight", {
 		clear = true,
@@ -211,11 +221,11 @@ local config = function()
 	end
 
 	-- Enable the following language servers
-	local lsp = require("lspconfig")
-	lsp.pyright.setup { capabilities = capabilities }
-	lsp.gopls.setup { capabilities = capabilities }
-	lsp.tsserver.setup {
+	server_setup("pyright", { capabilities = capabilities })
+	server_setup("gopls", { capabilities = capabilities })
+	server_setup("tsserver", {
 		root_dir = function(filename)
+			local lsp = require("lspconfig")
 			if
 				string.find(filename, "substitute_this_with_a_directory") ~= nil
 			then
@@ -231,8 +241,8 @@ local config = function()
 			)(filename)
 		end,
 		capabilities = capabilities,
-	}
-	lsp.efm.setup {
+	})
+	server_setup("efm", {
 		capabilities = capabilities,
 		init_options = {
 			documentFormatting = true,
@@ -243,8 +253,8 @@ local config = function()
 			rootMarkers = { ".git/" },
 			languages = efm_languages,
 		},
-	}
-	lsp.lua_ls.setup {
+	})
+	server_setup("lua_ls", {
 		capabilities = capabilities,
 		on_init = function(client)
 			local path = client.workspace_folders[1].name
@@ -273,7 +283,7 @@ local config = function()
 		settings = {
 			Lua = {},
 		},
-	}
+	})
 end
 
 return { {
