@@ -1,9 +1,9 @@
-local nmap = function(lhs, rhs, desc)
+local nmap = function(bufnr, lhs, rhs, desc)
 	vim.keymap.set("n", lhs, rhs, {
 		noremap = true,
 		silent = true,
 		desc = desc,
-		buffer = 0,
+		buffer = bufnr,
 	})
 end
 
@@ -97,7 +97,7 @@ local on_attach = function(client, bufnr)
 
 	local cond_nmap = function(capability, ...)
 		if client.server_capabilities[capability] then
-			nmap(...)
+			nmap(bufnr, ...)
 		end
 	end
 
