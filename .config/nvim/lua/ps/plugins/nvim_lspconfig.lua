@@ -7,14 +7,15 @@ local nmap = function(bufnr, lhs, rhs, desc)
 	})
 end
 
---- @param server string
+--- @param name string
 --- @param opts table
-local function server_setup(server, opts)
-	if vim.fn.executable(server) == 0 then
+--- @param exec_name string|nil
+local function server_setup(name, opts, exec_name)
+	if vim.fn.executable(exec_name and exec_name or name) == 0 then
 		return
 	end
 	local lsp = require("lspconfig")
-	lsp[server].setup(opts)
+	lsp[name].setup(opts)
 end
 
 local toggle_document_highlight = (function()
@@ -253,7 +254,7 @@ local config = function()
 			rootMarkers = { ".git/" },
 			languages = efm_languages,
 		},
-	})
+	}, "efm-langserver")
 	server_setup("lua_ls", {
 		capabilities = capabilities,
 		on_init = function(client)
@@ -283,7 +284,7 @@ local config = function()
 		settings = {
 			Lua = {},
 		},
-	})
+	}, "lua-language-server")
 end
 
 return { {
