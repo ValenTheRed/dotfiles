@@ -74,7 +74,6 @@ myfoldtext = function()
 		full = "",
 		outline = "󰬫",
 	}
-	local numbers = { "１", "２", "３", "４", "５", "６", "７", "８", "９" }
 	local first_line =
 		vim.api.nvim_buf_get_lines(0, foldstart - 1, foldstart, false)[1]
 	if first_line == nil then
@@ -85,7 +84,8 @@ myfoldtext = function()
 		local fmr_end = string.sub(vim.o.foldmarker, delim_idx + 1)
 		first_line = string.gsub(first_line, fmr_start, "")
 		first_line = string.gsub(first_line, fmr_end, "")
-		first_line = string.gsub(first_line, "\t", string.rep(" ", vim.o.tabstop))
+		first_line =
+			string.gsub(first_line, "\t", string.rep(" ", vim.o.tabstop))
 	end
 	return string.format(
 		"%s %s ...%d lines",
@@ -368,19 +368,19 @@ nmap("[q", ":cprevious<CR>")
 nmap("]l", ":lnext<CR>")
 nmap("[l", ":lprevious<CR>")
 
-nmap("n", function()
-	if not vim.o.hlsearch then
-		vim.o.hlsearch = true
-	end
-	return "nzz"
-end, { expr = true })
-
-nmap("N", function()
-	if not vim.o.hlsearch then
-		vim.o.hlsearch = true
-	end
-	return "Nzz"
-end, { expr = true })
+--- @param key string
+local function search_maps(key)
+	nmap(key, function()
+		if not vim.o.hlsearch then
+			vim.o.hlsearch = true
+		end
+		return key .. "zz"
+	end, { expr = true })
+end
+search_maps("n")
+search_maps("N")
+search_maps("*")
+search_maps("#")
 
 -- }}}
 
