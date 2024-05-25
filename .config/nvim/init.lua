@@ -65,7 +65,37 @@ set.colorcolumn = "80"
 
 set.matchpairs:append("<:>")
 
-set.fillchars:append("diff:╱")
+set.fillchars:append("diff:╱,fold: ")
+
+myfoldtext = function()
+	local foldstart, foldend, folddashes, foldlevel =
+		vim.v.foldstart, vim.v.foldend, vim.v.folddashes, vim.v.foldlevel
+	local icon = {
+		full = "",
+		outline = "󰬫",
+	}
+	local numbers = { "１", "２", "３", "４", "５", "６", "７", "８", "９" }
+	local first_line =
+		vim.api.nvim_buf_get_lines(0, foldstart - 1, foldstart, false)[1]
+	if first_line == nil then
+		first_line = "first_line is nil"
+	else
+		local delim_idx = string.find(vim.o.foldmarker, ",")
+		local fmr_start = string.sub(vim.o.foldmarker, 1, delim_idx - 1)
+		local fmr_end = string.sub(vim.o.foldmarker, delim_idx + 1)
+		first_line = string.gsub(first_line, fmr_start, "")
+		first_line = string.gsub(first_line, fmr_end, "")
+		first_line = string.gsub(first_line, "\t", string.rep(" ", vim.o.tabstop))
+	end
+	return string.format(
+		"%s %s ...%d lines",
+		first_line,
+		icon.full,
+		foldend - foldstart
+	)
+end
+
+set.foldtext = "v:lua.myfoldtext()"
 
 set.splitright = true
 set.splitbelow = true
