@@ -61,7 +61,7 @@ set.updatetime = 1000
 set.completeopt = { "menuone", "noselect" }
 
 -- NOTE: make sure to set the colour of the colour column wiht the colourscheme
-set.colorcolumn = "79"
+set.colorcolumn = "80"
 
 set.matchpairs:append("<:>")
 
