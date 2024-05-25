@@ -368,6 +368,20 @@ nmap("[q", ":cprevious<CR>")
 nmap("]l", ":lnext<CR>")
 nmap("[l", ":lprevious<CR>")
 
+nmap("n", function()
+	if not vim.o.hlsearch then
+		vim.o.hlsearch = true
+	end
+	return "nzz"
+end, { expr = true })
+
+nmap("N", function()
+	if not vim.o.hlsearch then
+		vim.o.hlsearch = true
+	end
+	return "Nzz"
+end, { expr = true })
+
 -- }}}
 
 -- vim: set fdm=marker fdl=0:
