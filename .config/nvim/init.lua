@@ -176,6 +176,7 @@ require("luasnip.loaders.from_lua").load {
 }
 require("ps.smart_quotes")
 require("ps.jest")
+require("ps.playground")
 
 letg.tex_flavor = "latex"
 
