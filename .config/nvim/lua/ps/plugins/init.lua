@@ -6,8 +6,8 @@ return {
 			vim.cmd.colorscheme("psmdc_dark")
 		end,
 		priority = 1000,
-		dir = "F:/Github/psmdc.nvim",
-		dev = true,
+		-- dir = "F:/Github/psmdc.nvim",
+		-- dev = true,
 	}, -- }}}
 	"tpope/vim-commentary",
 	"tpope/vim-fugitive",
