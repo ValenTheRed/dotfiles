@@ -36,6 +36,19 @@
 	# @params
 	# $1: git revision range, $2: patch file name
 	patch = !git format-patch \"$1\" --stdout > \"$2\".patch
+
+	# Filter specific dirty files and restore those files.
+	#
+	# NOTE: without wrapping the alias in quotes and appending the '#', git
+	# would expand the alias and append the param to the end. Eg. for alias
+	#
+	#	$ git config --global alias.a "git s -s | rg $1"
+	#	$ git a '__snapshots__' # is equivalent to below line
+	#	$ git s -s | rg __snapshots__ __snapshots__ # expands to this
+	#
+	# @params
+	# $1: ripgrep pattern to filter the files by
+	rpat = "!git s -s | awk '{print $2}' | rg $1 | xargs git r #"
 [commit]
 	# show equivalent to `diff --cached` in the commit message
 	verbose = true
