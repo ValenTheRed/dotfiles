@@ -41,5 +41,9 @@
 	verbose = true
 [advice]
 	detachedHead = false
+[credential]
+	helper = osxkeychain
+	helper = libsecret
+	helper = oauth
 
 # vim: set noet:
