@@ -14,3 +14,5 @@ if "${android_installed}"; then
     export PATH=${PATH}:${ANDROID_HOME}/emulator
     export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 fi
+
+export PATH=${PATH}:${$HOME/.local/bin}
