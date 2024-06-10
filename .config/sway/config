@@ -18,10 +18,14 @@ output {
 gaps outer 3
 gaps inner 5
 
+font pango:sans-serif 11
+
 for_window {
     # - `none` removes the titlebar and the border.
-    # - `pixel 2` keeps the borders but removes the titlebar. No idea if this is
-    #   resolution specific or just intented behavior.
+    # - `pixel 2` keeps the borders but removes the titlebar.
     [app_id="org.mozilla.firefox"] border pixel 2
     [app_id="foot"] border pixel 2
+    [app_id="thunar"] border pixel 2
 }
+
+# vim: set ft=config:
