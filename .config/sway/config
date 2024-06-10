@@ -15,4 +15,13 @@ output {
     $laptop  bg /nomad/Pictures/Wallpapers/dominik-mayer-fireball-stx-01-small.jpg fill
 }
 
-for_window [app_id="org.mozilla.firefox"] border none
+gaps outer 3
+gaps inner 5
+
+for_window {
+    # - `none` removes the titlebar and the border.
+    # - `pixel 2` keeps the borders but removes the titlebar. No idea if this is
+    #   resolution specific or just intented behavior.
+    [app_id="org.mozilla.firefox"] border pixel 2
+    [app_id="foot"] border pixel 2
+}
