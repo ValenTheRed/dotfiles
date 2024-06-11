@@ -15,4 +15,4 @@ if "${android_installed}"; then
     export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 fi
 
-export PATH=${PATH}:${$HOME/.local/bin}
+export PATH=${PATH}:${$HOME}/.local/bin
