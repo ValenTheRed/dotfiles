@@ -1,3 +1,5 @@
+alias sudo="sudo "
+
 alias es="eza --icons --group-directories-first"
 alias ea="eza --icons -a --group-directories-first"
 alias el="eza --icons -la --group-directories-first"
