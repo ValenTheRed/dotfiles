@@ -11,8 +11,14 @@ focus output $monitor
 # By using the name of the output instead of star, we can configure both
 # monitors to use different wallpapers.
 output {
-    $monitor bg /nomad/Pictures/Wallpapers/snow-on-leaves.jpg fill
-    $laptop  bg /nomad/Pictures/Wallpapers/dominik-mayer-fireball-stx-01-small.jpg fill
+    $laptop  disable
+    $monitor bg /nomad/Pictures/Wallpapers/samurai-bebop-4k_1708811490.jpg fill
+    # $laptop  bg /nomad/Pictures/Wallpapers/dominik-mayer-fireball-stx-01-small.jpg fill
+}
+
+workspace {
+    1 output $monitor
+    # 2 output $laptop
 }
 
 gaps outer 3
