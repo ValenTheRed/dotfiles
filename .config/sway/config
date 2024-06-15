@@ -1,5 +1,6 @@
 include /etc/sway/config.d/*
 include /etc/sway/config
+include /home/ps/.config/sway/config.d/*
 
 set {
     $laptop  eDP-1
