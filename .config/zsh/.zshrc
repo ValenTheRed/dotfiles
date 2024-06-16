@@ -36,6 +36,11 @@ bindkey "^[[Z" reverse-menu-complete # <S-Tab> to go backwards in tab completion
 # Setting HISTFILE again because /etc/zshrc sets it, which is sourced after
 # ~/.zshenv (and ${ZDOTDIR}/zsh/.zprofile both).
 HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
+# ${XDG_STATE_HOME}/zsh folder will always exists since we'll create the
+# directory in .zshenv
+if [[ ! -f ${HISTFILE} ]]; then
+    touch ${HISTFILE}
+fi
 HISTSIZE=500000
 SAVEHIST=100000
 HIST_STAMPS="yyyy-mm-dd"
