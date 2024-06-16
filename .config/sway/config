@@ -1,6 +1,6 @@
 include /etc/sway/config.d/*
 include /etc/sway/config
-include /home/ps/.config/sway/config.d/*
+include ~/.config/sway/config.d/*
 
 set {
     $laptop  eDP-1
@@ -34,5 +34,7 @@ for_window {
     [app_id="foot"] border pixel 2
     [app_id="thunar"] border pixel 2
 }
+
+exec ~/.config/sway/scripts/sunset
 
 # vim: set ft=config:
