@@ -25,6 +25,13 @@ workspace {
 gaps outer 3
 gaps inner 5
 
+# swayFX specific opts
+blur enable
+blur_xray disable
+blur_passes 3
+blur_radius 8
+default_dim_inactive 0.1
+
 font pango:sans-serif 11
 
 for_window {
