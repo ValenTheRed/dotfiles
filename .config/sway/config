@@ -31,6 +31,10 @@ blur_xray disable
 blur_passes 3
 blur_radius 8
 default_dim_inactive 0.1
+layer_effects {
+    "rofi" blur enable
+    "panel" blur enable
+}
 
 font pango:sans-serif 11
 
