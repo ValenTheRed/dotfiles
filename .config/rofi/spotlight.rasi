@@ -4,9 +4,10 @@
 	background-selected: #F2F2F245;
 	background-active: #F2F2F230;
 	background-white: #F2F2F211;
-	background-black: #00000088;
+	background-black: #10101055;
 	urgent: #E91E6366;
 	urgent-selected: #E91E6377;
+    border-color: #90909077;
 }
 
 window {
@@ -16,6 +17,7 @@ window {
 
 mainbox {
 	background-color: @transparent;
+    border: 2;
 }
 
 textbox-prompt {
@@ -43,10 +45,17 @@ inputbar {
     padding: 15px 20px 15px 20px;
 	background-color: @background-black;
     children: [ textbox-prompt, entry ];
+    border: 0 0 1 0;
+    border-color: @border-color;
 }
 
 listview {
 	background-color: @background-black;
+    padding: 14px;
+}
+
+element {
+    border-radius: 8px;
 }
 
 element, element-icon, element-text {
@@ -59,8 +68,8 @@ element.selected {
 }
 
 element-icon {
-    size: 1.2em;
-    padding: 4px 14px 4px 24px;
+    size: 1.1em;
+    padding: 4px 14px 4px 14px;
 }
 
 element-text {
