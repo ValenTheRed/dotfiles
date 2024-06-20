@@ -31,8 +31,13 @@ blur_xray disable
 blur_passes 3
 blur_radius 8
 default_dim_inactive 0.1
+shadow_offset 0 0
+shadow_blur_radius 20
+shadow_color #000000FF
+shadow_inactive_color #000000B0
 layer_effects {
     "rofi" blur enable
+    "rofi" shadows enable
     "panel" blur enable
 }
 
