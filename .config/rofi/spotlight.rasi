@@ -13,10 +13,12 @@
 window {
 	transparency: "real";
 	background-color: @transparent;
+	border-radius: 14px;
 }
 
 mainbox {
 	background-color: @transparent;
+	border-radius: 14px;
 	border: 2;
 }
 
