@@ -49,7 +49,6 @@ for_window {
     [all] inhibit_idle fullscreen
 }
 
-
 exec ~/.config/sway/scripts/sunset
 
 # vim: set ft=config:
