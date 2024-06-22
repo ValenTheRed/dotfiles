@@ -1,0 +1,2 @@
+# enable QT programs to use wayland
+export QT_QPA_PLATFORM=wayland
