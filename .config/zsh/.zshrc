@@ -10,6 +10,8 @@ alias lsa="ls -AlFh"
 
 alias vi="nvim"
 
+alias logoff="pkill -KILL -u ${USER}"
+
 # a nice sensible .zshrc file: https://gist.github.com/scottstanfield/fa1085c225069160225d18b1dc16ee1c
 
 # pressing `<S-v>` in normal mode (called command mode in zsh (`man zshzle(1)`))
