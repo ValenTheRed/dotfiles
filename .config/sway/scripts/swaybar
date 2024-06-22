@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "$(battery) · $(date '+%a, %e %b %l:%M %P')"
