@@ -46,7 +46,9 @@ default_border pixel 3
 
 for_window {
     [title="Picture-in-Picture" app_id="org.mozilla.firefox"] floating enable
+    [all] inhibit_idle fullscreen
 }
+
 
 exec ~/.config/sway/scripts/sunset
 
