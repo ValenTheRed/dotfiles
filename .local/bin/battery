@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# NOTE: `upower` prints battery info in multi-line. Don't forget to quote this
+# variable or you'll lose the newline characters!
+info=$(upower -i $(upower --enumerate | rg battery))
+percentage=$(echo "${info}" | rg 'percentage' | awk '{print $2}')
+notified=false
+threshold="20"
+timeout_ms="15000"
+
+batt_status=""
+if ! echo "${info}" | rg 'state:\s+dis'; then
+    batt_status=" "
+elif [[ "$(echo "${percentage}" | rg -o '\d+')" -le ${threshold} ]] && ! ${notified}; then
+    notify-send --urgency=critical --expire-time="${timeout_ms}" "Battery below ${threshold}%\!"
+    notified=true
+fi
+
+echo ${batt_status} ${percentage}
