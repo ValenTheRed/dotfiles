@@ -39,7 +39,7 @@ entry {
 	background-color: @transparent;
 	text-color: @foreground;
 	vertical-align: 0.5;
-	font: "sans-serif 23";
+	font: "Play 27";
 }
 
 inputbar {
