@@ -16,3 +16,9 @@ if "${android_installed}"; then
 fi
 
 export PATH=${PATH}:${XDG_BIN_HOME}
+if [[ -d /opt/ps/lua_ls ]]; then
+    export PATH=${PATH}:/opt/ps/lua_ls/bin
+fi
+if [[ -d /opt/ps/neovim ]]; then
+    export PATH=${PATH}:/opt/ps/neovim/bin
+fi
