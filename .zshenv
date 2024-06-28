@@ -4,6 +4,8 @@ export XDG_STATE_HOME=${XDG_STATE_HOME:=${HOME}/.local/state}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:=${HOME}/.cache}
 export XDG_BIN_HOME=${XDG_BIN_HOME:=${HOME}/.local/bin}
 
+export XDG_DATA_DIRS="${XDG_DATA_HOME}/flatpak/exports/share:${XDG_DATA_DIRS}"
+
 export ZDOTDIR=${ZDOTDIR:=${XDG_CONFIG_HOME}/zsh}
 export HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
 
