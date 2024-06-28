@@ -46,7 +46,7 @@ layer_effects {
 
 font pango:sans-serif 11
 
-default_border pixel 3
+default_border pixel 2
 
 for_window {
     [title="Picture-in-Picture" app_id="org.mozilla.firefox"] floating enable
