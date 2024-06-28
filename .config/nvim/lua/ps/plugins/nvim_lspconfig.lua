@@ -122,13 +122,6 @@ local on_attach = function(client, bufnr)
 		"lsp.declaration"
 	)
 
-	cond_nmap(
-		"hoverProvider",
-		"K",
-		vim.lsp.buf.hover,
-		"floating lsp symbol info"
-	)
-
 	cond_nmap("definitionProvider", "gd", function()
 		telescope_builtin.lsp_definitions(telescope_lsp_opts)
 	end, "Telescope list/goto definitions")
