@@ -65,6 +65,9 @@ local efm_prettierd = {
 		".prettierrc.mjs",
 		".prettierrc.cjs",
 		".prettierrc.toml",
+		"prettier.config.js",
+		"prettier.config.cjs",
+		"prettier.config.mjs",
 	},
 }
 
@@ -81,6 +84,9 @@ local efm_eslintd = {
 		".eslintrc.json",
 		".eslintrc.yaml",
 		".eslintrc.yml",
+		"eslint.config.js",
+		"eslint.config.cjs",
+		"eslint.config.mjs",
 	},
 }
 
