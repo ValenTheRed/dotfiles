@@ -1,5 +1,6 @@
 include /etc/sway/config.d/*
 include /etc/sway/config
+include ~/.config/sway/colors-sway.conf
 include ~/.config/sway/config.d/*
 
 set {
@@ -13,9 +14,12 @@ focus output $monitor
 # monitors to use different wallpapers.
 output {
     $laptop  disable
-    $monitor bg /nomad/Pictures/Wallpapers/samurai-bebop-4k_1708811490.jpg fill
+    $monitor bg $wallpaper fill
     # $laptop  bg /nomad/Pictures/Wallpapers/dominik-mayer-fireball-stx-01-small.jpg fill
 }
+
+# class          border    title_bar_bg   title_bar_fg   indicator   child_border
+client.focused   $color9   $color9        $background    $color15    $color9
 
 workspace {
     1 output $monitor
@@ -48,6 +52,8 @@ for_window {
     [title="Picture-in-Picture" app_id="org.mozilla.firefox"] floating enable
     [all] inhibit_idle fullscreen
 }
+
+seat seat0 xcursor_theme CapitaineCursors
 
 exec ~/.config/sway/scripts/sunset
 
