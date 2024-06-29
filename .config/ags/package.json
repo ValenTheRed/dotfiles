@@ -1,0 +1,19 @@
+{
+    "name": "ags-dotfiles",
+    "version": "0.0.1",
+    "main": "config.js",
+    "type": "module",
+    "config": {
+        "main": "main.ts",
+        "out": "config.js"
+    },
+    "scripts": {
+        "build": "esbuild ${npm_package_config_main} --bundle --format=esm --outfile=${npm_package_config_out} --external:resource://* --external:gi://* --external:file://*"
+    },
+    "devDependencies": {
+        "@girs/gjs": "3.3.0",
+        "esbuild": "0.21.5",
+        "prettier": "3.3.2",
+        "typescript": "^5.5.2"
+    }
+}
