@@ -1,0 +1,5 @@
+node_modules/
+.config/ags/types
+.config/chromium
+.config/user-dirs.dirs
+.config/user-dirs.locale
