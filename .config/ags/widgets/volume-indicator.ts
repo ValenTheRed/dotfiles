@@ -3,7 +3,7 @@ import { VOLUME_INDICATOR_THRESHOLDS } from "constants";
 const audio = await Service.import("audio");
 
 export default Widget.Button({
-    class_name: "volumn-indicator",
+    class_name: "volume-indicator status-widget",
     on_clicked: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
     child: Widget.Icon().hook(audio.speaker, (self) => {
         let icon: string | undefined, tooltip_text: string;

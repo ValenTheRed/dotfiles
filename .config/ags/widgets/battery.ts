@@ -10,6 +10,7 @@ const Label = Widget.Label({
 });
 
 export default Widget.Box({
+    class_name: "battery status-widget",
     spacing: LABEL_ICON_SPACING,
     children: [Label, Icon],
 });

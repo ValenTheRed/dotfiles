@@ -3,5 +3,6 @@ const date = Variable("", {
 });
 
 export default Widget.Label({
+    class_name: "date status-widget",
     label: date.bind(),
 });
