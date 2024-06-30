@@ -1,4 +1,5 @@
 import "style";
+import battery from "daemons/battery";
 import { Date, Battery, Workspace } from "widgets";
 
 const Bar = (monitor: number) =>
@@ -25,9 +26,9 @@ const Bar = (monitor: number) =>
     });
 
 App.config({
-    // onConfigParsed: () => {
-    //     battery();
-    // },
+    onConfigParsed: () => {
+        battery();
+    },
     style: "./style/style.css",
     windows: [Bar(0)],
 });

@@ -1,0 +1,1 @@
+export const LOW_BATTERY_THRESHOLD = 20;
