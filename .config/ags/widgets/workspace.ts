@@ -1,7 +1,8 @@
+/// Reference: https://github.com/Aylur/ags/pull/246
 import Sway from "services/sway";
 
-const WorkspaceBox = Widget.Box({
-    class_name: "workspace-box",
+export default Widget.Box({
+    class_name: "workspace",
     children: Array.from({ length: 9 }, (_, i) => {
         i += 1;
         return Widget.Button({
@@ -28,23 +29,6 @@ const WorkspaceBox = Widget.Box({
             },
             label: String(i),
             on_clicked: () => Sway.msg(`workspace ${i}`),
-            // child: Widget.Label({
-            //     label: String(i),
-            //     class_name: "workspace-indicator",
-            //     vpack: "center",
-            // }),
         });
     }),
-});
-
-export default Widget.EventBox({
-    // class_name: "workspaces panel-button",
-    // child: Widget.Box({
-    //     child: Widget.EventBox({
-    on_scroll_up: () => Sway.msg("workspace next"),
-    on_scroll_down: () => Sway.msg("workspace prev"),
-    class_name: "workspace",
-    child: WorkspaceBox,
-    // }),
-    // }),
 });
