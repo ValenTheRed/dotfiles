@@ -1,7 +1,7 @@
 import "style";
 import { WIDGET_SPACING } from "constants";
 import battery from "daemons/battery";
-import { Date, Battery, Workspace } from "widgets";
+import { Date, Battery, Workspace, VolumeIndicator } from "widgets";
 
 const Bar = (monitor: number) =>
     Widget.Window({
@@ -21,7 +21,7 @@ const Bar = (monitor: number) =>
                 class_name: "end-widget",
                 hpack: "end",
                 spacing: WIDGET_SPACING,
-                children: [Battery, Date],
+                children: [VolumeIndicator, Battery, Date],
             }),
         }),
     });

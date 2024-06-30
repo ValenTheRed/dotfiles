@@ -13,7 +13,7 @@ window {
     padding: 0px 12px 0px 0px;
 }
 
-.workspace-active, .workspace-occupied {
+button {
     /* Remove default background image that prevents setting background-color */
     background-image: none;
     /* Remove default box shadow since it creates a white line of top of the
@@ -25,6 +25,19 @@ window {
     border-radius: 0px;
     border-width: 0px;
     border-color: transparent;
+    /* With `all`, when the workspace button is created, you can see
+     * the transition from default style to new style which is jarring. This
+     * removes that. */
+    transition-property: none;
+}
+
+button:hover {
+    background-color: rgba(183, 168, 95, .5); /* color1 */
+    transition-property: all;
+}
+
+.workspace-active, .workspace-occupied {
+    padding: 0px 10px;
 }
 
 .workspace-active {
@@ -33,13 +46,9 @@ window {
     background-color: @color1;
     color: @background;
     text-shadow: none;
-    /* With `all`, when the workspace button is created, you can see
-     * the transition from default style to new style which is jarring. This
-     * removes that. */
-    transition-property: none;
 }
 
-.workspace-active:hover, .workspace-occupied:hover {
-    background-color: rgba(183, 168, 95, .5); /* color1 */
-    transition-property: all;
+.volumn-indicator {
+    padding: 0px 5px;
+    color: white;
 }
