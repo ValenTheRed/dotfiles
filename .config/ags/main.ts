@@ -1,5 +1,5 @@
 import "style/style";
-import { Date, Battery, Workspaces } from "widgets";
+import { Date, Battery, Workspace } from "widgets";
 
 const Bar = (monitor: number) =>
     Widget.Window({
@@ -13,7 +13,7 @@ const Bar = (monitor: number) =>
             startWidget: Widget.Box({
                 class_name: "start-widget",
                 hpack: "start",
-                children: [Workspaces],
+                children: [Workspace],
             }),
             endWidget: Widget.Box({
                 class_name: "end-widget",
