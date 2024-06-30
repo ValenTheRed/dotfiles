@@ -8,7 +8,7 @@
         "out": "config.js"
     },
     "scripts": {
-        "build": "esbuild ${npm_package_config_main} --bundle --format=esm --outfile=${npm_package_config_out} --external:resource://* --external:gi://* --external:file://*"
+        "build": "esbuild ${npm_package_config_main} --bundle --minify --format=esm --outfile=${npm_package_config_out} --external:resource://* --external:gi://* --external:file://*"
     },
     "devDependencies": {
         "@girs/gjs": "3.3.0",
