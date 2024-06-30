@@ -1,4 +1,4 @@
-import "style/style";
+import "style";
 import { Date, Battery, Workspace } from "widgets";
 
 const Bar = (monitor: number) =>
