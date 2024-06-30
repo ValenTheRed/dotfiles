@@ -4,7 +4,8 @@ window {
     background-color: transparent;
     color: white;
     font-size: 15px;
-    font-family: "Play";
+    font-family: "IBM Plex Sans";
+    font-weight: 500;
 }
 
 .panel {
@@ -20,7 +21,7 @@ window {
     box-shadow: none;
     background-color: transparent;
     color: @foreground;
-    padding: 2px 10px;
+    padding: 0px 10px;
     border-radius: 0px;
     border-width: 0px;
     border-color: transparent;
@@ -28,16 +29,17 @@ window {
 
 .workspace-active {
     border-width: 0px;
-    font-size: 18px;
+    font-size: 17px;
     background-color: @color1;
     color: @background;
     text-shadow: none;
     /* With `all`, when the workspace button is created, you can see
      * the transition from default style to new style which is jarring. This
-     * removes that while preserving the transitons for hover. */
+     * removes that. */
     transition-property: none;
 }
 
-.workspace-occupied:hover {
+.workspace-active:hover, .workspace-occupied:hover {
     background-color: rgba(183, 168, 95, .5); /* color1 */
+    transition-property: all;
 }
