@@ -1,3 +1,5 @@
+import { LABEL_ICON_SPACING } from "constants";
+
 const battery = await Service.import("battery");
 
 const Icon = Widget.Icon({
@@ -8,6 +10,6 @@ const Label = Widget.Label({
 });
 
 export default Widget.Box({
-    spacing: 5,
+    spacing: LABEL_ICON_SPACING,
     children: [Label, Icon],
 });

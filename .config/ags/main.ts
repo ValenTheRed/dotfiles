@@ -1,4 +1,5 @@
 import "style";
+import { WIDGET_SPACING } from "constants";
 import battery from "daemons/battery";
 import { Date, Battery, Workspace } from "widgets";
 
@@ -19,7 +20,7 @@ const Bar = (monitor: number) =>
             endWidget: Widget.Box({
                 class_name: "end-widget",
                 hpack: "end",
-                spacing: 12,
+                spacing: WIDGET_SPACING,
                 children: [Battery, Date],
             }),
         }),
