@@ -2,7 +2,6 @@
 
 window {
     background-color: transparent;
-    color: white;
     font-size: 15px;
     font-family: "IBM Plex Sans";
     font-weight: 500;
@@ -51,5 +50,5 @@ button:hover {
 .status-widget {
     padding: 0px 8px;
     border-radius: 5px;
-    color: white;
+    color: @foreground;
 }

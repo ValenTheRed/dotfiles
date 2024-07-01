@@ -3,7 +3,8 @@ enerated by 'wal' */
 
 /* Special */
 @define-color background #141619;
-@define-color foreground #c4c4c5;
+@define-color foreground white;
+@define-color foreground-dark #c4c4c5;
 @define-color cursor #c4c4c5;
 
 /* Colors */
