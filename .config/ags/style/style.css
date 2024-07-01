@@ -28,6 +28,8 @@ button {
      * the transition from default style to new style which is jarring. This
      * removes that. */
     transition-property: none;
+    text-shadow: none;
+    -gtk-icon-shadow: none;
 }
 
 button:hover {
@@ -51,4 +53,8 @@ button:hover {
     padding: 0px 8px;
     border-radius: 5px;
     color: @foreground;
+}
+
+.battery-icon {
+    padding: 0px 0px 0px 3px;
 }

@@ -30,6 +30,8 @@ App.config({
     onConfigParsed: () => {
         battery();
     },
+    /// Ref: https://github.com/vinceliuice/WhiteSur-icon-theme
+    iconTheme: "WhiteSur",
     style: "./style/style.css",
     windows: [Bar(0)],
 });
