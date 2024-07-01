@@ -39,6 +39,7 @@ button:hover {
 
 .workspace-active, .workspace-occupied {
     padding: 0px 10px;
+    border-radius: 5px;
 }
 
 .workspace-active {
