@@ -12,3 +12,4 @@ export const VOLUME_INDICATOR_THRESHOLDS = [
     ["low", 1],
     ["muted", 0],
 ] as const;
+export const SYMBOLIC_ICON_POSTFIX = "-symbolic";
