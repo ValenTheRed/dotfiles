@@ -1,14 +1,10 @@
 @import url("colors.css");
 
-window {
+window.panel {
     background-color: transparent;
     font-size: 15px;
     font-family: "IBM Plex Sans";
     font-weight: 500;
-}
-
-.panel {
-    background-color: transparent;
     padding: 0px 12px 0px 0px;
 }
 

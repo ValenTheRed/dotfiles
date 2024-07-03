@@ -5,13 +5,13 @@ import { Date, Battery, Workspace, VolumeIndicator, SystemTray } from "widgets";
 
 const Bar = (monitor: number) =>
     Widget.Window({
+        class_name: "panel",
         monitor,
         name: "panel",
         anchor: ["top", "left", "right"],
         exclusivity: "exclusive",
         layer: "top",
         child: Widget.CenterBox({
-            class_name: "panel",
             startWidget: Widget.Box({
                 class_name: "start-widget",
                 hpack: "start",
