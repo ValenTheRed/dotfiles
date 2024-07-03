@@ -3,6 +3,9 @@ return {
 	{
 		"ValenTheRed/psmdc.nvim",
 		config = function()
+			-- require("psmdc").setup {
+			-- 	transparent_bg = true
+			-- }
 			vim.cmd.colorscheme("psmdc_dark")
 		end,
 		priority = 1000,
