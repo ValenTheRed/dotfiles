@@ -1,7 +1,7 @@
-include /etc/sway/config.d/*
+# /etc/sway/config includes etc's config.d by default. Check for your
+# installation.
 include /etc/sway/config
 include ~/.config/sway/colors-sway.conf
-include ~/.config/sway/config.d/*
 
 set {
     $laptop  eDP-1
@@ -56,5 +56,9 @@ for_window {
 seat seat0 xcursor_theme CapitaineCursors
 
 exec ~/.config/sway/scripts/sunset
+
+# Following the footsteps of /etc/sway/config and including config.d at the
+# end.
+include ~/.config/sway/config.d/*
 
 # vim: set ft=config:
