@@ -8,6 +8,31 @@ window.panel {
     padding: 0px 12px 0px 0px;
 }
 
+window.volume-controls {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+box.volume-controls {
+    padding: 10px;
+}
+
+.volume-slider {
+    min-width: 20rem;
+    min-height: 20px;
+}
+
+.volume-slider trough {
+    min-height: .75rem;
+    border-radius: 50px;
+    border-width: 0px;
+}
+
+.volume-slider highlight {
+    background-color: @color6;
+    border-radius: 50px;
+    border-width: 0px;
+}
+
 button {
     /* Remove default background image that prevents setting background-color */
     background-image: none;

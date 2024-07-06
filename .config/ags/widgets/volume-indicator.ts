@@ -4,7 +4,8 @@ const { speaker } = await Service.import("audio");
 
 export default Widget.Button({
     class_name: "volume-indicator status-widget",
-    on_clicked: () => (speaker.is_muted = !speaker.is_muted),
+    on_secondary_click: () => (speaker.is_muted = !speaker.is_muted),
+    on_primary_click: () => App.toggleWindow("volume-controls"),
     setup: (self) =>
         self.hook(speaker, (self) => {
             let icon: string | undefined, tooltip_text: string;

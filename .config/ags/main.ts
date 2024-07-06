@@ -2,6 +2,7 @@ import "style";
 import { WIDGET_SPACING } from "constants";
 import battery from "daemons/battery";
 import { Date, Battery, Workspace, VolumeIndicator, SystemTray } from "widgets";
+import { VolumeControls } from "windows";
 
 const Bar = (monitor: number) =>
     Widget.Window({
@@ -33,5 +34,5 @@ App.config({
     /// Ref: https://github.com/vinceliuice/WhiteSur-icon-theme
     iconTheme: "WhiteSur",
     style: "./style/style.css",
-    windows: [Bar(0)],
+    windows: [Bar(0), VolumeControls(0)],
 });
