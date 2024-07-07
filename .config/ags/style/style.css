@@ -1,10 +1,13 @@
 @import url("colors.css");
 
-window.panel {
-    background-color: transparent;
+* {
     font-size: 15px;
     font-family: "IBM Plex Sans";
     font-weight: 500;
+}
+
+window.panel {
+    background-color: transparent;
     padding: 0px 12px 0px 0px;
 }
 
@@ -13,7 +16,7 @@ window.volume-controls {
 }
 
 box.volume-controls {
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 .volume-slider {
@@ -31,6 +34,11 @@ box.volume-controls {
     background-color: @color6;
     border-radius: 50px;
     border-width: 0px;
+}
+
+.volume-slider value {
+    color: @foreground;
+    margin-left: 5px;
 }
 
 button {
