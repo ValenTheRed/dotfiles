@@ -1,3 +1,4 @@
+import { WHITESUR_ICON_SIZE, AUDIO_APPLICATION } from "constants";
 import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 import { Stream } from "types/service/audio";
 
@@ -8,7 +9,25 @@ const Slider = (speaker: Stream) =>
     Widget.Box({
         children: [
             Widget.Icon({
-                icon_name: speaker.icon_name,
+                size: WHITESUR_ICON_SIZE.DEFAULT,
+                icon_name: speaker.bind("icon_name").as((name) => {
+                    if (
+                        name ===
+                        AUDIO_APPLICATION.NAME.BUILT_IN_AUDIO_ANALOG_STEREO
+                    ) {
+                        return AUDIO_APPLICATION.ICON.SYSTEM;
+                    } else if (
+                        name &&
+                        Utils.lookUpIcon(name, WHITESUR_ICON_SIZE.DEFAULT)
+                    ) {
+                        return name;
+                    } else {
+                        return AUDIO_APPLICATION.ICON.SYSTEM;
+                    }
+                }),
+                tooltip_text: speaker
+                    .bind("name")
+                    .as((name) => name ?? AUDIO_APPLICATION.NAME.UNKOWN),
             }),
             Widget.Slider({
                 class_name: "volume-slider",
