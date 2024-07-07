@@ -3,7 +3,7 @@ export const LABEL_ICON_SPACING = 3;
 export const WHITESUR_ICON_SIZE = {
     VOLUME_INDICATOR: 22,
     DEFAULT: 20,
-};
+} as const;
 export const WIDGET_SPACING = 0;
 export const VOLUME_INDICATOR_THRESHOLDS = [
     ["overamplified", 101],
