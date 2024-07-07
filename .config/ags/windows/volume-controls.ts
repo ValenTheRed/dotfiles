@@ -10,24 +10,31 @@ const Slider = (speaker: Stream) =>
         children: [
             Widget.Icon({
                 size: WHITESUR_ICON_SIZE.DEFAULT,
-                icon_name: speaker.bind("icon_name").as((name) => {
-                    if (
-                        name ===
-                        AUDIO_APPLICATION.NAME.BUILT_IN_AUDIO_ANALOG_STEREO
-                    ) {
-                        return AUDIO_APPLICATION.ICON.SYSTEM;
-                    } else if (
-                        name &&
-                        Utils.lookUpIcon(name, WHITESUR_ICON_SIZE.DEFAULT)
-                    ) {
-                        return name;
-                    } else {
-                        return AUDIO_APPLICATION.ICON.SYSTEM;
-                    }
-                }),
-                tooltip_text: speaker
-                    .bind("name")
-                    .as((name) => name ?? AUDIO_APPLICATION.NAME.UNKOWN),
+            }).hook(speaker, (self) => {
+                self.tooltip_text =
+                    speaker.name ?? AUDIO_APPLICATION.NAME.UNKOWN;
+
+                let icon_name: Stream["icon_name"];
+                const name = speaker.name?.toLowerCase();
+                if (name?.includes("firefox")) {
+                    icon_name = "firefox-symbolic";
+                } else if (name?.includes("vlc")) {
+                    icon_name = "vlc";
+                } else if (name?.includes("chromium")) {
+                    icon_name = "google-chrome-symbolic";
+                } else {
+                    icon_name = speaker.icon_name;
+                }
+                if (
+                    icon_name &&
+                    icon_name !==
+                        AUDIO_APPLICATION.NAME.BUILT_IN_AUDIO_ANALOG_STEREO &&
+                    Utils.lookUpIcon(icon_name, WHITESUR_ICON_SIZE.DEFAULT)
+                ) {
+                    self.icon_name = icon_name;
+                } else {
+                    self.icon_name = AUDIO_APPLICATION.ICON.SYSTEM;
+                }
             }),
             Widget.Slider({
                 class_name: "volume-slider",
