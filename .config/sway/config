@@ -43,6 +43,7 @@ layer_effects {
     "rofi" blur enable; shadows enable; corner_radius 13
     "panel" blur enable
     "volume-controls" blur enable; corner_radius 13
+    "notifications" blur enable; corner_radius 13
 }
 
 font pango:sans-serif 11
