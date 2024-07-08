@@ -42,6 +42,7 @@ shadow_inactive_color #000000B0
 layer_effects {
     "rofi" blur enable; shadows enable; corner_radius 13
     "panel" blur enable
+    "volume-controls" blur enable; corner_radius 13
 }
 
 font pango:sans-serif 11
