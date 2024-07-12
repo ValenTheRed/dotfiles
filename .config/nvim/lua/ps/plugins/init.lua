@@ -74,10 +74,12 @@ return {
 		"windwp/nvim-ts-autotag",
 		config = function()
 			require("nvim-ts-autotag").setup {
-				enable = true,
-				enable_rename = true,
-				enable_close = false,
-				enable_close_on_slash = false,
+				opt = {
+					enable = true,
+					enable_rename = true,
+					enable_close = false,
+					enable_close_on_slash = false,
+				}
 			}
 		end,
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -92,9 +94,6 @@ return {
 					disable = { "help" },
 				},
 				additional_vim_regex_highlighting = false,
-				context_commentstring = {
-					enable = true,
-				},
 			}
 		end,
 		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
