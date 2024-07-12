@@ -1,0 +1,152 @@
+[colors.bright]
+black = "#444b6a"
+blue = "#7da6ff"
+cyan = "#0db9d7"
+green = "#b9f27c"
+magenta = "#bb9af7"
+red = "#ff7a93"
+white = "#acb0d0"
+yellow = "#ff9e64"
+
+[colors.normal]
+black = "#32344a"
+blue = "#7aa2f7"
+cyan = "#449dab"
+green = "#9ece6a"
+magenta = "#ad8ee6"
+red = "#f7768e"
+white = "#787c99"
+yellow = "#e0af68"
+
+[colors.primary]
+background = "#1a1b26"
+foreground = "#a9b1d6"
+
+[font]
+size = 13
+
+[font.normal]
+family = "monospace"
+
+[window]
+opacity = 0.8
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;9~"
+key = "Tab"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;6;9~"
+key = "Tab"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+chars = "\u0013z"
+key = "Z"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013%"
+key = "P"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\""
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013x"
+key = "X"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[A"
+key = "K"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[B"
+key = "J"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[C"
+key = "L"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[D"
+key = "H"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013c"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00131"
+key = "Key1"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00132"
+key = "Key2"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00133"
+key = "Key3"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00134"
+key = "Key4"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00135"
+key = "Key5"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00136"
+key = "Key6"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00137"
+key = "Key7"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00138"
+key = "Key8"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u00139"
+key = "Key9"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[1;5B"
+key = "Down"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[1;5A"
+key = "Up"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[1;5C"
+key = "Right"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0013\u001B[1;5D"
+key = "Left"
+mods = "Command"
