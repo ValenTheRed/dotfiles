@@ -23,3 +23,9 @@ export const AUDIO_APPLICATION = {
         UNKOWN: "Unknown",
     },
 } as const;
+export const GAMMA_CONTROL_ICONS = {
+    ENABLED: "night-light-symbolic",
+    DISABLED: "night-light-disabled-symbolic",
+} as const;
+export const ENABLED = "Enabled";
+export const DISABLED = "Disabled";

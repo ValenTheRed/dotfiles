@@ -3,3 +3,4 @@ export { default as Battery } from "./battery";
 export { default as Workspace } from "./workspace";
 export { default as VolumeIndicator } from "./volume-indicator";
 export { default as SystemTray } from "./system-tray";
+export { default as GammaControl } from "./gamma-control";

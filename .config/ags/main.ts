@@ -1,7 +1,14 @@
 import "style";
 import { WIDGET_SPACING } from "constants";
 import battery from "daemons/battery";
-import { Date, Battery, Workspace, VolumeIndicator, SystemTray } from "widgets";
+import {
+    Date,
+    Battery,
+    Workspace,
+    VolumeIndicator,
+    SystemTray,
+    GammaControl,
+} from "widgets";
 import { VolumeControls } from "windows";
 
 const Bar = (monitor: number) =>
@@ -22,7 +29,13 @@ const Bar = (monitor: number) =>
                 class_name: "end-widget",
                 hpack: "end",
                 spacing: WIDGET_SPACING,
-                children: [SystemTray, VolumeIndicator, Battery, Date],
+                children: [
+                    SystemTray,
+                    GammaControl,
+                    VolumeIndicator,
+                    Battery,
+                    Date,
+                ],
             }),
         }),
     });
