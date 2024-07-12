@@ -162,7 +162,11 @@ set.runtimepath:prepend(lazypath)
 -- load ./lua/ps/plugins
 -- colorscheme is set there
 -- all plugins configuration is set there
-require("lazy").setup("ps.plugins")
+require("lazy").setup("ps.plugins", {
+	defaults = {
+		version = "*"
+	}
+})
 
 require("ps.sessions")
 require("ps.wiki")
