@@ -9,6 +9,7 @@ return {
 			vim.cmd.colorscheme("psmdc_dark")
 		end,
 		priority = 1000,
+		branch = "master"
 		-- dir = "F:/Github/psmdc.nvim",
 		-- dev = true,
 	}, -- }}}
@@ -92,11 +93,12 @@ return {
 				highlight = {
 					enable = true,
 					disable = { "help" },
+					additional_vim_regex_highlighting = false,
 				},
-				additional_vim_regex_highlighting = false,
 			}
 		end,
 		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
+		branch = "master",
 		build = ":TSUpdate",
 	}, --}}}
 	-- {{{ L3MON4D3/LuaSnip
