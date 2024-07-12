@@ -50,7 +50,6 @@ vim.ui.input = function(opts, on_confirm)
 		return
 	end
 
-	win_set_opt(win, "winhighlight", "Normal:Normal")
 	win_set_opt(win, "number", false)
 	win_set_opt(win, "relativenumber", false)
 	win_set_opt(win, "colorcolumn", "")
