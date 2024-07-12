@@ -30,7 +30,6 @@ vim.api.nvim_create_user_command("Playground", function(opts)
 		return
 	end
 
-	vim.cmd.lcd(tmpdir)
 	if opts.mods == "vertical" then
 		vim.cmd.vsplit(fname)
 	elseif opts.mods == "tab" then
@@ -40,4 +39,5 @@ vim.api.nvim_create_user_command("Playground", function(opts)
 	else
 		vim.cmd.edit(fname)
 	end
+	vim.cmd.lcd(tmpdir)
 end, { nargs = 1 })
