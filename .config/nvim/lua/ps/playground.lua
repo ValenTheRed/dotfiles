@@ -2,8 +2,8 @@ vim.api.nvim_create_user_command("Playground", function(opts)
 	local extension = opts.args
 	local fname = string.format("main.%s", extension)
 
-	local tmpfile = vim.fn.tempname()
-	local tmpdir = vim.fn.fnamemodify(tmpfile, ":h")
+	local tmpdir = vim.fn.fnamemodify(vim.fn.tempname(), ":h")
+	local file = tmpdir .. "/" .. fname
 	-- Need to add the buffer because for some filetypes, the extension alone
 	-- is not enough to disambiguate the filetype.
 	--
@@ -12,9 +12,9 @@ vim.api.nvim_create_user_command("Playground", function(opts)
 	--
 	-- Also, the providing `contents = {''}` still returns `nil` even though
 	-- logically it should return 'typescript'.
-	local bufnr = vim.fn.bufadd(tmpdir .. "/" .. fname)
+	local bufnr = vim.fn.bufadd(file)
 
-	if vim.filetype.match { buf = bufnr, filename = fname } == nil then
+	if vim.filetype.match { buf = bufnr, filename = file } == nil then
 		vim.notify(
 			string.format(
 				"No filetype corresponding to the extension '%s' found",
@@ -31,13 +31,13 @@ vim.api.nvim_create_user_command("Playground", function(opts)
 	end
 
 	if opts.mods == "vertical" then
-		vim.cmd.vsplit(fname)
+		vim.cmd.vsplit(file)
 	elseif opts.mods == "tab" then
-		vim.cmd.tab(fname)
+		vim.cmd.tab(file)
 	elseif opts.mods == "horizontal" then
-		vim.cmd.split(fname)
+		vim.cmd.split(file)
 	else
-		vim.cmd.edit(fname)
+		vim.cmd.edit(file)
 	end
 	vim.cmd.lcd(tmpdir)
 end, { nargs = 1 })
