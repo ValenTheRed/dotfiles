@@ -54,6 +54,7 @@ export default (monitor: number = 0) =>
             self.keybind("Escape", () => App.closeWindow("volume-controls")),
         visible: false,
         keymode: "on-demand",
+        margins: [3, 50, 0, 0],
         layer: "top",
         class_name: "volume-controls",
         decorated: true,
