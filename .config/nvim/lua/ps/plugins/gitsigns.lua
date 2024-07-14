@@ -46,11 +46,14 @@ local setup = {
 		delay = 200,
 	},
 	on_attach = on_attach,
+	attach_to_untracked = true,
+	signs_staged_enable = false,
 }
 
 return {
 	{
 		"lewis6991/gitsigns.nvim",
+		branch = "main",
 		config = function()
 			require("gitsigns").setup(setup)
 		end,
