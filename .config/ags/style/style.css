@@ -30,9 +30,10 @@ box.volume-controls {
     min-height: .75rem;
     border-radius: 50px;
     border-width: 0px;
+    outline-width: 0px;
 }
 
-.volume-slider trough slider:active {
+.volume-slider slider:active {
     border-color: @foreground;
 }
 
