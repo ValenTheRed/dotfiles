@@ -218,14 +218,14 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#14161988"
+    background = "#898a8c44"
     foreground = "#ffffff"
     timeout = 10
     highlight = "#cba5be"
     #default_icon = /path/to/icon
 
 [urgency_normal]
-    background = "#898a8c44"
+    background = "#14161988"
     foreground = "#ffffff"
     timeout = 10
     highlight = "#cba5be"
