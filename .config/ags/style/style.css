@@ -32,6 +32,10 @@ box.volume-controls {
     border-width: 0px;
 }
 
+.volume-slider trough slider:active {
+    border-color: @foreground;
+}
+
 .volume-slider highlight {
     background-color: @color6;
     border-radius: 50px;
