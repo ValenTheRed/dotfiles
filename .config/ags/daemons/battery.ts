@@ -22,6 +22,7 @@ export default async () => {
             body: `Approximately ${percent}% remaining.`,
             urgency: "critical",
             iconName: icon_name,
+            transient: true,
         });
         hasNotified = true;
     });
