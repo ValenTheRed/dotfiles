@@ -122,6 +122,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = { "L3MON4D3/LuaSnip" },
+		branch = "main",
 		config = config,
 	},
 	{ "hrsh7th/cmp-path",    dependencies = { "hrsh7th/nvim-cmp" } },
