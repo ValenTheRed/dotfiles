@@ -2,10 +2,12 @@ import { LOW_BATTERY_THRESHOLD } from "constants";
 import { closeNotification } from "utils";
 
 export default async () => {
-    const daemon = await Service.import("battery");
     let hasNotified = false;
     let isChargingAfterNotify = false;
     let id: Awaited<ReturnType<typeof Utils.notify>>;
+
+    const daemon = await Service.import("battery");
+
     daemon.connect("notify::charging", ({ charging }) => {
         if (charging && hasNotified) {
             isChargingAfterNotify = true;
@@ -16,6 +18,7 @@ export default async () => {
             isChargingAfterNotify = false;
         }
     });
+
     daemon.connect(
         "notify::percent",
         async ({ percent, charging, icon_name }) => {
