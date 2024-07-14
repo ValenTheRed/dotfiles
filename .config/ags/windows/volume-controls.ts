@@ -66,10 +66,12 @@ export default (monitor: number = 0) =>
             class_name: "volume-controls",
             vertical: true,
             children: [Slider(audio.speaker)],
-            setup: (self) =>
-                audio.connect("notify::apps", (audio) => {
-                    const appSliders = audio.apps.map(Slider);
-                    self.children = [Slider(audio.speaker), ...appSliders];
-                }),
-        }),
+        }).hook(
+            audio,
+            (self) => {
+                const appSliders = audio.apps.map(Slider);
+                self.children = [Slider(audio.speaker), ...appSliders];
+            },
+            "notify::apps",
+        ),
     });
