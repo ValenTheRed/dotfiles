@@ -17,6 +17,8 @@ window.volume-controls {
 
 box.volume-controls {
     padding: 10px 20px;
+    border: 1px solid @foreground;
+    border-radius: 13px;
 }
 
 .volume-slider {
