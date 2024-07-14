@@ -53,6 +53,7 @@ default_border pixel 2
 for_window {
     [title="Picture-in-Picture" app_id="org.mozilla.firefox"] floating enable
     [all] inhibit_idle fullscreen
+    [floating] shadows enable
 }
 
 seat seat0 xcursor_theme CapitaineCursors
