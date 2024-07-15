@@ -5,4 +5,5 @@ const date = Variable("", {
 export default Widget.Button({
     class_name: "date status-widget",
     label: date.bind(),
+    on_primary_click: () => App.toggleWindow("calendar"),
 });

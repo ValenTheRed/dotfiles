@@ -1,6 +1,6 @@
 import "style";
 import battery from "daemons/battery";
-import { VolumeControls, StatusBar } from "windows";
+import { VolumeControls, StatusBar, Calendar } from "windows";
 
 App.config({
     onConfigParsed: () => {
@@ -9,5 +9,5 @@ App.config({
     /// Ref: https://github.com/vinceliuice/WhiteSur-icon-theme
     iconTheme: "WhiteSur",
     style: "./style/style.css",
-    windows: [StatusBar(0), VolumeControls(0)],
+    windows: [StatusBar(0), VolumeControls(0), Calendar(0)],
 });
