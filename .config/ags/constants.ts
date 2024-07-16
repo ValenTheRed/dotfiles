@@ -23,9 +23,15 @@ export const AUDIO_APPLICATION = {
         UNKOWN: "Unknown",
     },
 } as const;
-export const GAMMA_CONTROL_ICONS = {
-    ENABLED: "night-light-symbolic",
-    DISABLED: "night-light-disabled-symbolic",
+export const GAMMA_CONTROL = {
+    LABELS: {
+        AUTO_TEMP: "Automatic temperature",
+        LOW_TEMP: "Low temperature",
+        HIGH_TEMP: "High temperature",
+    },
+    ICONS: {
+        AUTO_TEMP: "night-light-symbolic",
+        LOW_TEMP: "weather-clear-night-symbolic",
+        HIGH_TEMP: "weather-clear-symbolic",
+    },
 } as const;
-export const ENABLED = "Enabled";
-export const DISABLED = "Disabled";

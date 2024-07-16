@@ -1,33 +1,33 @@
-import {
-    DISABLED,
-    ENABLED,
-    GAMMA_CONTROL_ICONS,
-    WHITESUR_ICON_SIZE,
-} from "constants";
+import { GAMMA_CONTROL, WHITESUR_ICON_SIZE } from "constants";
 
-type IconType = typeof ENABLED | typeof DISABLED;
-
-const Icon = (type: IconType) =>
+const Icon = (name: string) =>
     Widget.Icon({
         size: WHITESUR_ICON_SIZE.DEFAULT,
-        icon:
-            type === ENABLED
-                ? GAMMA_CONTROL_ICONS.ENABLED
-                : GAMMA_CONTROL_ICONS.DISABLED,
+        icon: name,
     });
 
 export default Widget.Button({
     class_name: "gamma-control status-widget",
     on_clicked: (self) => {
         Utils.exec("pkill -SIGUSR1 wlsunset");
-        if (self.tooltip_text === ENABLED) {
-            self.image = Icon(DISABLED);
-            self.tooltip_text = DISABLED;
-        } else {
-            self.image = Icon(ENABLED);
-            self.tooltip_text = ENABLED;
+        switch (self.tooltip_text) {
+            case GAMMA_CONTROL.LABELS.AUTO_TEMP: {
+                self.tooltip_text = GAMMA_CONTROL.LABELS.LOW_TEMP;
+                self.image = Icon(GAMMA_CONTROL.ICONS.LOW_TEMP);
+                break;
+            }
+            case GAMMA_CONTROL.LABELS.LOW_TEMP: {
+                self.tooltip_text = GAMMA_CONTROL.LABELS.HIGH_TEMP;
+                self.image = Icon(GAMMA_CONTROL.ICONS.HIGH_TEMP);
+                break;
+            }
+            case GAMMA_CONTROL.LABELS.HIGH_TEMP: {
+                self.tooltip_text = GAMMA_CONTROL.LABELS.AUTO_TEMP;
+                self.image = Icon(GAMMA_CONTROL.ICONS.AUTO_TEMP);
+                break;
+            }
         }
     },
-    image: Icon(ENABLED),
-    tooltip_text: ENABLED,
+    image: Icon(GAMMA_CONTROL.ICONS.AUTO_TEMP),
+    tooltip_text: GAMMA_CONTROL.LABELS.AUTO_TEMP,
 });
