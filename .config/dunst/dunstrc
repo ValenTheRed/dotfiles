@@ -169,7 +169,7 @@
     history_length = 50
 
     ### Misc/Advanced ###
-    dmenu = /usr/bin/dmenu -p dunst:
+    dmenu = rofi -dmenu -p dunst:
     browser = /usr/bin/xdg-open
     always_run_script = true
 
