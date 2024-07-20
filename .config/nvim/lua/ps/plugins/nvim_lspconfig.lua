@@ -96,6 +96,7 @@ local efm_languages = {
 	typescriptreact = { efm_prettierd, efm_eslintd },
 	typescript = { efm_prettierd, efm_eslintd },
 	json = { efm_prettierd },
+	css = { efm_prettierd },
 	lua = {
 		{
 			formatCanRange = true,
