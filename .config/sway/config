@@ -56,7 +56,7 @@ for_window {
     [floating] shadows enable
 }
 
-seat seat0 xcursor_theme CapitaineCursors
+seat seat0 xcursor_theme Bibata-Modern-Classic
 
 exec ~/.config/sway/scripts/sunset
 
