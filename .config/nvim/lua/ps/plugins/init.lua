@@ -9,8 +9,8 @@ return {
 			vim.cmd.colorscheme("psmdc_dark")
 		end,
 		priority = 1000,
-		branch = "master"
-		-- dir = "F:/Github/psmdc.nvim",
+		branch = "master",
+		-- dir = "~/repository/psmdc.nvim",
 		-- dev = true,
 	}, -- }}}
 	"tpope/vim-commentary",
