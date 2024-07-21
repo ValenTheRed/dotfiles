@@ -1,16 +1,14 @@
-alias sudo="sudo "
-
+if [[ "$(uname -s)" == Linux* ]]; then
+    alias logoff="pkill -KILL -u ${USER}"
+    alias sudo="sudo "
+fi
 alias es="eza --icons --group-directories-first"
 alias ea="eza --icons -a --group-directories-first"
 alias el="eza --icons -la --group-directories-first"
-
 alias la="ls -A"
 alias ll="ls -lFh"
 alias lsa="ls -AlFh"
-
 alias vi="nvim"
-
-alias logoff="pkill -KILL -u ${USER}"
 
 # a nice sensible .zshrc file: https://gist.github.com/scottstanfield/fa1085c225069160225d18b1dc16ee1c
 
