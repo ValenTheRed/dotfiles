@@ -22,6 +22,26 @@ autoload -Uz compinit && compinit
 # smart case matching. `cd d<TAB>` will match `Doc` and `doc`.
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
+# Ref for KEYTIMEOUT:
+# - https://zsh.sourceforge.io/Doc/Release/Parameters.html#Parameters-Used-By-The-Shell-1
+# - https://www.johnhawthorn.com/2012/09/vi-escape-delays/
+# 1 = 10ms, default is 0.4s
+KEYTIMEOUT=1
+
+# Change cursor shape in vi mode.
+# Ref: https://unix.stackexchange.com/a/765611
+zle-keymap-select () {
+    if [[ $KEYMAP == vicmd ]]; then
+        # Command mode: block cursor
+        echo -ne "\e[2 q"
+    else
+        # Insert mode: blinking I-beam cursor
+        echo -ne "\e[5 q"
+    fi
+}
+precmd_functions+=(zle-keymap-select)
+zle -N zle-keymap-select
+
 source "${ZDOTDIR}/prompt.zsh"
 
 # ZSH automatically sets editing mode as `vi` if it detects substring `vi`
