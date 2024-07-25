@@ -73,7 +73,7 @@ button:hover {
     transition-property: all;
 }
 
-.workspace-active, .workspace-occupied {
+.workspace-active, .workspace-occupied, .workspace-add {
     padding: 0px 10px;
     border-radius: 5px;
 }

@@ -1,4 +1,5 @@
 /// Reference: https://github.com/Aylur/ags/pull/246
+import { WHITESUR_ICON_SIZE } from "constants";
 import Sway from "services/sway";
 
 export default Widget.Box({
@@ -36,8 +37,12 @@ export default Widget.Box({
         }
         btns.push(
             Widget.Button({
-                label: "+",
-                class_name: "workspace-occupied",
+                image: Widget.Icon({
+                    size: WHITESUR_ICON_SIZE.DEFAULT,
+                    // NOTE: "icon_name" prop doesn't work.
+                    icon: "list-add-symbolic",
+                }),
+                class_name: "workspace-add",
                 on_clicked: () =>
                     Sway.msg(`workspace number ${addWorkspaceNumber}`),
             }),
