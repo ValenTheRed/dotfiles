@@ -24,7 +24,10 @@ export default Widget.Box({
                     on_clicked: () => Sway.msg(`workspace ${label}`),
                 });
             })
-            .filter((btn) => btn !== undefined);
+            .filter((btn) => btn !== undefined)
+            // NOTE: This don't work so well if we have actual strings in the
+            // workspaces.
+            .toSorted((b1, b2) => Number(b1.label) - Number(b2.label));
 
         let nextPredicted = btns[0].label === "1" ? 2 : 1;
         let addWorkspaceNumber = nextPredicted;
