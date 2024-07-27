@@ -105,7 +105,7 @@ end
 if use_winbar then
 	winbar.active = {
 		lualine_a = {
-			unpack(FileInfo.component("outline")),
+			unpack(FileInfo.component("full")),
 		},
 		lualine_c = {
 			{
@@ -119,7 +119,7 @@ if use_winbar then
 	}
 	winbar.inactive = {
 		lualine_a = {
-			unpack(FileInfo.component("full")),
+			unpack(FileInfo.component("outline")),
 		},
 		lualine_b = {
 			{
