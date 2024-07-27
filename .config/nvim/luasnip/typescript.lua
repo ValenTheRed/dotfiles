@@ -38,7 +38,7 @@ return {
 		f(function(args)
 			local idents = split(args[1][1], ",")
 			local transformed = vim.tbl_map(function(ident)
-				return string.format([['\n%s:', %s]], ident, ident)
+				return string.format([['\n\t%s:', %s]], ident, ident)
 			end, idents)
 			return table.concat(transformed, ", ")
 		end, { 1 }),
