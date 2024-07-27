@@ -6,6 +6,7 @@ include ~/.config/sway/colors-sway.conf
 set {
     $laptop  eDP-1
     $monitor HDMI-A-1
+    $wallpaper $XDG_CACHE_HOME/wallpaper
 }
 
 focus output $monitor
