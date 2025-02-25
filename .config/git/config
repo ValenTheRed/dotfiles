@@ -49,6 +49,10 @@
 	# @params
 	# $1: ripgrep pattern to filter the files by
 	rpat = "!git s -s | awk '{print $2}' | rg $1 | xargs git r #"
+
+	pog = "!git push -u origin $(git curb)"
+
+	update = "!git pull origin $(git curb)"
 [commit]
 	# show equivalent to `diff --cached` in the commit message
 	verbose = true
