@@ -29,7 +29,7 @@ size = 13
 family = "monospace"
 
 [window]
-opacity = 0.8
+opacity = 1
 
 [[keyboard.bindings]]
 chars = "\u001B[27;5;9~"
