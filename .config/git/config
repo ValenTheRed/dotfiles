@@ -78,8 +78,12 @@
 [advice]
 	detachedHead = false
 [credential]
-	helper = osxkeychain
-	helper = libsecret
-	helper = oauth
+	credentialStore = secretservice
+	helper = /home/ps/.dotnet/tools/git-credential-manager
+	# helper = osxkeychain
+	# helper = libsecret
+	# helper = oauth
+[credential "https://dev.azure.com"]
+	useHttpPath = true
 
 # vim: set noet:
