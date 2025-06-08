@@ -16,7 +16,7 @@ local function format(client_messages)
 		return msg and string.format("%s %s", name, msg) or name
 	end
 
-	local lsp_clients = vim.lsp.get_active_clients {
+	local lsp_clients = vim.lsp.get_clients {
 		bufnr = 0,
 	}
 	if #lsp_clients <= 0 then
