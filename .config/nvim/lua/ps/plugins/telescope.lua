@@ -115,6 +115,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		branch = 'master',
 		config = config,
 	},
 	{

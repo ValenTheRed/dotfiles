@@ -134,7 +134,7 @@ local on_attach = function(client, bufnr)
 	end, "Telescope list/goto definitions")
 
 	-- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
-	cond_nmap("implementationProvider", "gR", function()
+	cond_nmap("implementationProvider", "gri", function()
 		telescope_builtin.lsp_implementations(telescope_lsp_opts)
 	end, "Telescope list/goto implementations")
 
@@ -145,7 +145,7 @@ local on_attach = function(client, bufnr)
 		"floating lsp function signature help"
 	)
 
-	cond_nmap("referencesProvider", "gr", function()
+	cond_nmap("referencesProvider", "grr", function()
 		telescope_builtin.lsp_references(telescope_lsp_opts)
 	end, "Telescope lists references")
 
@@ -153,7 +153,7 @@ local on_attach = function(client, bufnr)
 		telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
 	end, "Telescope list/goto type definitions")
 
-	cond_nmap("documentSymbolProvider", "<space>dr", function()
+	cond_nmap("documentSymbolProvider", "gO", function()
 		telescope_builtin.lsp_document_symbols {
 			previewer = true,
 		}
@@ -174,12 +174,12 @@ local on_attach = function(client, bufnr)
 
 	cond_nmap(
 		"renameProvider",
-		"<space>rn",
+		"grn",
 		vim.lsp.buf.rename,
 		"lsp rename identifier under cursor"
 	)
 
-	cond_nmap("codeActionProvider", "<space>ca", function()
+	cond_nmap("codeActionProvider", "gca", function()
 		telescope_builtin.lsp_code_actions {
 			previewer = false,
 		}
