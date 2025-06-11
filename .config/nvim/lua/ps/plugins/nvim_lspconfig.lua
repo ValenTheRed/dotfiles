@@ -97,14 +97,14 @@ local efm_languages = {
 	typescript = { efm_prettierd, efm_eslintd },
 	json = { efm_prettierd },
 	css = { efm_prettierd },
-	lua = {
-		{
-			formatCanRange = true,
-			formatCommand = "stylua ${--range-start:charStart} ${--range-end:charEnd} -",
-			formatStdin = true,
-			rootMarkers = { "stylua.toml", ".stylua.toml" },
-		},
-	},
+	-- lua = {
+	-- 	{
+	-- 		formatCanRange = true,
+	-- 		formatCommand = "stylua ${--range-start:charStart} ${--range-end:charEnd} -",
+	-- 		formatStdin = true,
+	-- 		rootMarkers = { "stylua.toml", ".stylua.toml" },
+	-- 	},
+	-- },
 }
 
 -- Use an on_attach function to only map the following keys
