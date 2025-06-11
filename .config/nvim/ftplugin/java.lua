@@ -1,11 +1,15 @@
-local java_executable = "path"
-local jdtls_launcher_path = "path"
-local jdtls_config_path = "path"
+local home = vim.fn.expand("$HOME")
+
+local java_executable = "java"
+local jdtls_launcher_path =
+	home .. "/opt/jdt-language-server-1.48.0-202506032041/plugins/org.eclipse.equinox.launcher_1.7.0.v20250519-0528.jar"
+local jdtls_config_path = home .. "/opt/jdt-language-server-1.48.0-202506032041/config_linux"
 -- TODO: the way project_name is extracted is a footgun. Make it
 -- better.
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = vim.fn.expand("~") .. "/jdtls-workspace/" .. project_name
-local format_xml_path = "path"
+local jdtls_workspace = vim.fn.expand("$XDG_DATA_HOME") .. "/jdtls-workspace"
+local workspace_dir = jdtls_workspace .. "/" .. project_name
+local format_xml_path = jdtls_workspace .. "/" .. "eclipse-java-google-style.xml"
 local config = {
 	cmd = {
 		-- 💀
@@ -35,10 +39,13 @@ local config = {
 	settings = {
 		java = {
 			format = {
+				enabled = true,
 				settings = {
 					url = format_xml_path,
+					profile = "GoogleStyle",
 				},
 			},
+			signatureHelp = { enabled = true },
 		},
 	},
 }
