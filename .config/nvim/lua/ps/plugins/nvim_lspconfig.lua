@@ -189,6 +189,12 @@ local on_attach = function(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end
+	if client.name == "jdtls" then
+		--- Even though `gqq`/`vim.lsp.buf.format()` works, `jdtls` declares
+		--- that it doesn't have formatting capability.
+		client.server_capabilities.documentFormattingProvider = true
+		client.server_capabilities.documentRangeFormattingProvider = true
+	end
 
 	cond_nmap(
 		"documentFormattingProvider",
