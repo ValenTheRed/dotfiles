@@ -31,7 +31,7 @@ return {
 	),
 	s(
 		{
-			trig = "fore",
+			trig = "fre",
 			snippetType = "autosnippet",
 			dscr = "for construct",
 		},
