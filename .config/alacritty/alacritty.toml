@@ -44,109 +44,109 @@ mods = "Control|Shift"
 [[keyboard.bindings]]
 chars = "\u0013z"
 key = "Z"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013%"
 key = "P"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\""
 key = "S"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013x"
 key = "X"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[A"
 key = "K"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[B"
 key = "J"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[C"
 key = "L"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[D"
 key = "H"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013c"
 key = "T"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00131"
 key = "Key1"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00132"
 key = "Key2"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00133"
 key = "Key3"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00134"
 key = "Key4"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00135"
 key = "Key5"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00136"
 key = "Key6"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00137"
 key = "Key7"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00138"
 key = "Key8"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u00139"
 key = "Key9"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[1;5B"
 key = "Down"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[1;5A"
 key = "Up"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[1;5C"
 key = "Right"
-mods = "Command"
+mods = "Alt"
 
 [[keyboard.bindings]]
 chars = "\u0013\u001B[1;5D"
 key = "Left"
-mods = "Command"
+mods = "Alt"
