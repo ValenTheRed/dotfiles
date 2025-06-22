@@ -213,15 +213,15 @@ vim.api.nvim_create_autocmd("BufNewFile", {
 		if extension == "" then
 			return
 		end
-		-- To restore alternate file register after `:r` clobers it
-		local alt_reg = vim.fn.getreg("#")
 		local file = vim.fn.stdpath("config")
 			.. [[/templates/skeleton.]]
 			.. extension
 		if vim.fn.filereadable(file) ~= 0 then
+			-- To restore alternate file register after `:r` clobers it
+			local alt_reg = vim.fn.getreg("#")
 			vim.cmd([[0r ]] .. file)
+			vim.fn.setreg("#", alt_reg)
 		end
-		vim.fn.setreg("#", alt_reg)
 	end,
 })
 
