@@ -1,6 +1,6 @@
 local dir = {
-	notes = vim.fn.expand([[~/notes]]),
-	todo = vim.fn.expand([[~/notes/todo.md]]),
+	notes = vim.fn.resolve(vim.fn.expand([[~/notes]])),
+	todo = vim.fn.resolve(vim.fn.expand([[~/notes/todo.md]])),
 }
 
 local function set_todos()
