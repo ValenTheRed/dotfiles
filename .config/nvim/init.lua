@@ -142,6 +142,8 @@ set.showbreak = "↪ "
 
 -- If last line of files doesn't have EOL, don't insert it.
 set.fixendofline = false
+
+set.mousescroll = { 'hor:1', 'ver:1' }
 --}}}
 
 -- {{{ Plugins
