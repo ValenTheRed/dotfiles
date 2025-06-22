@@ -31,6 +31,10 @@ family = "monospace"
 [window]
 opacity = 1
 
+[window.dimensions]
+columns = 180
+lines = 50
+
 [[keyboard.bindings]]
 chars = "\u001B[27;5;9~"
 key = "Tab"
