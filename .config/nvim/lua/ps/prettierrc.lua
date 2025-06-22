@@ -15,13 +15,23 @@ end
 -- prettierrc -> editorconfig options
 local dictionary = {
 	-- typeof both is number
-	printWidth = "max_line_length",
+	printWidth = {
+		{ name = "max_line_length", type = "number" }
+	},
 	-- NOTE: typeof useTabs = boolean and typeof indent_style = "tab" | "space"
-	useTabs = "indent_style",
+	useTabs = {
+		from = "boolean",
+		{ name = "indent_style", type = "string" }
+	},
 	-- typeof both is number
-	tabWidth = "indent_size",
+	tabWidth = {
+		{ name = "indent_size", type = "number" },
+		{ name = "tab_width",   type = "number" }
+	},
 	-- typeof endOfLine = "lf" | crlf" | "cr" | "auto" and typeof end_of_line = "lf" | crlf" | "cr"
-	endOfLine = "end_of_line",
+	endOfLine = {
+		{ name = "end_of_line", type = "string" }
+	},
 }
 
 local default_opts = {
@@ -31,13 +41,17 @@ local default_opts = {
 	end_of_line = "lf",
 }
 
+local function strip_quotes(s)
+	return string.gsub(s, [["]], "")
+end
+
 local function split_line(line)
 	local at = line:find(":", 1, true)
 	if not at then
 		return
 	end
 	local key, value = line:sub(1, at - 1), line:sub(at + 1)
-	return trim(key, ","), trim(value, ",")
+	return strip_quotes(trim(key, ",")), strip_quotes(trim(value, ","))
 end
 
 -- parse parses prettierrc.js file and returns a table of the
@@ -52,16 +66,35 @@ local function parse(path)
 	for line in f:lines() do
 		-- local key, value = line:match([[^%s*(%a+)%s*:%s*['"]?(.-)['"]?,?$]])
 		local key, value = split_line(line)
-		local opt = dictionary[key]
-		if key and opt and not opts[opt] then
-			if key == "useTabs" then
-				opts[opt] = value and "tab" or "space"
-			else
-				opts[opt] = value
+		if key == nil then
+			goto continue
+		end
+		local opt_tbl = dictionary[key]
+		if opt_tbl == nil then
+			goto continue
+		end
+		for _, opt in ipairs(opt_tbl) do
+			-- vim.notify(string.format("key: %s\nvalue: %s\nopt_tbl: %s\n\n", key, value, vim.inspect(opt_tbl)), vim.log.levels.INFO)
+			if key and opt.name and not opts[opt.name] then
+				local cvalue
+				if opt_tbl.from == "boolean" then
+					cvalue = value == "true"
+				end
+				if opt.type == "number" then
+					cvalue = tonumber(value)
+				end
+				if key == "useTabs" then
+					-- vim.notify(string.format("cvalue: %s", vim.inspect(cvalue)))
+					opts[opt.name] = cvalue and "tab" or "space"
+				else
+					opts[opt.name] = cvalue
+				end
 			end
 		end
+		::continue::
 	end
 	f:close()
+	-- vim.notify(string.format("parsed opts: %s", vim.inspect(opts)))
 	return vim.tbl_extend("keep", opts, default_opts)
 end
 
