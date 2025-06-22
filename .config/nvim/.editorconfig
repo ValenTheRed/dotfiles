@@ -1,0 +1,6 @@
+root = true
+
+[*.lua]
+indent_style = tab
+tabSize = 4
+max_line_length = 80
