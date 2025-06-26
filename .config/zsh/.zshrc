@@ -61,8 +61,8 @@ HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
 if [[ ! -f ${HISTFILE} ]]; then
     touch ${HISTFILE}
 fi
-HISTSIZE=500000
-SAVEHIST=100000
+HISTSIZE=4000000000 # 4294967296 = 2^32
+SAVEHIST=$HISTSIZE
 HIST_STAMPS="yyyy-mm-dd"
 setopt append_history           # allow multiple sessions to append to one history
 setopt extended_history         # Record the timestamps along with the commands
