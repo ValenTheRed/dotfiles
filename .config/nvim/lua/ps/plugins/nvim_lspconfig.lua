@@ -185,7 +185,7 @@ local on_attach = function(client, bufnr)
 		}
 	end, "Telescope list code actions")
 
-	if client.name == "tsserver" then
+	if client.name == "ts_ls" then
 		client.server_capabilities.documentFormattingProvider = false
 		client.server_capabilities.documentRangeFormattingProvider = false
 	end
@@ -230,7 +230,7 @@ local config = function()
 	-- Enable the following language servers
 	server_setup("pyright", { capabilities = capabilities })
 	server_setup("gopls", { capabilities = capabilities })
-	server_setup("tsserver", {
+	server_setup("ts_ls", {
 		root_dir = function(filename)
 			local lsp = require("lspconfig")
 			if
@@ -248,7 +248,7 @@ local config = function()
 			)(filename)
 		end,
 		capabilities = capabilities,
-	})
+	}, "tsserver")
 	server_setup("efm", {
 		capabilities = capabilities,
 		init_options = {
