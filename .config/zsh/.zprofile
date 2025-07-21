@@ -8,9 +8,9 @@ if [[ "${os_kernel}" == Darwin* ]] && "${java_installed}"; then
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
 fi
 
-android_installed=false
+android_installed=true
 if "${android_installed}"; then
-    export ANDROID_HOME=${HOME}/Library/Android/sdk
+    export ANDROID_HOME=${HOME}/opt/Android/Sdk
     export PATH=${PATH}:${ANDROID_HOME}/emulator
     export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 fi
