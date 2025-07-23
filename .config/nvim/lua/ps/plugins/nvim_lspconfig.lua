@@ -228,7 +228,7 @@ local config = function()
 	end
 
 	-- Enable the following language servers
-	server_setup("pyright", { capabilities = capabilities })
+	-- server_setup("pyright", { capabilities = capabilities })
 	server_setup("gopls", { capabilities = capabilities })
 	server_setup("ts_ls", {
 		root_dir = function(filename)
@@ -291,6 +291,12 @@ local config = function()
 			Lua = {},
 		},
 	}, "lua-language-server")
+	server_setup("ruff", {
+		capabilities = capabilities,
+	})
+	server_setup("basedpyright", {
+		capabilities = capabilities,
+	})
 end
 
 return { {
