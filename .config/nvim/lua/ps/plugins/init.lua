@@ -98,7 +98,7 @@ return {
 			}
 		end,
 		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
-		branch = "master",
+		branch = "main",
 		build = ":TSUpdate",
 	}, --}}}
 	-- {{{ L3MON4D3/LuaSnip
