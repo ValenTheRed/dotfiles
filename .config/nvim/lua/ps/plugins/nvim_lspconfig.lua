@@ -238,21 +238,19 @@ local config = function()
 	-- server_setup("pyright", { capabilities = capabilities })
 	server_setup("gopls")
 	server_setup("ts_ls", {
-		root_dir = function(filename)
-			local lsp = require("lspconfig")
+		root_dir = function(bufnr, on_dir)
+			local full_path = vim.api.nvim_buf_get_name(bufnr)
 			if
-				string.find(filename, "substitute_this_with_a_directory") ~= nil
+				string.find(full_path, "substitute_this_with_a_directory") ~= nil
 			then
-				return lsp.util.find_git_ancestor(filename)
+				return on_dir(vim.fs.root(bufnr, ".git"))
 			end
-			-- This is the default config set by lspconfig.
-			-- Check `:h lspconfig-server-configurations` & `/# tsserver`
-			return lsp.util.root_pattern(
+			return on_dir(vim.fs.root(bufnr, {
 				"package.json",
 				"tsconfig.json",
 				"jsconfig.json",
 				".git"
-			)(filename)
+			}))
 		end,
 	}, "tsserver")
 	server_setup("efm", {
