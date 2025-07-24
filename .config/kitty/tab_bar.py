@@ -7,14 +7,13 @@ import subprocess
 from typing import Callable
 
 from kitty import rgb
-from kitty.fast_data_types import Screen, add_timer, get_options, Color
+from kitty.fast_data_types import Screen, add_timer, get_boss, get_options
 from kitty.tab_bar import (
     DrawData,
     ExtraData,
     TabBarData,
     draw_title,
 )
-from kitty.tabs import get_boss
 
 opts = get_options()
 
@@ -130,10 +129,10 @@ def draw_tab(
     return screen.cursor.x
 
 
-# def redraw_tabs(timer_id: int | None):
-#     tm = get_boss().active_tab_manager
-#     if tm is not None:
-#         tm.mark_tab_bar_dirty()
+def redraw_tabs(timer_id: int | None):
+    tm = get_boss().active_tab_manager
+    if tm is not None:
+        tm.mark_tab_bar_dirty()
 
 
-# _ = add_timer(redraw_tabs, 1000, True)
+_ = add_timer(redraw_tabs, 1, True)
