@@ -8,13 +8,15 @@ local nmap = function(bufnr, lhs, rhs, desc)
 end
 
 --- @param name string
---- @param opts table
+--- @param opts table|nil
 --- @param exec_name string|nil
 local function server_setup(name, opts, exec_name)
 	if vim.fn.executable(exec_name and exec_name or name) == 0 then
 		return
 	end
-	vim.lsp.config(name, opts)
+	if opts then
+		vim.lsp.config(name, opts)
+	end
 	vim.lsp.enable(name)
 end
 
@@ -73,7 +75,8 @@ local efm_prettierd = {
 
 local efm_eslintd = {
 	lintSource = "efm/eslint_d",
-	lintCommand = 'eslint_d --no-color --format unix --stdin-filename "${INPUT}" --stdin',
+	lintCommand =
+	'eslint_d --no-color --format unix --stdin-filename "${INPUT}" --stdin',
 	lintStdin = true,
 	lintFormats = { "%f:%l:%c: %m" },
 	lintIgnoreExitCode = true,
@@ -227,9 +230,13 @@ local config = function()
 		capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 	end
 
+	vim.lsp.config('*', {
+		capabilities = capabilities
+	})
+
 	-- Enable the following language servers
 	-- server_setup("pyright", { capabilities = capabilities })
-	server_setup("gopls", { capabilities = capabilities })
+	server_setup("gopls")
 	server_setup("ts_ls", {
 		root_dir = function(filename)
 			local lsp = require("lspconfig")
@@ -247,10 +254,8 @@ local config = function()
 				".git"
 			)(filename)
 		end,
-		capabilities = capabilities,
 	}, "tsserver")
 	server_setup("efm", {
-		capabilities = capabilities,
 		init_options = {
 			documentFormatting = true,
 			documentRangeFormatting = true,
@@ -262,7 +267,6 @@ local config = function()
 		},
 	}, "efm-langserver")
 	server_setup("lua_ls", {
-		capabilities = capabilities,
 		on_init = function(client)
 			local path = client.workspace_folders[1].name
 			if
@@ -291,12 +295,8 @@ local config = function()
 			Lua = {},
 		},
 	}, "lua-language-server")
-	server_setup("ruff", {
-		capabilities = capabilities,
-	})
-	server_setup("basedpyright", {
-		capabilities = capabilities,
-	})
+	server_setup("ruff")
+	server_setup("basedpyright")
 end
 
 return { {
