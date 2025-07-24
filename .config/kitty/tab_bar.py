@@ -129,10 +129,10 @@ def draw_tab(
     return screen.cursor.x
 
 
-def redraw_tabs(timer_id: int | None):
-    tm = get_boss().active_tab_manager
-    if tm is not None:
-        tm.mark_tab_bar_dirty()
+# def redraw_tabs(timer_id: int | None):
+#     tm = get_boss().active_tab_manager
+#     if tm is not None:
+#         tm.mark_tab_bar_dirty()
 
 
-_ = add_timer(redraw_tabs, 1, True)
+# _ = add_timer(redraw_tabs, 1, True)
