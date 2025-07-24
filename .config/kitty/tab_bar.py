@@ -60,7 +60,7 @@ def draw_right_status(
         CALENDAR + datetime.date.today().strftime("%a %-d %b"),
     )
     components.append(
-        CLOCK + datetime.datetime.now().strftime("%-I:%M:%S %p"),
+        CLOCK + datetime.datetime.now().strftime("%-I:%M %p"),
     )
     right_status = TAB_SEPARATOR.join(components)
     screen.cursor.x += screen.columns - screen.cursor.x - len(right_status)
