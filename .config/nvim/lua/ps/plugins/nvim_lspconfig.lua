@@ -14,8 +14,8 @@ local function server_setup(name, opts, exec_name)
 	if vim.fn.executable(exec_name and exec_name or name) == 0 then
 		return
 	end
-	local lsp = require("lspconfig")
-	lsp[name].setup(opts)
+	vim.lsp.config(name, opts)
+	vim.lsp.enable(name)
 end
 
 local toggle_document_highlight = (function()
