@@ -89,14 +89,24 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
-			require("nvim-treesitter.configs").setup {
-				highlight = {
-					enable = true,
-					disable = { "help" },
-					additional_vim_regex_highlighting = false,
-				},
+			local lang_list = {
+				'jsx', 'tsx', 'javascript', 'typescript', 'python', 'go'
 			}
+			require('nvim-treesitter').install(lang_list)
+			vim.api.nvim_create_autocmd('FileType', {
+				pattern = lang_list,
+				callback = function()
+					-- syntax highlighting, provided by Neovim
+					vim.treesitter.start()
+					-- folds, provided by Neovim
+					vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+					-- indentation, provided by nvim-treesitter
+					vim.bo.indentexpr =
+					"v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
+			})
 		end,
+		lazy = false,
 		dependencies = "JoosepAlviste/nvim-ts-context-commentstring",
 		branch = "main",
 		build = ":TSUpdate",
