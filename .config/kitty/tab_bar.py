@@ -32,8 +32,6 @@ def draw_right_status(
     set_inactive: Callable[[], None],
     restore: Callable[[], None],
 ):
-    low_battery = ""
-    battery = ""
     components: list[str] = []
     try:
         xdg_config_home = os.getenv("XDG_CONFIG_HOME")
@@ -42,20 +40,16 @@ def draw_right_status(
             .resolve(strict=True)
             .absolute(),
             universal_newlines=True,
-        )
+        ).strip()
         battery = subprocess.check_output(
             pathlib.Path(f"{xdg_config_home}/tmux/battery")
             .resolve(strict=True)
             .absolute(),
             universal_newlines=True,
-        )
-        if battery:
-            components.append((low_battery + " " if low_battery else "") + battery)
+        ).strip()
+        components.append(" ".join((low_battery, battery)).strip())
     except BaseException:
         pass
-    finally:
-        low_battery = low_battery.strip()
-        battery = battery.strip()
     components.append(
         CALENDAR + datetime.date.today().strftime("%a %-d %b"),
     )
@@ -66,9 +60,10 @@ def draw_right_status(
     screen.cursor.x = screen.columns - len(right_status)
 
     set_inactive()
-    if battery:
+    if components:
         screen.cursor.fg = rgb.color_names["orange"].rgb
         screen.draw(components[0])
+        screen.draw(TAB_SEPARATOR)
         set_inactive()
         screen.draw(TAB_SEPARATOR.join(components[1:]))
     else:
