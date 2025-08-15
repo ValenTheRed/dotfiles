@@ -60,7 +60,7 @@ def draw_right_status(
     screen.cursor.x = screen.columns - len(right_status)
 
     set_inactive()
-    if components:
+    if len(components) == 3:
         screen.cursor.fg = rgb.color_names["orange"].rgb
         screen.draw(components[0])
         screen.draw(TAB_SEPARATOR)
