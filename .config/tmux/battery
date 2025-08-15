@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 batt_status=""
-if pmset -g batt | rg -o '\bcharging\b'; then
+if pmset -g batt | rg -o '\bcharging\b' > /dev/null; then
     batt_status=" "
 fi
 
