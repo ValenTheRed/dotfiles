@@ -10,6 +10,9 @@ alias ll="ls -lFh"
 alias lsa="ls -AlFh"
 alias vi="nvim"
 
+# Pass <C-s> to nvim. By default, it's intercepted to perform an 'XOFF'
+stty -ixon
+
 # a nice sensible .zshrc file: https://gist.github.com/scottstanfield/fa1085c225069160225d18b1dc16ee1c
 
 # pressing `<S-v>` in normal mode (called command mode in zsh (`man zshzle(1)`))
