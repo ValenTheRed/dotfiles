@@ -231,13 +231,26 @@ local config = function()
 		capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 	end
 
+	vim.lsp.inlay_hint.enable(true)
 	vim.lsp.config('*', {
 		capabilities = capabilities
 	})
 
 	-- Enable the following language servers
+
 	-- server_setup("pyright", { capabilities = capabilities })
+
 	server_setup("gopls")
+	-- server_setup("gopls", {
+	-- 	settings = {
+	-- 		gopls = {
+	-- 			hints = {
+	-- 				parameterNames = true
+	-- 			}
+	-- 		},
+	-- 	}
+	-- })
+
 	server_setup("ts_ls", {
 		root_dir = function(bufnr, on_dir)
 			local full_path = vim.api.nvim_buf_get_name(bufnr)
@@ -254,6 +267,7 @@ local config = function()
 			}))
 		end,
 	}, "tsserver")
+
 	server_setup("efm", {
 		init_options = {
 			documentFormatting = true,
@@ -265,6 +279,7 @@ local config = function()
 			languages = efm_languages,
 		},
 	}, "efm-langserver")
+
 	server_setup("lua_ls", {
 		on_init = function(client)
 			local path = client.workspace_folders[1].name
@@ -294,7 +309,9 @@ local config = function()
 			Lua = {},
 		},
 	}, "lua-language-server")
+
 	server_setup("ruff")
+
 	server_setup("basedpyright")
 end
 
