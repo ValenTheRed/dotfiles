@@ -190,17 +190,17 @@ letg.tex_flavor = "latex"
 
 -- {{{ Autocmds
 
--- Re-source $MYVIMRC if changed
--- augroup resource_vimrc
---     au!
---     autocmd BufWritePost $MYVIMRC nested :source $MYVIMRC
--- augroup END
-vim.api.nvim_create_autocmd("BufWritePost", {
-	group = vim.api.nvim_create_augroup("re_source_vimrc", { clear = true }),
-	pattern = vim.fn.expand("$MYVIMRC"),
-	nested = true,
-	command = ":source $MYVIMRC",
-})
+-- -- Re-source $MYVIMRC if changed
+-- -- augroup resource_vimrc
+-- --     au!
+-- --     autocmd BufWritePost $MYVIMRC nested :source $MYVIMRC
+-- -- augroup END
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+-- 	group = vim.api.nvim_create_augroup("re_source_vimrc", { clear = true }),
+-- 	pattern = vim.fn.expand("$MYVIMRC"),
+-- 	nested = true,
+-- 	command = ":source $MYVIMRC",
+-- })
 
 vim.api.nvim_create_autocmd("BufNewFile", {
 	group = vim.api.nvim_create_augroup(
