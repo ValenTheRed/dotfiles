@@ -89,7 +89,9 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			local lang_list = {
-				'jsx', 'tsx', 'javascript', 'typescript', 'python', 'go'
+				'javascriptreact', 'typescriptreact', 'javascript',
+				'typescript', 'python', 'go', 'markdown', 'markdown_inline',
+				'html', 'sh', 'bash', 'sql'
 			}
 			require('nvim-treesitter').install(lang_list)
 			vim.api.nvim_create_autocmd('FileType', {
