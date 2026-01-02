@@ -182,11 +182,12 @@ local on_attach = function(client, bufnr)
 		"lsp rename identifier under cursor"
 	)
 
-	cond_nmap("codeActionProvider", "gca", function()
-		telescope_builtin.lsp_code_actions {
-			previewer = false,
-		}
-	end, "Telescope list code actions")
+	cond_nmap(
+		"codeActionProvider",
+		"gca",
+		vim.lsp.buf.code_action,
+		"List code actions"
+	)
 
 	if client.name == "ts_ls" then
 		client.server_capabilities.documentFormattingProvider = false
