@@ -65,7 +65,7 @@ return {
 		config = function()
 			require("ibl").setup {
 				indent = { char = "│" },
-				scope = { enabled = false },
+				scope = { enabled = true, show_start = false },
 			}
 		end,
 	}, -- }}}
