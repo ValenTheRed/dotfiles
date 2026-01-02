@@ -91,7 +91,7 @@ return {
 			local lang_list = {
 				'javascriptreact', 'typescriptreact', 'javascript',
 				'typescript', 'python', 'go', 'markdown', 'markdown_inline',
-				'html', 'sh', 'bash', 'sql'
+				'html', 'sh', 'bash', 'sql', 'comment'
 			}
 			require('nvim-treesitter').install(lang_list)
 			vim.api.nvim_create_autocmd('FileType', {
