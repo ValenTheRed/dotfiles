@@ -175,19 +175,19 @@ local on_attach = function(client, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "print workspace folders in :messages section")
 
-	cond_nmap(
-		"renameProvider",
-		"grn",
-		vim.lsp.buf.rename,
-		"lsp rename identifier under cursor"
-	)
+	-- cond_nmap(
+	-- 	"renameProvider",
+	-- 	"grn",
+	-- 	vim.lsp.buf.rename,
+	-- 	"lsp rename identifier under cursor"
+	-- )
 
-	cond_nmap(
-		"codeActionProvider",
-		"gca",
-		vim.lsp.buf.code_action,
-		"List code actions"
-	)
+	-- cond_nmap(
+	-- 	"codeActionProvider",
+	-- 	"gca",
+	-- 	vim.lsp.buf.code_action,
+	-- 	"List code actions"
+	-- )
 
 	if client.name == "ts_ls" then
 		client.server_capabilities.documentFormattingProvider = false

@@ -315,9 +315,6 @@ nmap("Q", "q:")
 cmap("<C-k>", "<Up>")
 cmap("<C-j>", "<Down>")
 
--- Yank till EOF; consistency with 'D', 'C' etc.
-nmap("Y", "y$")
-
 -- Toggle search hightlighting
 nmap("<F3>", ":set hlsearch! hlsearch?<CR>")
 
