@@ -13,7 +13,6 @@ return {
 		-- dir = "~/repository/psmdc.nvim",
 		-- dev = true,
 	}, -- }}}
-	"tpope/vim-commentary",
 	"tpope/vim-fugitive",
 	"tpope/vim-surround",
 	"tpope/vim-repeat",
