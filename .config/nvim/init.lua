@@ -340,11 +340,11 @@ nmap("[b", ":bp<CR>")
 
 -- change directory for whole of nvim
 nmap("<leader>cd", ":cd %:p:h<CR>:pwd<CR>", { silent = true })
-nmap("<leader>lc", ":lcd %:p:h<CR>:pwd<CR>", { silent = true })
 -- change directory for the current window
+nmap("<leader>lc", ":lcd %:p:h<CR>:pwd<CR>", { silent = true })
 
 -- We can emulate 'zoom' feature by opening the buffer in a new tab.
--- builtin keymap is <C-W><C-T>
+-- builtin keymap is <C-W> T. `h CTRL-W`
 
 -- Easy move between split panes
 nmap("<C-j>", "<C-w><C-j>")
