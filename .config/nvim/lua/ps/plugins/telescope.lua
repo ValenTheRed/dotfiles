@@ -60,6 +60,7 @@ local config = function()
 	}
 
 	require("telescope").load_extension("fzf")
+	require("telescope").load_extension("ui-select")
 
 	-- KEYMAPS
 	local builtin = require("telescope.builtin")
@@ -123,4 +124,5 @@ return {
 		build = "make",
 		dependencies = { "nvim-telescope/telescope.nvim" },
 	},
+	"nvim-telescope/telescope-ui-select.nvim",
 }
