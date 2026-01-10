@@ -1,0 +1,100 @@
+# Numbers in style = 256 ANSI colour codes
+# https://hexdocs.pm/color_palette/color_groups.html
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# ======================
+# GLOBAL PROMPT FORMAT
+# ======================
+add_newline = false
+
+format = """
+$username\
+$hostname\
+$directory\
+${custom.git_branch_icon}\
+$git_branch\
+$git_commit\
+$git_status\
+$git_state\
+$status\
+$character
+"""
+
+# ======================
+# USER / HOST (matches __username_and_host)
+# ======================
+[username]
+style_user = "cyan"
+format = "[ $user]($style)"
+
+[hostname]
+ssh_only = true
+style = "cyan"
+format = "[@$hostname]($style) "
+
+# ======================
+# DIRECTORY
+# ======================
+[directory]
+truncate_to_repo = false
+truncation_length = 0
+read_only = '  '
+style = "#d8bfd8"
+format = "[ $path]($style)[$read_only]($style) "
+
+# ======================
+# GIT BRANCH
+# ======================
+[custom.git_branch_icon]
+when = "git rev-parse --is-inside-work-tree"
+style = "#ff3ba5"
+format = "[ ]($style)"
+shell = ["sh"]
+
+[git_branch]
+style = "13"
+only_attached = true
+format = "[$branch]($style)"
+
+# Detached HEAD
+[git_commit]
+tag_disabled = false
+tag_symbol = ""
+format = '[$tag](117)[:$hash](116)'
+
+# current operation i.e. rebasing, cherry-picking, etc.
+[git_state]
+style = "166"
+format = ' \([$state( $progress_current/$progress_total)]($style)\)'
+
+# ======================
+# GIT STATUS (maps git-prompt flags)
+# ======================
+[git_status]
+format = " ▶$all_status$ahead_behind\n"
+staged     = " [+$count](green)"
+modified   = " [!$count](yellow)"
+conflicted = " [=$count](none)"
+untracked  = " […$count](none)"
+stashed    = " [$count](yellow)"
+ahead      = " [↑$count](none)"
+behind     = " [↓$count](none)"
+up_to_date = " [✓](#ff8c00)"
+
+# ======================
+# EXIT STATUS (matches __last_exit_code)
+# ======================
+[status]
+disabled = false
+symbol = ""
+style = "red"
+format = "[$symbol$int]($style) "
+
+# ======================
+# PROMPT SYMBOL
+# ======================
+[character]
+success_symbol = "[](yellow)"
+error_symbol   = "[](yellow)"

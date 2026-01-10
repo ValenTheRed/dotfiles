@@ -45,7 +45,8 @@ zle-keymap-select () {
 precmd_functions+=(zle-keymap-select)
 zle -N zle-keymap-select
 
-source "${ZDOTDIR}/prompt.zsh"
+source "${ZDOTDIR}/starship_prompt.zsh"
+# source "${ZDOTDIR}/prompt.zsh"
 
 # ZSH automatically sets editing mode as `vi` if it detects substring `vi`
 # in $EDITOR. So, no need for `set -o vi` or whatever the ZSH equivalent is.
