@@ -13,6 +13,7 @@ format = """
 $username\
 $hostname\
 $directory\
+$cmd_duration\
 ${custom.git_branch_icon}\
 $git_branch\
 $git_commit\
@@ -102,3 +103,7 @@ format = "[$symbol$int]($style) "
 success_symbol = "[](yellow)"
 error_symbol   = "[](yellow)"
 vimcmd_symbol  = "[ ](yellow)"
+
+[cmd_duration]
+style = "11"
+format = '[󰄉 $duration]($style) '
