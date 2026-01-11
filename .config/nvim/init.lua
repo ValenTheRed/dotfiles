@@ -144,6 +144,8 @@ set.showbreak = "↪ "
 set.fixendofline = false
 
 set.mousescroll = { 'hor:1', 'ver:1' }
+
+set.winborder = 'rounded'
 --}}}
 
 -- {{{ Plugins
