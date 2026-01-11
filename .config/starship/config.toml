@@ -74,14 +74,17 @@ format = ' \([$state( $progress_current/$progress_total)]($style)\)'
 # ======================
 [git_status]
 format = " ▶$all_status$ahead_behind\n"
-staged     = " [+$count](green)"
-modified   = " [!$count](yellow)"
-conflicted = " [=$count](none)"
-untracked  = " […$count](none)"
-stashed    = " [$count](yellow)"
+conflicted = " [ $count](none)"
 ahead      = " [↑$count](none)"
 behind     = " [↓$count](none)"
+diverged   = " [󰙁 $count](none)"
 up_to_date = " [✓](#ff8c00)"
+untracked  = " […$count](none)"
+stashed    = " [ $count](yellow)"
+modified   = " [!$count](yellow)"
+staged     = " [+$count](green)"
+renamed    = " [󱀱 $count](green)"
+deleted    = " [ $count](204)"
 
 # ======================
 # EXIT STATUS (matches __last_exit_code)
