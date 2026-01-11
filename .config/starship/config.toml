@@ -16,8 +16,8 @@ $directory\
 ${custom.git_branch_icon}\
 $git_branch\
 $git_commit\
-$git_status\
 $git_state\
+$git_status\
 $status\
 $character
 """
