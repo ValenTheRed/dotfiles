@@ -152,5 +152,10 @@ return {
 		end,
 	}, -- }}}
 	"mfussenegger/nvim-jdtls",
+	{
+		"XXiaoA/atone.nvim",
+		cmd = "Atone",
+		opts = {}, -- your configuration here
+	}
 }
 -- vim: set fdm=marker fdl=0:
