@@ -101,3 +101,4 @@ format = "[$symbol$int]($style) "
 [character]
 success_symbol = "[](yellow)"
 error_symbol   = "[](yellow)"
+vimcmd_symbol  = "[ ](yellow)"
