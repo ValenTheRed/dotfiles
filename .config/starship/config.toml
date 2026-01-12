@@ -92,7 +92,7 @@ deleted    = " [ $count](204)"
 # ======================
 [status]
 disabled = false
-symbol = ""
+symbol = "󱈸"
 style = "red"
 format = "[$symbol$int]($style) "
 
