@@ -3,7 +3,14 @@ export STARSHIP_CONFIG=${XDG_CONFIG_HOME}/starship/config.toml
 if ! command -v starship &>/dev/null ; then
     os_kernel="$OSTYPE"
     if [[ "${os_kernel}" == darwin* ]] && command -v brew &>/dev/null ; then
-        brew install starship
+        echo 'Install starship?: brew install starship'
+        read -q "reply?Proceed? [y/N] "
+        if [[ "$reply" == [yY] ]]; then
+            brew install starship
+        else
+            echo "Aborted"
+            return 1
+        fi
     elif [[ "${os_kernel}" == linux* ]] ; then
         echo 'Install starship?: curl -sS https://starship.rs/install.sh | sh'
         read -q "reply?Proceed? [y/N] "
