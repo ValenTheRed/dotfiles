@@ -86,4 +86,4 @@
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 
-# vim: set noet:
+# vim: set noet commentstring=#\ %s:
