@@ -13,9 +13,17 @@ fi
 
 # Install nvm, latest node version, and tree-sitter-cli for installing parsers
 # in neovim.
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-if command -v nvm &>/dev/null ; then
-    nvm install node
+
+echo 'Install nvm?: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash'
+read -q "reply?Proceed? [y/N] "
+if [[ "$reply" == [yY] ]]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+    if command -v nvm &>/dev/null ; then
+        nvm install node
+    fi
+    if command -v npm &>/dev/null ; then
+        npm install -g tree-sitter-cli
+    fi
 fi
 if command -v npm &>/dev/null ; then
     npm install -g tree-sitter-cli
