@@ -25,6 +25,12 @@ if [[ "$reply" == [yY] ]]; then
         npm install -g tree-sitter-cli
     fi
 fi
-if command -v npm &>/dev/null ; then
-    npm install -g tree-sitter-cli
+
+read -q "reply?Change git name and email? [y/N] "
+if [[ "$reply" == [yY] ]]; then
+    echo ''
+    read "reply?git name: "
+    git config --global user.name "$reply"
+    read "reply?git email: "
+    git config --global user.email "$reply"
 fi
