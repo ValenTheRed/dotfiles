@@ -1,4 +1,3 @@
-local set = vim.opt
 local lsp_progress = require("lsp-progress")
 
 local use_winbar = true
@@ -186,12 +185,9 @@ insert("c", {
 })
 
 insert("c", {
-	"diagnostics",
-	-- Having both nvim_diagnostic and nvim_lsp leads to the component
-	-- reporting twice the number of errors.
-	sources = { "nvim_diagnostic" },
-	coloured = true,
-	symbols = require("ps.vim_diagnostic").icons,
+	function()
+		return vim.diagnostic.status()
+	end
 })
 
 insert("x", {
