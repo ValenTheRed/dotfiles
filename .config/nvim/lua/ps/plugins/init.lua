@@ -88,7 +88,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
 			local lang_list = {
-				'javascriptreact', 'typescriptreact', 'javascript',
+				'jsx', 'tsx', 'javascript',
 				'typescript', 'python', 'go', 'markdown', 'markdown_inline',
 				'html', 'sh', 'bash', 'sql', 'comment'
 			}
