@@ -152,7 +152,7 @@ local on_attach = function(client, bufnr)
 		telescope_builtin.lsp_references(telescope_lsp_opts)
 	end, "Telescope lists references")
 
-	cond_nmap("typeDefinitionProvider", "<space>D", function()
+	cond_nmap("typeDefinitionProvider", "grt", function()
 		telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
 	end, "Telescope list/goto type definitions")
 
