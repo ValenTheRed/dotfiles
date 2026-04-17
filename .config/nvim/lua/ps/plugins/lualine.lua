@@ -1,5 +1,3 @@
-local lsp_progress = require("lsp-progress")
-
 local use_winbar = true
 
 local statusline = { active = {}, inactive = {} }
@@ -191,7 +189,9 @@ insert("c", {
 })
 
 insert("x", {
-	lsp_progress.progress,
+	function ()
+		return require('lsp-progress').progress()
+	end,
 	-- function()
 	--   local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 	--   if #clients == 1 then

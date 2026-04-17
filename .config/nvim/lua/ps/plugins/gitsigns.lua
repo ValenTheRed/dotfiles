@@ -53,7 +53,6 @@ local setup = {
 return {
 	{
 		"lewis6991/gitsigns.nvim",
-		branch = "main",
 		config = function()
 			require("gitsigns").setup(setup)
 		end,
