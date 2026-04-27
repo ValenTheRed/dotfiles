@@ -1,3 +1,17 @@
 font-family = JetBrains Mono NL
 font-thicken = true
 adjust-cell-width = -5%
+
+theme = ps_dark
+
+keybind = super+p=new_split:right
+keybind = super+s=new_split:down
+keybind = super+j=goto_split:down
+keybind = super+k=goto_split:up
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right
+keybind = super+shift+i=prompt_tab_title
+keybind = super+z=toggle_split_zoom
+
+# window padding color
+# window colorspace
