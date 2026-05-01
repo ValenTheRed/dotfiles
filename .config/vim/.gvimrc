@@ -1,4 +1,5 @@
-set guifont=Fira_Code:h12
+colo retrobox
+set guifont=JetBrains_Mono_NL:h12
 " IMPORTANT: go-=... doesn't work without go=go
 set guioptions=go
 set guioptions-=mTrRlL
