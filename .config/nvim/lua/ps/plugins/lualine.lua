@@ -74,6 +74,7 @@ FileInfo.component = function(icon_type)
 				return "[+]"
 			end,
 			padding = { right = 1 },
+			color = { gui="bold" },
 			cond = function()
 				return vim.bo.modified
 			end,
@@ -127,12 +128,12 @@ if use_winbar then
 			},
 		},
 	}
-	insert("a", {
-		function()
-			return " "
-		end,
-		padding = {},
-	})
+	-- insert("a", {
+	-- 	function()
+	-- 		return " "
+	-- 	end,
+	-- 	padding = {},
+	-- })
 else
 	insert("a", {
 		"filename",
@@ -155,7 +156,7 @@ else
 	}
 end
 
-insert("b", {
+insert("a", {
 	"filetype",
 	icons_enabled = true,
 	colored = false,
@@ -164,14 +165,14 @@ insert("b", {
 	end,
 })
 
-insert("c", {
-	function()
-		return use_winbar and "%m%r%w" or ""
-	end,
-	padding = {},
-})
+-- insert("a", {
+-- 	function()
+-- 		return use_winbar and "%m%r%w" or ""
+-- 	end,
+-- 	padding = {},
+-- })
 
-insert("c", {
+insert("b", {
 	function()
 		return "%l:%c/%p%%"
 	end,
@@ -182,7 +183,7 @@ insert("c", {
 	end,
 })
 
-insert("c", {
+insert("b", {
 	function()
 		return vim.diagnostic.status()
 	end,
@@ -195,7 +196,7 @@ insert("c", {
 	end
 })
 
-insert("x", {
+insert("y", {
 	function ()
 		return require('lsp-progress').progress()
 	end,
@@ -216,7 +217,7 @@ insert("x", {
 	-- end,
 })
 
-insert("x", {
+insert("y", {
 	"diff",
 	colored = true,
 	source = function()
@@ -231,7 +232,7 @@ insert("x", {
 	end,
 })
 
-insert("x", {
+insert("y", {
 	"b:gitsigns_head",
 	icon = "",
 })
