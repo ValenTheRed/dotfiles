@@ -36,10 +36,7 @@ return {
 					"icon",
 				},
 				keymaps = {
-					["<C-s>"] = false,
 					["<C-h>"] = false,
-					["<C-t>"] = false,
-					["<C-p>"] = false,
 					["<C-c>"] = false,
 					["<C-l>"] = false,
 					["<C-p>"] = "actions.select_vsplit",
