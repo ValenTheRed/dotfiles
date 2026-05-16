@@ -7,10 +7,10 @@ local nmap = function(lhs, rhs, desc)
 end
 
 local texthl = {
-	[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-	[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-	[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
-	[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+	[vim.diagnostic.severity.ERROR] = "DiagnosticError",
+	[vim.diagnostic.severity.WARN]  = "DiagnosticWarn",
+	[vim.diagnostic.severity.INFO]  = "DiagnosticInfo",
+	[vim.diagnostic.severity.HINT]  = "DiagnosticHint",
 }
 local text = {
 	[vim.diagnostic.severity.ERROR] = " ",
@@ -30,7 +30,7 @@ vim.diagnostic.config {
 				if count > 0 then
 					table.insert(
 						items,
-						("%%#%s#%s%s"):format(texthl[level], text[level], count)
+						("%%$%s$%s%s"):format(texthl[level], text[level], count)
 					)
 				end
 			end

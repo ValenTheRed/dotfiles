@@ -185,6 +185,13 @@ insert("c", {
 insert("c", {
 	function()
 		return vim.diagnostic.status()
+	end,
+	--- @param out string
+	fmt = function (out)
+		-- The output string ends with "%##" for some reason. This creates a
+		-- right padding space whose color doesn't change as the section's bg
+		-- color changes.
+		return out:sub(0, -4)
 	end
 })
 
