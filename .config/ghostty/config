@@ -13,5 +13,9 @@ keybind = super+l=goto_split:right
 keybind = super+shift+i=prompt_tab_title
 keybind = super+z=toggle_split_zoom
 
+tab-inherit-working-directory = false
+cursor-invert-fg-bg = true
+# split-divider-color = red
+
 window-padding-color = extend
 # window colorspace
