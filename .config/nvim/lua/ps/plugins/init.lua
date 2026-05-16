@@ -3,15 +3,16 @@ return {
 	{
 		"ValenTheRed/psmdc.nvim",
 		config = function()
-			-- require("psmdc").setup {
-			-- 	transparent_bg = true
-			-- }
+			require("psmdc").setup {
+				transparent_bg = false,
+				dev = false,
+			}
 			vim.cmd.colorscheme("psmdc_dark")
 		end,
 		priority = 1000,
-		branch = "master",
-		-- dir = "~/repository/psmdc.nvim",
-		-- dev = true,
+		branch = "nvim-v0.12.2",
+		-- dir = "~/repo/psmdc.nvim",
+		dev = false,
 	}, -- }}}
 	"tpope/vim-fugitive",
 	"tpope/vim-surround",
