@@ -95,7 +95,9 @@ return {
 			}
 			require('nvim-treesitter').install(lang_list)
 			vim.api.nvim_create_autocmd('FileType', {
-				pattern = lang_list,
+				pattern = vim.list_extend(
+					{ 'javascriptreact', 'typescriptreact' }, lang_list
+				),
 				callback = function()
 					-- syntax highlighting, provided by Neovim
 					vim.treesitter.start()
