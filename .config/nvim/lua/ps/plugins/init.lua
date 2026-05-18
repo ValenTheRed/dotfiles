@@ -88,7 +88,7 @@ return {
 			local lang_list = {
 				'jsx', 'tsx', 'javascript',
 				'typescript', 'python', 'go', 'markdown', 'markdown_inline',
-				'html', 'sh', 'bash', 'sql', 'comment', 'c', 'cpp',
+				'html', 'bash', 'sql', 'comment', 'c', 'cpp',
 				'rust', 'json',
 			}
 			require('nvim-treesitter').install(lang_list)
