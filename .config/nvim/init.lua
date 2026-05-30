@@ -31,6 +31,8 @@ set.softtabstop = 4
 set.ignorecase = true
 set.smartcase = true
 
+set.wildignorecase = true
+
 set.wildignore:append {
 	"*/tmp/*",
 	"*/virenvs/*",
