@@ -1,6 +1,8 @@
 if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
     source /usr/share/fzf/shell/key-bindings.zsh
 fi
-if [[ -f "/opt/homebrew/Cellar/fzf/0.67.0/shell/key-bindings.zsh" ]]; then
-    source "/opt/homebrew/Cellar/fzf/0.67.0/shell/key-bindings.zsh"
+fzf_version=$(fzf --version | awk '{print $1}')
+cellar_path=$(brew --cellar)
+if [[ -f "${cellar_path}/fzf/${fzf_version}/shell/key-bindings.zsh" ]]; then
+    source "${cellar_path}/fzf/${fzf_version}/shell/key-bindings.zsh"
 fi
