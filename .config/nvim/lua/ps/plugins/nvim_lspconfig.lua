@@ -9,11 +9,7 @@ end
 
 --- @param name string
 --- @param opts table|nil
---- @param exec_name string|nil
-local function server_setup(name, opts, exec_name)
-	if vim.fn.executable(exec_name and exec_name or name) == 0 then
-		return
-	end
+local function server_setup(name, opts)
 	if opts then
 		vim.lsp.config(name, opts)
 	end
@@ -291,7 +287,7 @@ local config = function()
 				}
 			},
 		}
-	}, "tsserver")
+	})
 
 	server_setup("efm", {
 		init_options = {
@@ -303,7 +299,7 @@ local config = function()
 			rootMarkers = { ".git/" },
 			languages = efm_languages,
 		},
-	}, "efm-langserver")
+	})
 
 	server_setup("lua_ls", {
 		on_init = function(client)
@@ -333,7 +329,7 @@ local config = function()
 		settings = {
 			Lua = {},
 		},
-	}, "lua-language-server")
+	})
 
 	server_setup("ruff")
 
