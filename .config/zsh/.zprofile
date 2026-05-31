@@ -1,6 +1,8 @@
 os_kernel="$(uname -s)"
 if [[ "${os_kernel}" == Darwin* ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ "${os_kernel}" == Linux* ]] ; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
 
 java_installed=false
