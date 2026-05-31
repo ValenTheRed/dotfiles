@@ -3,11 +3,10 @@
 ln -s ~/dotfiles/.config .config
 ln -s ~/dotfiles/.zshenv .zshenv
 
-os_kernel="$OSTYPE"
-if [[ "${os_kernel}" == darwin* ]] && command -v brew &>/dev/null ; then
-    brew install neovim fd rg fzf eza
+if command -v brew &>/dev/null ; then
+    brew install neovim fd rg fzf eza node starship git-credential-manager lua-language-server gopls typescript-language-server basedpyright ruff
 else
-    echo "Don't forget to install neovim, fd, rg, fzf, and eza from your package manager"
+    echo "Don't forget to install neovim, fd, rg, fzf, eza, node, git-credential-manager, lua-language-server, gopls, typescript-language-server, basedpyright, and ruff from your package manager"
 fi
 
 
