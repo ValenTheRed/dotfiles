@@ -213,6 +213,15 @@ local on_attach = function(client, bufnr)
 		toggle_document_highlight,
 		"toggle ide-like symbol under cursor highlight"
 	)
+
+	cond_nmap(
+		"inlayHintProvider",
+		"ghi",
+		function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+		end,
+		"toggle inlay hints"
+	)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
