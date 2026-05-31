@@ -78,11 +78,8 @@
 [advice]
 	detachedHead = false
 [credential]
-	credentialStore = secretservice
-	helper = /home/ps/.dotnet/tools/git-credential-manager
-	# helper = osxkeychain
-	# helper = libsecret
-	# helper = oauth
+	credentialStore = secretservice # only works on linux; it's a no-op (except for a 2-line error message) on macOS.
+	helper = manager # invokes git-credential-manager on both, linux and macOS.
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 
