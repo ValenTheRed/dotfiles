@@ -275,6 +275,22 @@ local config = function()
 				".git"
 			}))
 		end,
+		settings = {
+			javascript = {
+				inlayHints = {
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParamterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+				}
+			},
+			typescript = {
+				inlayHints = {
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParamterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+				}
+			},
+		}
 	}, "tsserver")
 
 	server_setup("efm", {
