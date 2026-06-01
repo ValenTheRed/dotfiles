@@ -257,20 +257,6 @@ local config = function()
 	-- })
 
 	server_setup("ts_ls", {
-		root_dir = function(bufnr, on_dir)
-			local full_path = vim.api.nvim_buf_get_name(bufnr)
-			if
-				string.find(full_path, "substitute_this_with_a_directory") ~= nil
-			then
-				return on_dir(vim.fs.root(bufnr, ".git"))
-			end
-			return on_dir(vim.fs.root(bufnr, {
-				"package.json",
-				"tsconfig.json",
-				"jsconfig.json",
-				".git"
-			}))
-		end,
 		settings = {
 			javascript = {
 				inlayHints = {
