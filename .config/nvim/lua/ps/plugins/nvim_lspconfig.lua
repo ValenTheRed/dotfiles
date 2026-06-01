@@ -275,7 +275,7 @@ local config = function()
 			javascript = {
 				inlayHints = {
 					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayFunctionParamterTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
 					includeInlayVariableTypeHints = true,
 				}
 			},
