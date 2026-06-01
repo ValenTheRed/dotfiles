@@ -332,8 +332,40 @@ local config = function()
 	})
 
 	server_setup("ruff")
-
 	server_setup("basedpyright")
+	server_setup("biome")
+	server_setup("prettier-lsp", {
+		cmd = { "prettier-lsp", "--stdio" },
+		filetypes = {
+			'javascript',
+			'javascriptreact',
+			'typescript',
+			'typescriptreact',
+			'json',
+		},
+		rootMarkers = {
+			".prettierrc",
+			".prettierrc.json",
+			".prettierrc.js",
+			".prettierrc.yml",
+			".prettierrc.yaml",
+			".prettierrc.json5",
+			".prettierrc.mjs",
+			".prettierrc.cjs",
+			".prettierrc.toml",
+			"prettier.config.js",
+			"prettier.config.cjs",
+			"prettier.config.mjs",
+		},
+		settings = {
+			prettierLsp = {
+				localOnly = false,
+				validate = {
+					enable = false,
+				},
+			}
+		}
+	})
 end
 
 return { {
