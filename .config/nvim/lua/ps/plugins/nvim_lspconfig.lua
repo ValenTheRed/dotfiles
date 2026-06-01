@@ -245,16 +245,15 @@ local config = function()
 
 	-- server_setup("pyright", { capabilities = capabilities })
 
-	server_setup("gopls")
-	-- server_setup("gopls", {
-	-- 	settings = {
-	-- 		gopls = {
-	-- 			hints = {
-	-- 				parameterNames = true
-	-- 			}
-	-- 		},
-	-- 	}
-	-- })
+	server_setup("gopls", {
+		settings = {
+			gopls = {
+				hints = {
+					parameterNames = true
+				}
+			},
+		}
+	})
 
 	server_setup("ts_ls", {
 		settings = {
