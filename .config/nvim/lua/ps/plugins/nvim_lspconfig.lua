@@ -108,12 +108,16 @@ local efm_languages = {
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
+---@param client vim.lsp.Client
+---@param bufnr integer
 local on_attach = function(client, bufnr)
 	local telescope_builtin = require("telescope.builtin")
 	local telescope_lsp_opts = { show_line = false }
 
-	local cond_nmap = function(capability, ...)
-		if client.server_capabilities[capability] then
+	---@param method vim.lsp.protocol.Method.ClientToServer | vim.lsp.protocol.Method.Registration
+	---@param ... unknown
+	local cond_nmap = function(method, ...)
+		if client:supports_method(method) then
 			nmap(bufnr, ...)
 		end
 	end
@@ -122,52 +126,78 @@ local on_attach = function(client, bufnr)
 	-- [server capabilities](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#serverCapabilities)
 
 	cond_nmap(
-		"declarationProvider",
+		"textDocument/declaration",
 		"gD",
 		vim.lsp.buf.declaration,
 		"lsp.declaration"
 	)
 
-	cond_nmap("definitionProvider", "gd", function()
-		telescope_builtin.lsp_definitions(telescope_lsp_opts)
-	end, "Telescope list/goto definitions")
+	cond_nmap(
+		"textDocument/definition",
+		"gd",
+		function()
+			telescope_builtin.lsp_definitions(telescope_lsp_opts)
+		end,
+		"Telescope list/goto definitions"
+	)
 
 	-- Default mapping of gi is occasionally useful. Default gR seems pretty useless.
-	cond_nmap("implementationProvider", "gri", function()
-		telescope_builtin.lsp_implementations(telescope_lsp_opts)
-	end, "Telescope list/goto implementations")
+	cond_nmap(
+		"textDocument/implementation",
+		"gri",
+		function()
+			telescope_builtin.lsp_implementations(telescope_lsp_opts)
+		end,
+		"Telescope list/goto implementations"
+	)
 
 	cond_nmap(
-		"signatureHelpProvider",
+		'textDocument/signatureHelp',
 		"gs",
 		vim.lsp.buf.signature_help,
 		"floating lsp function signature help"
 	)
 
-	cond_nmap("referencesProvider", "grr", function()
-		telescope_builtin.lsp_references(telescope_lsp_opts)
-	end, "Telescope lists references")
-
-	cond_nmap("typeDefinitionProvider", "grt", function()
-		telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
-	end, "Telescope list/goto type definitions")
-
-	cond_nmap("documentSymbolProvider", "gO", function()
-		telescope_builtin.lsp_document_symbols {
-			previewer = true,
-		}
-	end, "Telescope list doc symbols")
+	cond_nmap(
+		"textDocument/references",
+		"grr",
+		function()
+			telescope_builtin.lsp_references(telescope_lsp_opts)
+		end,
+		"Telescope lists references"
+	)
 
 	cond_nmap(
-		"workspaceSymbolProvider",
+		"textDocument/typeDefinition",
+		"grt",
+		function()
+			telescope_builtin.lsp_type_definitions(telescope_lsp_opts)
+		end,
+		"Telescope list/goto type definitions"
+	)
+
+	cond_nmap(
+		'textDocument/documentSymbol',
+		"gO",
+		function()
+			telescope_builtin.lsp_document_symbols {
+				previewer = true,
+			}
+		end,
+		"Telescope list doc symbols"
+	)
+
+
+	cond_nmap(
+		'workspace/symbol',
 		"<space>wr",
 		telescope_builtin.lsp_workspace_symbols,
 		"Telescope list lsp workspace symbols"
 	)
 
-	cond_nmap("workspace", "<space>wa", vim.lsp.buf.add_workspace_folder)
-	cond_nmap("workspace", "<space>wr", vim.lsp.buf.remove_workspace_folder)
-	cond_nmap("workspace", "<space>wl", function()
+	nmap(bufnr, "<leader>wa", vim.lsp.buf.add_workspace_folder)
+	nmap(bufnr, "<leader>wr", vim.lsp.buf.remove_workspace_folder)
+	nmap(bufnr, "<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "print workspace folders in :messages section")
 
@@ -197,21 +227,21 @@ local on_attach = function(client, bufnr)
 	end
 
 	cond_nmap(
-		"documentFormattingProvider",
+		"textDocument/formatting",
 		"<space>f",
 		vim.lsp.buf.format,
 		"vim.lsp.buf.format"
 	)
 
 	cond_nmap(
-		"documentHighlightProvider",
+		"textDocument/documentHighlight",
 		"<space>dh",
 		toggle_document_highlight,
 		"toggle ide-like symbol under cursor highlight"
 	)
 
 	cond_nmap(
-		"inlayHintProvider",
+		"textDocument/inlayHint",
 		"ghi",
 		function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
