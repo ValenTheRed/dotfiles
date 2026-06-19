@@ -5,7 +5,7 @@ ln -s ~/dotfiles/.zshenv .zshenv
 
 if command -v brew &>/dev/null ; then
     brew install neovim fd rg fzf eza node starship lua-language-server gopls uv
-    read -q "reply?Give sudo access to install git-credential-manager? [y/N] "
+    read -p "Give sudo access to install git-credential-manager? [y/N] " reply
     if [[ "$reply" == [yY] ]]; then
         brew install git-credential-manager
     fi
@@ -34,21 +34,26 @@ fi
 #     fi
 # fi
 
-read -q "reply?Change git name and email? [y/N] "
+read -p "Change git name and email? [y/N] " reply
+echo ''
 if [[ "$reply" == [yY] ]]; then
     echo ''
-    read "reply?git name: "
+    read -p "git name: " reply?
+    echo ''
     git config --global user.name "$reply"
-    read "reply?git email: "
+    read -p "git email: " reply?
+    echo ''
     git config --global user.email "$reply"
 fi
 
-read -q "reply?Define ANDROID_HOME and add to path? [y/N] "
+read -p "Define ANDROID_HOME and add to path? [y/N] " reply
+echo ''
 if [[ "$reply" == [yY] ]]; then
     perl -i -pe 's/(android_installed=)false/$1true/' ./.config/zsh/.zprofile
 fi
 
-read -q "reply?Update USER and HOST for prompt.zsh? [y/N] "
+read -p "Update USER and HOST for prompt.zsh? [y/N] " reply
+echo ''
 if [[ "$reply" == [yY] ]]; then
     perl -i -pe "s/substitute_this_with_USER/${USER}/" ./.config/zsh/prompt.zsh
     perl -i -pe "s/substitute_this_with_HOST/${HOST}/" ./.config/zsh/prompt.zsh
