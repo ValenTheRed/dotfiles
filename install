@@ -31,3 +31,14 @@ if [[ "$reply" == [yY] ]]; then
     read "reply?git email: "
     git config --global user.email "$reply"
 fi
+
+read -q "reply?Define ANDROID_HOME and add to path? [y/N] "
+if [[ "$reply" == [yY] ]]; then
+    perl -i -pe 's/(android_installed=)false/$1true/' ./.config/zsh/.zprofile
+fi
+
+read -q "reply?Update USER and HOST for prompt.zsh? [y/N] "
+if [[ "$reply" == [yY] ]]; then
+    perl -i -pe "s/substitute_this_with_USER/${USER}/" ./.config/zsh/prompt.zsh
+    perl -i -pe "s/substitute_this_with_HOST/${HOST}/" ./.config/zsh/prompt.zsh
+fi

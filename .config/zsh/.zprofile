@@ -5,11 +5,6 @@ elif [[ "${os_kernel}" == Linux* ]] ; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 fi
 
-java_installed=false
-if [[ "${os_kernel}" == Darwin* ]] && "${java_installed}"; then
-    export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
-fi
-
 android_installed=true
 if "${android_installed}"; then
     export ANDROID_HOME=${HOME}/opt/Android/Sdk
