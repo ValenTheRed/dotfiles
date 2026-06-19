@@ -5,7 +5,7 @@ ln -s ~/dotfiles/.zshenv .zshenv
 
 if command -v brew &>/dev/null ; then
     brew install neovim fd rg fzf eza node starship lua-language-server gopls uv
-    read -p "Give sudo access to install git-credential-manager? [y/N] " reply
+    read -p "Install git-credential-manager? Will most likely require sudo. [y/N] " reply
     if [[ "$reply" == [yY] ]]; then
         brew install git-credential-manager
     fi
