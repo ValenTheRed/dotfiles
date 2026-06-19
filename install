@@ -4,7 +4,12 @@ ln -s ~/dotfiles/.config .config
 ln -s ~/dotfiles/.zshenv .zshenv
 
 if command -v brew &>/dev/null ; then
-    brew install neovim fd rg fzf eza node starship git-credential-manager lua-language-server gopls uv
+    brew install neovim fd rg fzf eza node starship lua-language-server gopls uv
+    read -q "reply?Give sudo access to install git-credential-manager? [y/N] "
+    if [[ "$reply" == [yY] ]]; then
+        brew install git-credential-manager
+    fi
+    rehash
     if command -v uv &>/dev/null ; then
         uv tool install ruff
     fi
