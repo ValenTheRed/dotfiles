@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-ln -s ~/dotfiles/.config .config
-ln -s ~/dotfiles/.zshenv .zshenv
+ln -s ~/dotfiles/.config ~/.config
+ln -s ~/dotfiles/.zshenv ~/.zshenv
 
 if command -v brew &>/dev/null ; then
     brew install neovim fd rg fzf eza node starship lua-language-server gopls uv
