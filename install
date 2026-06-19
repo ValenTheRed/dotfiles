@@ -4,9 +4,15 @@ ln -s ~/dotfiles/.config .config
 ln -s ~/dotfiles/.zshenv .zshenv
 
 if command -v brew &>/dev/null ; then
-    brew install neovim fd rg fzf eza node starship git-credential-manager lua-language-server gopls typescript-language-server basedpyright ruff
+    brew install neovim fd rg fzf eza node starship git-credential-manager lua-language-server gopls uv
+    if command -v uv &>/dev/null ; then
+        uv tool install ruff
+    fi
+    if command -v npm &>/dev/null ; then
+        npm install -g typescript-language-server basedpyright
+    fi
 else
-    echo "Don't forget to install neovim, fd, rg, fzf, eza, node, git-credential-manager, lua-language-server, gopls, typescript-language-server, basedpyright, and ruff from your package manager"
+    echo "Don't forget to install neovim, fd, rg, fzf, eza, node, git-credential-manager, lua-language-server, gopls, typescript-language-server, basedpyright, ruff, and uv from your package manager"
 fi
 
 # # Install nvm, latest node version, and tree-sitter-cli for installing parsers
