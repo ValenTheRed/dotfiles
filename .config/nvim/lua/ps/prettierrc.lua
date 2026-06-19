@@ -116,7 +116,7 @@ local function config(bufnr)
 	--- @type table<string,string>
 	local opts = {}
 	for _, rc in
-	ipairs(vim.fs.find({ ".prettierrc.js", ".prettierrc" }, {
+	ipairs(vim.fs.find({ ".prettierrc.js", ".prettierrc", ".prettierrc.mjs" }, {
 		path = path,
 		upward = true,
 		stop = vim.fn.expand("~"),
