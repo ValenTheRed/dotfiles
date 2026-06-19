@@ -14,10 +14,18 @@ map gr :action ShowUsages<CR>
 map <leader>fg :action FindInPath<CR>
 map <leader>ff :action RecentFiles<CR>
 map <leader>fd :action GotoFile<CR>
+map za :action ExpandCollapseToggleAction<CR>
 
 map <leader>hr :action Vcs.RollbackChangedLines<CR>
 map [c :action VcsShowPrevChangeMarker<CR>
 map ]c :action VcsShowNextChangeMarker<CR>
+map [q :action PreviousOccurence<CR>
+map ]q :action NextOccurence<CR>
+map [d :action GotoPreviousError<CR>
+map ]d :action GotoNextError<CR>
+map d- :action ShowErrorDescription<CR>
+" A more general action than `ShowErrorDescription`.
+"map <leader>h :action ShowHoverInfo<CR>
 
 map <leader>rn :action RenameElement<CR>
 
