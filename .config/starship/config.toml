@@ -14,7 +14,6 @@ $username\
 $hostname\
 $directory\
 $cmd_duration\
-${custom.git_branch_icon}\
 $git_branch\
 $git_commit\
 $git_state\
@@ -48,22 +47,16 @@ format = "[ $path]($style)[$read_only]($style) "
 # ======================
 # GIT BRANCH
 # ======================
-[custom.git_branch_icon]
-when = "git rev-parse --is-inside-work-tree"
-style = "#ff3ba5"
-format = "[ ]($style)"
-shell = ["sh"]
-
 [git_branch]
 style = "13"
 only_attached = true
-format = "[$branch]($style)"
+format = "[ ](#ff3ba5)[$branch]($style)"
 
 # Detached HEAD
 [git_commit]
 tag_disabled = false
 tag_symbol = ""
-format = '[$tag](117)[:$hash](116)'
+format = '[ ](#ff3ba5)[$tag](117)[:$hash](116)'
 
 # current operation i.e. rebasing, cherry-picking, etc.
 [git_state]
