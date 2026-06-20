@@ -48,27 +48,6 @@ local toggle_document_highlight = (function()
 	end
 end)()
 
-local efm_prettierd = {
-	formatCanRange = true,
-	formatCommand =
-	"prettierd '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd} ${--tab-width=tabSize} ${--use-tabs=!insertSpaces}",
-	formatStdin = true,
-	rootMarkers = {
-		".prettierrc",
-		".prettierrc.json",
-		".prettierrc.js",
-		".prettierrc.yml",
-		".prettierrc.yaml",
-		".prettierrc.json5",
-		".prettierrc.mjs",
-		".prettierrc.cjs",
-		".prettierrc.toml",
-		"prettier.config.js",
-		"prettier.config.cjs",
-		"prettier.config.mjs",
-	},
-}
-
 local efm_eslintd = {
 	lintSource = "efm/eslint_d",
 	lintCommand =
@@ -90,12 +69,10 @@ local efm_eslintd = {
 }
 
 local efm_languages = {
-	javascriptreact = { efm_prettierd, efm_eslintd },
-	javascript = { efm_prettierd, efm_eslintd },
-	typescriptreact = { efm_prettierd, efm_eslintd },
-	typescript = { efm_prettierd, efm_eslintd },
-	json = { efm_prettierd },
-	css = { efm_prettierd },
+	javascriptreact = { efm_eslintd },
+	javascript = { efm_eslintd },
+	typescriptreact = { efm_eslintd },
+	typescript = { efm_eslintd },
 	-- lua = {
 	-- 	{
 	-- 		formatCanRange = true,
@@ -305,12 +282,10 @@ local config = function()
 	})
 
 	server_setup("efm", {
-		init_options = {
-			documentFormatting = true,
-			documentRangeFormatting = true,
-		},
 		filetypes = vim.tbl_keys(efm_languages),
 		settings = {
+			logLevel = 3,
+			logFile = "/tmp/efm.log",
 			rootMarkers = { ".git/" },
 			languages = efm_languages,
 		},
