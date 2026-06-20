@@ -3,7 +3,7 @@ local set = vim.opt
 
 --{{{ Vim options
 
-letg.mapleader = ","
+letg.mapleader = " "
 
 -- use true colours; for nvim-colorizer.lua
 set.termguicolors = true
