@@ -213,7 +213,7 @@ local on_attach = function(client, bufnr)
 
 	cond_nmap(
 		"textDocument/formatting",
-		"<space>f",
+		"<space>ft",
 		vim.lsp.buf.format,
 		"vim.lsp.buf.format"
 	)
