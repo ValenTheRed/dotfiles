@@ -17,29 +17,37 @@ local function server_setup(name, opts)
 end
 
 local toggle_document_highlight = (function()
+	vim.opt.updatetime = 100
 	local id = vim.api.nvim_create_augroup("lsp_document_highlight", {
 		clear = true,
 	})
-	return function()
+	--- @param no_notify boolean?
+	return function(no_notify)
 		-- [Reference](https://vi.stackexchange.com/questions/4120) for
 		-- toggling autocmds.
 		if
 			vim.fn.exists("#lsp_document_highlight#CursorHold#<buffer>") ~= 0
 		then
-			vim.notify("nohldocument")
+			if not no_notify then
+				vim.notify("nohldocument")
+			end
 			-- Clearing autocmds doesn't automatically clear the highlights.
 			vim.lsp.buf.clear_references()
 			-- Only clear the autocmds defined for the current buffer,
 			-- otherwise highlights in other buffers will disappear.
 			vim.api.nvim_clear_autocmds { buffer = 0, group = id }
 		else
-			vim.notify("hldocument")
+			if not no_notify then
+				vim.notify("hldocument")
+			end
 			vim.api.nvim_create_autocmd("CursorHold", {
 				group = id,
 				buffer = 0,
 				callback = vim.lsp.buf.document_highlight,
 			})
-			vim.api.nvim_create_autocmd("CursorMoved", {
+			vim.api.nvim_create_autocmd({
+				"CursorMoved", "CursorMovedI", "CursorMovedC"
+			}, {
 				group = id,
 				buffer = 0,
 				callback = vim.lsp.buf.clear_references,
@@ -232,6 +240,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local bufnr = args.buf
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		on_attach(client, bufnr)
+		if client:supports_method("textDocument/documentHighlight") then
+			toggle_document_highlight(true)
+		end
 	end,
 })
 
